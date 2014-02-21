@@ -1,0 +1,7 @@
+[user]
+	name = Sam Morrison
+	email = samuelmorrison87@gmail.com
+[credential]
+	helper = osxkeychain
+[core]
+	editor = /usr/local/bin/vim

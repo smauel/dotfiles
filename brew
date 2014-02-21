@@ -1,0 +1,16 @@
+brew install bash-completion
+brew install brew-cask
+brew install git
+brew install maven
+brew install scala
+brew install tomcat
+brew install tree
+brew install vim
+
+brew cask install calibre
+brew cask install intellij-idea-ultimate
+brew cask install spotify
+brew cask install utorrent
+brew cask install vagrant
+brew cask install virtualbox
+brew cask install vlc
