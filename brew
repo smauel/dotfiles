@@ -30,10 +30,12 @@ function install_packages() {
 	done
 }
 
+echo
 echo "########################"
 echo "Installing brew packages"
 echo "########################"
 install_packages "brew" "$brew_packages"
+
 echo
 echo "########################"
 echo "Installing cask packages"
