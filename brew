@@ -1,16 +1,41 @@
-brew install bash-completion
-brew install brew-cask
-brew install git
-brew install maven
-brew install scala
-brew install tomcat
-brew install tree
-brew install vim
+#!/bin/sh
 
-brew cask install calibre
-brew cask install intellij-idea-ultimate
-brew cask install spotify
-brew cask install utorrent
-brew cask install vagrant
-brew cask install virtualbox
-brew cask install vlc
+brew_packages="bash-completion brew-cask git maven scala tomcat tree vim"
+cask_packages="calibre google-chrome iterm2 intellij-idea-ultimate spotify utorrent vagrant virtualbox vlc"
+
+function install_packages() {
+	local type="$1"
+	local packages_to_install="$2"
+	local check_command=
+	local install_command=
+	
+	if [[ "$type" == "brew" ]]; then
+		check_command="brew list"
+		install_command="brew install"
+	elif [[ "$type" == "cask" ]]; then
+		check_command="brew cask list"
+		install_command="brew cask install"
+	else
+		echo "can only install 'brew' or 'cask' packages"
+		exit 1
+	fi
+	
+	for package in $packages_to_install; do
+		if [[ `$check_command` == *$package* ]]; then
+			echo "$package already installed"
+		else
+			echo "installing $package"
+			`$install_command $package`
+		fi
+	done
+}
+
+echo "########################"
+echo "Installing brew packages"
+echo "########################"
+install_packages "brew" "$brew_packages"
+echo
+echo "########################"
+echo "Installing cask packages"
+echo "########################"
+install_packages "cask" "$cask_packages"

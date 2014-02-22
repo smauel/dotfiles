@@ -23,6 +23,7 @@ set cmdheight=1
 set number
 set pastetoggle=<F11>
 set tabstop=2
+set shiftwidth=2
 
 "Visual options
 set background=dark
