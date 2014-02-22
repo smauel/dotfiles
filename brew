@@ -1,7 +1,7 @@
 #!/bin/sh
 
 brew_packages="bash-completion brew-cask git maven scala tomcat tree vim"
-cask_packages="calibre google-chrome iterm2 intellij-idea-ultimate spotify utorrent vagrant virtualbox vlc"
+cask_packages="calibre dropbox google-chrome iterm2 intellij-idea-ultimate spotify utorrent vagrant virtualbox vlc"
 
 function install_packages() {
 	local type="$1"
