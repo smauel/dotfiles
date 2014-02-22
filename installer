@@ -1,21 +1,20 @@
 #!/bin/sh
 
-timestamp=$(date +"%m-%d-%y_%H-%M-%S")
-mkdir -p ~/.dotfiles.bak/"${timestamp}"
-echo "Created backup directory in ~/.dotfiles.bak/${timestamp}"
+dotfiles="bash_profile bashrc vimrc bash_aliases brew gitconfig"
+backup_dir=~/.dotfiles.bak/$(date +"%m-%d-%y_%H-%M-%S")
 
-echo "Backing up current dotfiles into the backup folder created above"
-mv ~/.bash_profile ~/.dotfiles.bak/"${timestamp}"
-mv ~/.bashrc ~/.dotfiles.bak/"${timestamp}"
-mv ~/.vimrc ~/.dotfiles.bak/"${timestamp}"
-mv ~/.bash_aliases ~/.dotfiles.bak/"${timestamp}"
-mv ~/.brew ~/.dotfiles.bak/"${timestamp}"
-mv ~/.gitconfig ~/.dotfiles.bak/"${timestamp}"
+echo "#######################"
+echo "# Installing dotfiles #"
+echo "#######################"
 
-echo "Installing new dotfiles to users home directory"
-ln -s ~/dev/dotfiles/bash_profile ~/.bash_profile
-ln -s ~/dev/dotfiles/bashrc ~/.bashrc
-ln -s ~/dev/dotfiles/vimrc ~/.vimrc
-ln -s ~/dev/dotfiles/bash_aliases ~/.bash_aliases
-ln -s ~/dev/dotfiles/brew ~/.brew
-ln -s ~/dev/dotfiles/gitconfig ~/.gitconfig
+echo "Creating backup directory in $backup_dir"
+mkdir -p $backup_dir
+
+for file in $dotfiles; do
+  echo "Installing dotfile $file"
+  mv ~/".$file" $backup_dir
+  ln -s ~/dev/dotfiles/$file ~/".$file"
+done
+
+echo
+./brew
