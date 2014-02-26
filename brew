@@ -1,6 +1,6 @@
 #!/bin/sh
 
-brew_packages="bash-completion brew-cask git maven scala tomcat tree vim"
+brew_packages="bash-completion brew-cask git maven scala tomcat tree vim autoenv"
 cask_packages="calibre dropbox google-chrome iterm2 intellij-idea-ultimate spotify utorrent vagrant virtualbox vlc"
 
 function install_packages() {
