@@ -1,5 +1,8 @@
 #!/bin/sh
 
+./dotfiles
+./brew
+
 if [[ ! -d ~/.vim/bundle/vundle ]]; then
   echo
   echo "#####################"
@@ -8,5 +11,11 @@ if [[ ! -d ~/.vim/bundle/vundle ]]; then
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 fi
 
-./dotfiles
-./brew
+if [[ ! -d ~/.oh-my-zsh ]]; then
+  echo
+  echo "########################"
+  echo "# Installing oh-my-zsh #"
+  echo "########################"
+	curl -L github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+fi
+
