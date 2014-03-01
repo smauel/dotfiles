@@ -24,6 +24,9 @@ set number
 set pastetoggle=<F11>
 set tabstop=2
 set shiftwidth=2
+set nobackup
+set noswapfile
+set nowritebackup
 
 "Visual options
 set background=dark
