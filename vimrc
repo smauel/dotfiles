@@ -36,6 +36,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
 Bundle 'flazz/vim-colorschemes'
+Bundle 'tpope/vim-fugitive'
 
 "Ctrl-P
 let g:ctrlp_map = '<c-p>'
