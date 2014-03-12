@@ -1,31 +1,34 @@
 #!/bin/sh
 
 read -r -d '' brew_packages << BREW
+autoenv
 bash-completion
 brew-cask
 git
+gradle
+leiningen
 maven
 scala
 tomcat
 tree
 vim
-autoenv
-gradle
+https://raw.github.com/gcuisinier/jenv/homebrew/jenv.rb
 BREW
 
 read -r -d '' cask_packages << CASK
 calibre
 dropbox
 google-chrome
-iterm2
 intellij-idea-ultimate
+iterm2
+macvim
+skype
 spotify
+sublime-text
 utorrent
 vagrant
 virtualbox
 vlc
-sublime-text
-macvim
 CASK
 
 function install_packages() {

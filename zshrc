@@ -19,3 +19,5 @@ export EDITOR='vim'
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
