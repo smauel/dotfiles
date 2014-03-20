@@ -19,7 +19,7 @@ read -r -d '' cask_packages << CASK
 calibre
 dropbox
 google-chrome
-intellij-idea-ultimate
+intellij-idea
 iterm2
 macvim
 skype
@@ -57,6 +57,12 @@ function install_packages() {
 		fi
 	done
 }
+
+echo
+echo "######################"
+echo "Updating brew packages"
+echo "######################"
+brew update
 
 echo
 echo "########################"
