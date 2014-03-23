@@ -4,22 +4,6 @@ read -r -d '' brew_taps << TAPS
 jenv/jenv
 TAPS
 
-read -r -d '' brew_packages << BREW
-ansible
-autoenv
-bash-completion
-brew-cask
-git
-gradle
-jenv
-leiningen
-maven
-scala
-tomcat
-tree
-vim
-BREW
-
 read -r -d '' cask_packages << CASK
 calibre
 dropbox
@@ -46,14 +30,11 @@ function install_packages() {
 	if [[ "$type" == "tap" ]]; then
 		check_command="brew tap"
 		install_command="brew tap"
-	elif [[ "$type" == "brew" ]]; then
-		check_command="brew list"
-		install_command="brew install"
 	elif [[ "$type" == "cask" ]]; then
 		check_command="brew cask list"
 		install_command="brew cask install"
 	else
-		echo "can only install 'brew' or 'cask' packages"
+		echo "can only install 'tap' or 'cask' packages"
 		exit 1
 	fi
 	
@@ -78,12 +59,6 @@ echo "####################"
 echo "Installing brew taps"
 echo "####################"
 install_packages "tap" "$brew_taps"
-
-echo
-echo "########################"
-echo "Installing brew packages"
-echo "########################"
-install_packages "brew" "$brew_packages"
 
 echo
 echo "########################"

@@ -1,4 +1,7 @@
 #!/bin/sh
+if [ "$(brew list | grep ansible)" == "" ]; then
+  brew install ansible
+fi
 
 # install dotfiles
 cd dotfiles
