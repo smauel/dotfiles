@@ -1,5 +1,0 @@
----
-- hosts: dotfiles
-  roles:
-  - brew
-  - dotfiles

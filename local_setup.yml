@@ -1,0 +1,9 @@
+---
+- hosts: local_setup
+  roles:
+  - prefs
+  - brew
+  - cask
+  - dotfiles
+  - vundle
+  - oh-my-zsh

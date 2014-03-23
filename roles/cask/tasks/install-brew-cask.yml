@@ -1,0 +1,8 @@
+---
+- name: install cask tap
+  shell: brew tap {{ item }}
+  with_items:
+    - phinze/cask
+
+- name: install brew-cask
+  homebrew: name=brew-cask state=present
