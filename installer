@@ -1,15 +1,13 @@
 #!/bin/sh
+echo "Updating homebrew"
+brew update
+
 if [ "$(brew list | grep ansible)" == "" ]; then
   brew install ansible
 fi
 
-# install dotfiles
-cd dotfiles
-make install
-cd ../
-
-# install brew packages
-./brew
+# run ansible
+ansible-playbook -i hosts site.yml -c local
 
 if [[ ! -d ~/.vim/bundle/vundle ]]; then
   echo

@@ -1,0 +1,39 @@
+---
+- name: install brew taps
+  shell: brew tap {{ item }}
+  with_items:
+    - jenv/jenv
+
+- name: install brew packages
+  homebrew: name={{ item }} state=present
+  with_items: 
+    - autoenv
+    - bash-completion
+    - brew-cask
+    - git
+    - gradle
+    - jenv
+    - leiningen
+    - maven
+    - scala
+    - tomcat
+    - tree
+    - vim
+
+- name: install brew cask packages
+  shell: brew cask install {{ item }}
+  with_items:
+    - calibre
+    - dropbox
+    - google-chrome
+    - intellij-idea
+    - iterm2
+    - kindle
+    - macvim
+    - skype
+    - spotify
+    - sublime-text
+    - utorrent
+    - vagrant
+    - virtualbox
+    - vlc
