@@ -1,6 +1,11 @@
 #!/bin/sh
 
-./dotfiles
+# install dotfiles
+cd dotfiles
+make install
+cd ../
+
+# install brew packages
 ./brew
 
 if [[ ! -d ~/.vim/bundle/vundle ]]; then

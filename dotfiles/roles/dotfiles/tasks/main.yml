@@ -1,0 +1,5 @@
+---
+- name: copy dotfiles
+  copy: src={{ item }} dest={{ sam.home }}/.{{ item | basename }}
+  with_fileglob:
+    - ./*

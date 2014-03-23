@@ -5,18 +5,19 @@ jenv/jenv
 TAPS
 
 read -r -d '' brew_packages << BREW
+ansible
 autoenv
 bash-completion
 brew-cask
 git
 gradle
+jenv
 leiningen
 maven
 scala
 tomcat
 tree
 vim
-jenv
 BREW
 
 read -r -d '' cask_packages << CASK
