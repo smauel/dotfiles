@@ -1,6 +1,6 @@
 ---
 - name: install brew cask packages
-  shell: brew cask install {{ item }}
+  homebrew_cask: name={{ item }} state=present
   with_items:
     - calibre
     - dropbox

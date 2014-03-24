@@ -1,6 +1,6 @@
 ---
 - name: install cask tap
-  shell: brew tap {{ item }}
+  homebrew_tap: tap={{ item }} state=present
   with_items:
     - phinze/cask
 

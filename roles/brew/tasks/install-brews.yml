@@ -1,6 +1,6 @@
 ---
 - name: install brew taps
-  shell: brew tap {{ item }}
+  homebrew_tap: tap={{ item }} state=present
   with_items:
     - jenv/jenv
 
