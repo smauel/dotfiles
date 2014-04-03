@@ -15,6 +15,7 @@
     - jenv
     - leiningen
     - maven
+    - play
     - scala
     - tomcat
     - tree
