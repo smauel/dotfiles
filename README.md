@@ -5,7 +5,8 @@ An [ansible](http://docs.ansible.com/) playbook to help manage my local env
 Installation
 =============
 NOTE: requires ansible 1.6 to use the homebrew_cask and homebrew_tap modules
-make install
+make install - installs everything
+make dotfiles - installs only dotfile changes
 
 What does this install?
 =======================
