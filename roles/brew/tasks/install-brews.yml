@@ -16,6 +16,7 @@
     - leiningen
     - maven
     - play
+    - sbt
     - scala
     - tomcat
     - tree
