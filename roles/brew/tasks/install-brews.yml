@@ -15,6 +15,7 @@
     - jenv
     - leiningen
     - maven
+    - node
     - play
     - sbt
     - scala
