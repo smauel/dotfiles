@@ -1,53 +1,108 @@
-"Features
-set nocompatible
-filetype off
-filetype indent plugin on
+"
+"  ▄▀▀▄ ▄▀▀▄  ▄▀▀█▀▄    ▄▀▀▄ ▄▀▄  ▄▀▀▄▀▀▀▄  ▄▀▄▄▄▄  
+" █   █    █ █   █  █  █  █ ▀  █ █   █   █ █ █    ▌ 
+" ▐  █    █  ▐   █  ▐  ▐  █    █ ▐  █▀▀█▀  ▐ █      
+"    █   ▄▀      █       █    █   ▄▀    █    █      
+"     ▀▄▀     ▄▀▀▀▀▀▄  ▄▀   ▄▀   █     █    ▄▀▄▄▄▄▀ 
+"            █       █ █    █    ▐     ▐   █     ▐  
+"            ▐       ▐ ▐    ▐              ▐        
+"
 
-"Must have options
+
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
+Plug 'rking/ag.vim'
+Plug 'sjl/gundo.vim'
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'ervandew/supertab'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+call plug#end()
+" }}}
+
+" Colors {{{
+colorscheme Dracula
 syntax on
+" }}}
+
+" Spaces & Tabs {{{
+set tabstop=4
+set softtabstop=4
+set expandtab
+" }}}
+
+" UI Layout {{{
+set relativenumber
+set showcmd
+set cursorline
+filetype indent on
+set wildmenu
+set lazyredraw
+set showmatch
+" }}}
+
+" Search {{{
+set incsearch
 set hlsearch
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" }}}
 
-"Usability options
-set ignorecase
-set smartcase
-set backspace=eol,start,indent
-set autoindent
-set ruler
-set laststatus=2
-set confirm
-set visualbell
-set t_vb=
-set cmdheight=1
-set number
-set pastetoggle=<F11>
-set tabstop=2
-set shiftwidth=2
+" Folding {{{
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+nnoremap <space> za
+set foldmethod=indent
+" }}}
+
+" Movement {{{
+nnoremap j gj
+nnoremap k gk
+nnoremap B ^
+nnoremap E $
+nnoremap ^ <nop>
+nnoremap $ <nop>
+" }}}
+
+" Backup {{{
 set nobackup
-set noswapfile
-set nowritebackup
+" }}}
 
-"Visual options
-set background=dark
+" Leader {{{
+let mapleader=","
+inoremap jk <esc>
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>a :Ag
+" }}}
 
-"Bundles
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-fireplace'
+" CtrlP {{{
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" }}}
 
-"Ctrl-P
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*.class
+" NERDTree {{{
+" Auto open NERDTree if no file is specified when vim starts
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-"NerdTree
-autocmd vimenter * if !argc() | NERDTree | endif
+" Map NERDTreeToggle to Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q
 
-colorscheme solarized
+" Close vim if NERDTree is the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" }}}
+
+" General {{{
+set modelines=1
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0
