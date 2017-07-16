@@ -1,4 +1,0 @@
----
-- hosts: local_setup
-  roles:
-  - dotfiles

@@ -1,3 +1,0 @@
----
-- name: show home library folder
-  shell: chflags nohidden ~/Library/

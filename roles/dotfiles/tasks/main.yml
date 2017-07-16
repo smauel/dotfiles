@@ -1,5 +1,0 @@
----
-- name: install dotfiles
-  copy: src={{ item }} dest=~/.{{ item | basename }}
-  with_fileglob:
-    - ./*

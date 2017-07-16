@@ -1,8 +1,0 @@
----
-- name: check if oh-my-zsh is installed
-  stat: path=~/.oh-my-zsh
-  register: ohmyzsh_installed
-
-- name: install oh-my-zsh
-  shell: curl -L github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-  when: not ohmyzsh_installed.stat.exists

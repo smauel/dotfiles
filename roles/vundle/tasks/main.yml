@@ -1,3 +1,0 @@
----
-- name: install vundle
-  git: repo=git@github.com:gmarik/Vundle.vim.git dest=~/.vim/bundle/vundle update=yes

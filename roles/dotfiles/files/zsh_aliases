@@ -1,1 +1,0 @@
-alias ls='ls -G' # Override the ls --color from the oh-my-zsh common-aliases plugin
