@@ -3,6 +3,8 @@ Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
+Plug 'valloric/youcompleteme'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'dracula/vim'

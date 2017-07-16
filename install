@@ -3,6 +3,7 @@
 declare -a DOTFILES=(
 .bash_profile
 .bashrc
+.editorconfig
 .npmrc
 .tmux.conf
 .vimrc

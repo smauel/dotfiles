@@ -17,4 +17,4 @@ alias ll='ls -Gal'
 alias x='exit'
 # tmux
 alias tls='tmux list-sessions'
-
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
