@@ -1,6 +1,9 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'dracula/vim'
 call plug#end()
@@ -9,6 +12,7 @@ call plug#end()
 " THEME
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 color dracula
+set number
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIG

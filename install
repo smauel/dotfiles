@@ -1,0 +1,34 @@
+#!/bin/sh
+
+declare -a DOTFILES=(
+.bash_profile
+.bashrc
+.npmrc
+.tmux.conf
+.vimrc
+.yarnrc
+.zshrc
+)
+declare -r POWERLINE_DIR='/Users/sam/Library/Python/2.7/lib/python/site-packages/powerline'
+
+function symlink_dotfiles {
+  echo 'creating symlinks for dotfiles'
+  for dotfile in ${DOTFILES[@]}; do
+    echo " - ${dotfile}"
+    ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
+  done
+}
+
+function symlink_powerline {
+  echo 'creating symlink for powerline config'
+  rm -rf "${POWERLINE_DIR}/config_files"
+  ln -sf "${PWD}/powerline" "${POWERLINE_DIR}/config_files"
+}
+
+function install {
+  symlink_dotfiles
+  symlink_powerline
+}
+
+install
+
