@@ -5,6 +5,7 @@ declare -a DOTFILES=(
 .bashrc
 .editorconfig
 .npmrc
+.tern-project
 .tmux.conf
 .vimrc
 .yarnrc

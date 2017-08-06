@@ -9,8 +9,6 @@ fi
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-. /Users/sam/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
-
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ll='ls -Gal'
