@@ -1,20 +1,21 @@
 call plug#begin('~/.vim/plugged')
-Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
+Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dracula/vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-sensible'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic', { 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround', { 'for': 'javascript' }
 Plug 'valloric/youcompleteme', { 'for': 'javascript' }
-Plug 'jistr/vim-nerdtree-tabs'
 call plug#end()
 
 " ==========
@@ -24,7 +25,7 @@ colorscheme dracula
 set number
 set hlsearch
 if has('gui_running')
-  set guifont=Fira\ Mono:h18
+  set guifont=Knack\ Regular\ Nerd\ Font\ Complete:h14
 endif
 
 " ==========
@@ -57,9 +58,10 @@ let g:nerdtree_tabs_open_on_console_startup=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " ==========
-" Sytastic
+" Syntastic
 " ==========
 let g:syntastic_check_on_open=1
+let g:syntastic_javascript_checkers=['eslint']
 
 " ==========
 " YouCompleteMe

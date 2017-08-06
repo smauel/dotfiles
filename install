@@ -8,7 +8,6 @@ declare -a DOTFILES=(
 .tern-project
 .tmux.conf
 .vimrc
-.yarnrc
 .zshrc
 )
 declare -r POWERLINE_DIR='/Users/sam/Library/Python/2.7/lib/python/site-packages/powerline'
