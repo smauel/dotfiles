@@ -8,6 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-sensible'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': 'javascript' }
@@ -75,3 +76,13 @@ set completeopt-=preview
 " ==========
 set ts=2 sw=2 et
 let g:indent_guides_enable_on_vim_startup = 1
+
+" ==========
+" CtrlP
+" ==========
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" ==========
+" DelimitMate
+" ==========
+let g:delimitMate_expand_cr = 1
