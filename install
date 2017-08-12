@@ -10,7 +10,6 @@ declare -a DOTFILES=(
 .vimrc
 .zshrc
 )
-declare -r POWERLINE_DIR='/Users/sam/Library/Python/2.7/lib/python/site-packages/powerline'
 
 function symlink_dotfiles {
   echo 'creating symlinks for dotfiles'
@@ -20,15 +19,8 @@ function symlink_dotfiles {
   done
 }
 
-function symlink_powerline {
-  echo 'creating symlink for powerline config'
-  rm -rf "${POWERLINE_DIR}/config_files"
-  ln -sf "${PWD}/powerline" "${POWERLINE_DIR}/config_files"
-}
-
 function install {
   symlink_dotfiles
-  symlink_powerline
 }
 
 install
