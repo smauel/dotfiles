@@ -2,18 +2,26 @@ call plug#begin('~/.vim/plugged')
 Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dracula/vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'kien/ctrlp.vim'
+Plug 'metakirby5/codi.vim'
+Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-surround'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'kien/ctrlp.vim'
-Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'scrooloose/syntastic', { 'for': 'javascript' }
+Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'tpope/vim-surround', { 'for': 'javascript' }
 Plug 'valloric/youcompleteme', { 'for': 'javascript' }
@@ -86,3 +94,46 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " DelimitMate
 " ==========
 let g:delimitMate_expand_cr = 1
+
+" ==========
+" esformatter (npm install -g esformatter)
+" ==========
+nnoremap <silent> <leader>e :call JSFormat()<cr>
+function! JSFormat()
+  " Preparation: save last search, and cursor position.
+  let l:win_view = winsaveview()
+  let l:last_search = getreg('/')
+  let fileWorkingDirectory = expand('%:p:h')
+  let currentWorkingDirectory = getcwd()
+  execute ':lcd' . fileWorkingDirectory
+  execute ':silent' . '%!esformatter'
+  if v:shell_error
+    undo
+    "echo "esformatter error, using builtin vim formatter"
+    " use internal formatting command
+    execute ":silent normal! gg=G<cr>"
+  endif
+  " Clean up: restore previous search history, and cursor position
+  execute ':lcd' . currentWorkingDirectory
+  call winrestview(l:win_view)
+  call setreg('/', l:last_search)
+endfunction
+
+" ==========
+" Codi
+" ==========
+nnoremap <Leader><Leader>c :Codi!!<CR>
+xnoremap <Leader><Leader>c :Codi!!<CR>
+
+" ==========
+" Editor Config
+" ==========
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" ==========
+" Vim Startify
+" ==========
+let g:startify_bookmarks=[
+  \ '~/.vimrc',
+  \ '~/.zshrc',
+\]
