@@ -154,15 +154,14 @@
     let g:ycm_confirm_extra_conf=0
     set completeopt-=preview
 
-    Plug 'nathanaelkane/vim-indent-guides', { 'for': 'javascript' }
-    set ts=2 sw=2 et
-    let g:indent_guides_enable_on_vim_startup = 1
-
     Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
     let g:delimitMate_expand_cr = 1
 
     Plug 'scrooloose/syntastic', { 'for': 'javascript' }
     let g:syntastic_check_on_open=1
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_wq = 1
     let g:syntastic_javascript_checkers=['eslint']
 
     "" javascript {{{
