@@ -50,51 +50,6 @@
   "" }}}
 "" }}}
 
-"" theme {{{
-  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h14
-
-  "" visual {{{
-    syntax on
-    set number
-    set ruler
-    set showtabline=2
-    set showcmd
-    if exists('+colorcolumn')
-      set colorcolumn=80
-      highlight ColorColumn ctermbg=gray
-    endif
-    set cursorline
-    augroup highlight_active_window
-      autocmd!
-      autocmd BufEnter * setlocal cursorline
-      autocmd BufLeave * setlocal nocursorline
-    augroup END
-    set novisualbell
-    set noerrorbells
-    set scrolloff=3
-    set statusline=%1*%{winnr()}\ %*%<\ %f\ %h%m%r%=%l,%c%V\ (%P)
-    set laststatus=2
-    set conceallevel=0
-
-    "" colors {{{
-      set t_Co=256
-      if &term =~ '256color'
-        set t_ut=
-      endif
-      set background=dark
-    "" }}}
-
-    "" searching and matching {{{
-      set showmatch
-      set matchtime=5
-      set hlsearch " highlight matches...
-      set incsearch " ...dynamically while typing
-      set ignorecase " ignore case when searching...
-      set smartcase " ...except when you're explicit with caps
-    "" }}}
-  "" }}}
-"" }}}
-
 "" key mappings {{{
   let mapleader=","
   let g:mapleader=","
@@ -147,39 +102,43 @@
           \ '~/.zshrc',
           \]
 
-    Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-    Plug 'dracula/vim'
+    Plug 'vim-airline/vim-airline'
+    let g:airline#extensions#tabline#enabled = 1
+    Plug 'vim-airline/vim-airline-themes'
+    let g:airline_theme='molokai'
 
+    Plug 'dracula/vim'
+    Plug 'sickill/vim-monokai'
     Plug 'tomasr/molokai'
     let g:molokai_original=1
     let g:rehash256=1
-    colorscheme desert
   "" }}}
 
   "" git {{{
-    Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
   "" }}}
 
   "" search {{{
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+    Plug 'scrooloose/nerdtree'
+    Plug 'jistr/vim-nerdtree-tabs'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     map <leader>n <plug>NERDTreeTabsToggle<CR>
     map <leader>l :NERDTreeFind<cr>
     let NERDTreeShowHidden=1
     let NERDTreeIgnore=['\~$', '\.swo$', '\.swp$', '\.git']
-    "let NERDTreeShowBookmarks=1
-    "let NERDTreeChDirMode=0
-    "let NERDTreeQuitOnOpen=0
-    "let NERDTreeMouseMode=2
-    "let NERDTreeKeepTreeInNewTab=1
+    let NERDTreeQuitOnOpen=1
+    let NERDTreeAutoDeleteBuffer=1
+    let NERDTreeMinimalUI = 1
+    let NERDTreeDirArrows = 1
     "close vim if only nerdtree
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
     Plug 'kien/ctrlp.vim'
     let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+    "let NERDTreeShowBookmarks=1
+    "let NERDTreeChDirMode=0
   "" }}}
 
   "" programming {{{
@@ -237,4 +196,50 @@
     "" }}}
   "" }}}
   call plug#end()
+"" }}}
+
+"" theme {{{
+  colorscheme monokai
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h14
+
+  "" visual {{{
+    syntax on
+    set number
+    set ruler
+    set showtabline=2
+    set showcmd
+    if exists('+colorcolumn')
+      set colorcolumn=80
+      highlight ColorColumn ctermbg=gray
+    endif
+    set cursorline
+    augroup highlight_active_window
+      autocmd!
+      autocmd BufEnter * setlocal cursorline
+      autocmd BufLeave * setlocal nocursorline
+    augroup END
+    set novisualbell
+    set noerrorbells
+    set scrolloff=3
+    set statusline=%1*%{winnr()}\ %*%<\ %f\ %h%m%r%=%l,%c%V\ (%P)
+    set laststatus=2
+    set conceallevel=0
+
+    "" colors {{{
+      set t_Co=256
+      if &term =~ '256color'
+        set t_ut=
+      endif
+      set background=dark
+    "" }}}
+
+    "" searching and matching {{{
+      set showmatch
+      set matchtime=5
+      set hlsearch " highlight matches...
+      set incsearch " ...dynamically while typing
+      set ignorecase " ignore case when searching...
+      set smartcase " ...except when you're explicit with caps
+    "" }}}
+  "" }}}
 "" }}}
