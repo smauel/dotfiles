@@ -10,11 +10,11 @@ source /usr/local/share/antigen/antigen.zsh
   antigen bundle osx
   antigen bundle thefuck
   antigen bundle yarn
+  antigen theme agnoster
 antigen apply
 
 PATH="${HOME}/.npm-packages/bin:$PATH"
 eval $(thefuck --alias)
 
-antigen theme agnoster
 # aliases
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
