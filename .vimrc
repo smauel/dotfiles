@@ -60,6 +60,10 @@
   nnoremap <C-j><C-j> :m .+1<CR>==
   nnoremap <C-k><C-k> :m .-2<CR>==
 
+  "" buffers {{{
+    nnoremap <silent> <Leader>bd :bd<CR>
+  "" }}}
+
   """ tabs {{{
     nnoremap <silent> <Tab><Tab> :tabnew<CR>
     nnoremap <silent> <Tab>q :tabclose<CR>
@@ -127,11 +131,11 @@
     map <leader>n <plug>NERDTreeTabsToggle<CR>
     map <leader>l :NERDTreeFind<cr>
     let NERDTreeShowHidden=1
-    let NERDTreeIgnore=['\~$', '\.swo$', '\.swp$', '\.git']
-    let NERDTreeQuitOnOpen=1
-    let NERDTreeAutoDeleteBuffer=1
-    let NERDTreeMinimalUI = 1
-    let NERDTreeDirArrows = 1
+    let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
+    "let NERDTreeQuitOnOpen=1
+    "let NERDTreeAutoDeleteBuffer=1
+    "let NERDTreeMinimalUI = 1
+    "let NERDTreeDirArrows = 1
     "close vim if only nerdtree
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -145,9 +149,9 @@
     Plug 'editorconfig/editorconfig-vim'
     let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+    Plug 'mtth/scratch.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-surround', { 'for': 'javascript' }
 
     Plug 'valloric/youcompleteme', { 'for': 'javascript' }
     let g:ycm_add_preview_to_completeopt=0
