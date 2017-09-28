@@ -111,11 +111,7 @@
     Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme='molokai'
 
-    Plug 'dracula/vim'
-    Plug 'sickill/vim-monokai'
-    Plug 'tomasr/molokai'
-    let g:molokai_original=1
-    let g:rehash256=1
+    Plug 'chriskempson/base16-vim'
   "" }}}
 
   "" git {{{
@@ -150,8 +146,14 @@
     let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
     Plug 'mtth/scratch.vim'
-    Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-surround'
+
+    Plug 'scrooloose/nerdcommenter'
+    let g:NERDSpaceDelims=1
+    let g:NERDCompactSexyComs=1
+    let g:NERDDefaultAlign='left'
+    let g:NERDCommentEmptyLines=1
+    let g:NERDTrimTrailingWhitespace=1
 
     Plug 'valloric/youcompleteme', { 'for': 'javascript' }
     let g:ycm_add_preview_to_completeopt=0
@@ -202,8 +204,8 @@
 "" }}}
 
 "" theme {{{
-  colorscheme monokai
-  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h14
+  colorscheme base16-default-dark
+  set guifont=InputMonoNarrow:h14
 
   "" visual {{{
     syntax on
@@ -212,7 +214,7 @@
     set showtabline=2
     set showcmd
     if exists('+colorcolumn')
-      set colorcolumn=80
+      set colorcolumn=100
       highlight ColorColumn ctermbg=gray
     endif
     set cursorline
