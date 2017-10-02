@@ -24,7 +24,11 @@ alias ll='ls -aFGhl'
 alias ls='ls -aFG'
 alias x='exit'
 alias rm='rm -i'
-alias vi='/Applications/MacVim.app/Contents/MacOS/Vim'
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+
+alias dcua='docker-compose up -d api'
+alias dcla='docker-compose logs -f api'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias drm='docker rm -f $(docker ps -aq)'
 
 export PATH="$HOME/.yarn/bin:$PATH"
