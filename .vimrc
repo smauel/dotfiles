@@ -112,36 +112,11 @@ set backspace=indent,eol,start
 set mouse=a
 set mousehide
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
-nnoremap <C-j><C-j> :m .+1<CR>==
-nnoremap <C-k><C-k> :m .-2<CR>==
 
 " buffers
 nnoremap <silent> <Leader>bd :bd<CR>
-
-" tabs
-nnoremap <silent> <Tab><Tab> :tabnew<CR>
-nnoremap <silent> <Tab>q :tabclose<CR>
-nnoremap <silent> <Tab>o :tabonly<CR>
-nnoremap <silent> <Tab>s :tabs<CR>
-nnoremap <silent> <Tab>^ :tabfirst<CR>
-nnoremap <silent> <Tab>$ :tablast<CR>
-nnoremap <silent> <Tab>k :tabfirst<CR>
-nnoremap <silent> <Tab>j :tablast<CR>
-nnoremap <silent> <Tab>l :tabnext<CR>
-nnoremap <silent> <Tab>h :tabprev<CR>
-nnoremap <silent> <Tab>n :tabnext<CR>
-nnoremap <silent> <Tab>p :tabprev<CR>
-nnoremap <silent> <Tab><Right> :tabnext<CR>
-nnoremap <silent> <Tab><Left> :tabprev<CR>
-nnoremap <silent> <Tab>1 :tabnext 1<CR>
-nnoremap <silent> <Tab>2 :tabnext 2<CR>
-nnoremap <silent> <Tab>3 :tabnext 3<CR>
-nnoremap <silent> <Tab>4 :tabnext 4<CR>
-nnoremap <silent> <Tab>5 :tabnext 5<CR>
-nnoremap <silent> <Tab>6 :tabnext 6<CR>
-nnoremap <silent> <Tab>7 :tabnext 7<CR>
-nnoremap <silent> <Tab>8 :tabnext 8<CR>
-nnoremap <silent> <Tab>9 :tabnext 9<CR>
+nnoremap <Tab><Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
 
 " startify config
 let g:startify_bookmarks=[
@@ -151,7 +126,7 @@ let g:startify_bookmarks=[
 
 " airline config
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='molokai'
+let g:airline_theme='base16'
 
 " nerdtree config
 map <leader>n :NERDTreeToggle<cr>
