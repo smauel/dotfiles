@@ -13,6 +13,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+export EDITOR=/usr/bin/vim
+
 PATH="${HOME}/.npm-packages/bin:$PATH"
 eval $(thefuck --alias)
 
