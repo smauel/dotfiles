@@ -1,20 +1,23 @@
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
+Plug 'mileszs/ack.vim'
+Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
+Plug 'valloric/youcompleteme', { 'for': 'javascript' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'sheerun/vim-polyglot'
-Plug 'valloric/youcompleteme', { 'for': 'javascript' }
-Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'w0rp/ale', { 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
 " base16-shell keeps vim and shell consistent theme
@@ -25,7 +28,6 @@ endif
 
 " general
 filetype plugin indent on
-syntax enable
 set nocompatible
 set runtimepath+=~/.vim
 set wildmenu
@@ -65,7 +67,7 @@ set autoindent
 set smartindent
 
 " theme
-colorscheme base16-default-dark
+colorscheme base16-ashes
 set guifont=Knack\ Regular\ Nerd\ Font\ Complete\ Mono:h14
 
 " visual
@@ -118,6 +120,14 @@ nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <Tab><Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
+" split navigation
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
 " startify config
 let g:startify_bookmarks=[
       \ '~/.vimrc',
@@ -134,7 +144,10 @@ map <leader>l :NERDTreeFind<cr>
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
 let NERDTreeAutoDeleteBuffer = 1
-"close vim if only nerdtree
+" open nerdtree if no files specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" close vim if only nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " ctrlp config
@@ -157,8 +170,7 @@ let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-a> <Plug>(ale_next_wrap)
 
 " jsformat
 "" esformatter (npm install -g esformatter)
@@ -182,3 +194,11 @@ function! JSFormat()
   call winrestview(l:win_view)
   call setreg('/', l:last_search)
 endfunction
+
+" ack config
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" vim tmux navigator config
+let g:tmux_navigator_save_on_switch = 2 " write all buffers when leaving vim for tmux

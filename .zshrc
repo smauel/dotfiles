@@ -20,12 +20,15 @@ autoload -U promptinit; promptinit
 prompt pure
 
 # aliases
+alias p='./projects'
 alias ll='ls -aFGhl'
 alias ls='ls -aFG'
 alias x='exit'
 alias rm='rm -i'
+alias vim='/Applications/MacVim.app/Contents/bin/vim'
 
 alias dcua='docker-compose up -d api'
+alias dcl='docker-compose logs -f'
 alias dcla='docker-compose logs -f api'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
