@@ -13,7 +13,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export EDITOR=/usr/bin/vim
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias vim='/Applications/MacVim.app/Contents/bin/vim'
+  export EDITOR='/Applications/MacVim.app/Contents/bin/vim'
+else
+  export EDITOR=/usr/bin/vim
+fi
 
 PATH="${HOME}/.npm-packages/bin:$PATH"
 eval $(thefuck --alias)
@@ -28,12 +33,6 @@ alias ll='ls -aFGhl'
 alias ls='ls -aFG'
 alias x='exit'
 alias rm='rm -i'
-
-# git aliases
-alias gs='git status'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gl='git log'
 
 # docker aliases
 alias dcua='docker-compose up -d api'
