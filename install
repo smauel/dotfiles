@@ -4,12 +4,17 @@ declare -a DOTFILES=(
 .bash_profile
 .bashrc
 .editorconfig
+.gitconfig_personal
+.gitconfig_work
+.gitignore
 .npmrc
 .tern-project
 .tmux.conf
 .vimrc
 .zshrc
 )
+
+# TODO: figure out how to have a work and a personal version of my gitconfig
 
 function symlink_dotfiles {
   echo 'creating symlinks for dotfiles'
@@ -19,9 +24,22 @@ function symlink_dotfiles {
   done
 }
 
+function symlink_gitconfig {
+  echo 'which gitconfig would you like to use? [work|personal]'
+  read config
+  if [[ "$config" == "work" ]]; then
+    ln -sf "${HOME}/.gitconfig_work" "${HOME}/.gitconfig"
+  elif [[ "$config" == "personal" ]]; then
+    ln -sf "${HOME}/.gitconfig_personal" "${HOME}/.gitconfig"
+  else
+    echo "$config is not a valid option"
+    exit 1
+  fi
+}
+
 function install {
   symlink_dotfiles
+  symlink_gitconfig
 }
 
 install
-
