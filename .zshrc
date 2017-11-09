@@ -33,6 +33,7 @@ alias ll='ls -aFGhl'
 alias ls='ls -aFG'
 alias x='exit'
 alias rm='rm -i'
+alias tmux='tmux -2'
 
 # docker aliases
 alias dcua='docker-compose up -d api'

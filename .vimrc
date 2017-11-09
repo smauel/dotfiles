@@ -22,6 +22,7 @@ call plug#end()
 
 " base16-shell keeps vim and shell consistent theme
 if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
   source ~/.vimrc_background
 endif
 
