@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' }
 Plug 'kien/ctrlp.vim'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
@@ -121,12 +122,13 @@ nnoremap <Tab><Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
 " split navigation
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
+
+" quickfix
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
 " startify config
 let g:startify_bookmarks=[
@@ -202,3 +204,11 @@ endif
 
 " vim tmux navigator config
 let g:tmux_navigator_save_on_switch = 2 " write all buffers when leaving vim for tmux
+
+" go config
+set autowrite " :make autosaves the buffer (useful for :GoBuild)
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 0
+let g:go_highlight_fields = 0
+let g:go_highlight_functions = 0
+let g:go_highlight_methods = 0
