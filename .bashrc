@@ -15,3 +15,5 @@ alias ll='ls -Gal'
 alias x='exit'
 # tmux
 alias tls='tmux list-sessions'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

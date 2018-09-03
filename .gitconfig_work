@@ -3,29 +3,14 @@
 	email = sam.d.morrison@pwc.com
 [core]
 	editor = vim
-	excludesfile = $HOME/.gitignore
+	excludesfile = /Users/927019/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
-  #log - short form
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  #log - show commited files
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  #log - no color
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-  #log - oneline & dates
-  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  #log - oneline & relative dates
-  ldr = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-  #log - default
-  le = log --oneline --decorate
-  #history of a file with diffs
-  fl = log -u
-  #show modified files in last commit
-  dl = "!git ll -1"
-  #show diff last commit
-  dlc = diff --cached HEAD^
   #list aliases
   la = "!git config -l | grep alias | cut -c 7-"
+  ls = log --oneline --graph
+  dl = "!git ls -1"
+  dlc = diff --cached HEAD^
   st = status -s
   cl = clone
   ci = commit
@@ -34,3 +19,11 @@
   diff = diff --word-diff
   dc = diff --cached
 	d = difftool
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/927019/.stCommitMsg

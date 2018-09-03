@@ -8,6 +8,7 @@ declare -a DOTFILES=(
 .gitconfig_work
 .gitignore
 .npmrc
+.taskrc
 .tern-project
 .tmux.conf
 .vimrc
