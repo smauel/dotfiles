@@ -160,6 +160,11 @@ set splitright
 nnoremap j gj
 nnoremap k gk
 
+" quickfix
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
 " startify config
 " =======
 let g:startify_bookmarks=[
@@ -255,7 +260,3 @@ nmap <silent> <C-a> <Plug>(ale_next_wrap)
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
-" vim tmux navigator config
-" =======
-let g:tmux_navigator_save_on_switch = 2 " write all buffers when leaving vim for tmux
