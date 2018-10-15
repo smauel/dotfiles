@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
+Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'airblade/vim-gitgutter'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -13,7 +14,9 @@ Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'pangloss/vim-javascript'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-sensible'
 Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
@@ -29,6 +32,7 @@ augroup END
 
 " general
 filetype plugin indent on
+syntax on
 set nocompatible
 set runtimepath+=~/.vim
 set wildmenu
@@ -42,7 +46,14 @@ set lazyredraw
 set ambiwidth=double
 set noshowmode                                          " handled by lightline
 
-" backup/swap
+" folding
+set foldenable
+set foldmethod=syntax
+set foldlevel=99
+set foldopen-=search
+set foldopen-=undo
+
+" backup and swap
 set noswapfile
 set nobackup
 set nowritebackup
@@ -62,6 +73,8 @@ set smartindent
 set formatoptions+=j                                    " swallow comment when joining lines of comments
 set nojoinspaces                                        " don't insert space when joing lines
 
+" theme
+
 " visual
 syntax on
 set number
@@ -79,14 +92,25 @@ set background=dark
 set termguicolors
 colorscheme onedark
 set guifont=HackNerdFontComplete-Regular:h14
+set guioptions= " remove all scrollbars
+highlight Visual guibg=Green guifg=Black
 
 " search
 set showmatch
 set matchtime=5
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
+set hlsearch " highlight matches...
+set incsearch " ...dynamically while typing
+set ignorecase " ignore case when searching...
+set smartcase " ...except when you're explicit with caps
+
+" grep
+if executable('ag')
+  set grepprg=ag\ --vimgrep
+elseif executable('awk')
+  set grepprg=ack\ -H\ --nocolor\ --nogroup
+endif
+
+set grepformat=%f:%l:%c:%m
 
 " key mappings
 let mapleader=","
@@ -103,15 +127,16 @@ nnoremap <Leader><Leader> <C-^>
 " close all but the current buffer
 nnoremap <Leader>o :only<CR>
 
-" buffers
-nnoremap <tab><tab> :bn<CR>
-nnoremap <S-tab> :bp<CR>
-nnoremap <C-j> <C-w><C-j>
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-
 " splits
+nnoremap <silent> <Leader>bd :bd<CR>
+nnoremap <Tab><Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
+
+" split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
@@ -150,6 +175,7 @@ let g:ale_fixers = {
       \ 'javascript': ['eslint'],
       \ }
 let g:ale_fix_on_save = 1
+nmap <silent> <C-a> <Plug>(ale_next_wrap)
 
 " lightline
 let g:lightline = {
@@ -200,10 +226,17 @@ let NERDTreeWinSize=40
 let NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if only nerdtree
 
-" youcompleteme
+" editorconfig config
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" youcompleteme config
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
 
 " delimitmate
 let delimitMate_expand_cr = 1
+
+" vim test
+nmap <silent> <C-t><C-n> :TestNearest<CR>
+nmap <silent> <C-t><C-f> :TestFile<CR>

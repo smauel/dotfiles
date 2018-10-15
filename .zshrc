@@ -22,6 +22,7 @@ else
 fi
 
 PATH="${HOME}/.npm-packages/bin:$PATH"
+PATH="${HOME}/go/bin:$PATH"
 eval $(thefuck --alias)
 
 autoload -U promptinit; promptinit
@@ -35,7 +36,6 @@ alias ls='ls -aFG'
 alias x='exit'
 alias rm='rm -i'
 alias tmux='tmux -2'
-alias cat='bat'
 alias ping='prettyping --nolegend'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
@@ -44,7 +44,6 @@ alias d='docker'
 alias dc='docker-compose'
 alias dupapi='docker-compose up -d api'
 alias dlogs='docker-compose logs -f'
-alias dlogsapi='docker-compose logs -f api'
 alias dps='docker ps'
 alias dpa='docker ps --all'
 alias di='docker images'
@@ -55,6 +54,7 @@ alias dprune='docker system prune && docker volume prune'
 
 # aws aliases
 alias mfa-start-session='function(){eval $(command mfa-start-session $@);}'
+alias mfa-end-session='function(){eval $(command mfa-end-session); unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID}'
 alias assume-role='function(){eval $(command assume-role $@);}'
 
 # kubectl aliases
@@ -65,7 +65,11 @@ alias kgs='kubectl get service'
 alias kgi='kubectl get ingress'
 alias kgd='kubectl get deployment'
 alias kpf='kubectl port-forward'
-alias kctx='kubectl config use-context'
+alias kns='kubens'
+alias kctx='kubectx'
+
+# terraform aliases
+alias terraform='function(){command terraform $@ | landscape}'
 
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
