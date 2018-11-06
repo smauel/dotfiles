@@ -28,6 +28,11 @@ eval $(thefuck --alias)
 autoload -U promptinit; promptinit
 prompt pure
 
+# add kube to prompt
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+PROMPT='$(kube_ps1)'$PROMPT
+kubeoff
+
 # aliases
 # general aliases
 alias p='./projects'
@@ -69,7 +74,7 @@ alias kns='kubens'
 alias kctx='kubectx'
 
 # terraform aliases
-alias terraform='function(){command terraform $@ | landscape}'
+# alias terraform='function(){command terraform $@ | landscape}'
 
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"

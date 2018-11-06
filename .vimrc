@@ -42,6 +42,7 @@ set binary
 set noeol
 set modeline
 set modelines=4
+set ttyfast
 set lazyredraw
 set ambiwidth=double
 set noshowmode                                          " handled by lightline
@@ -74,6 +75,12 @@ set formatoptions+=j                                    " swallow comment when j
 set nojoinspaces                                        " don't insert space when joing lines
 
 " theme
+if (has("termguicolors"))
+  set termguicolors
+endif
+colorscheme onedark
+set guifont=HackNerdFontComplete-Regular:h14
+highlight Visual guibg=Green guifg=Black
 
 " visual
 syntax on
@@ -90,10 +97,6 @@ set conceallevel=0
 set guioptions=
 set background=dark
 set termguicolors
-colorscheme onedark
-set guifont=HackNerdFontComplete-Regular:h14
-set guioptions= " remove all scrollbars
-highlight Visual guibg=Green guifg=Black
 
 " search
 set showmatch
@@ -236,6 +239,17 @@ set completeopt-=preview
 
 " delimitmate
 let delimitMate_expand_cr = 1
+
+" ale config
+"let g:ale_linters = { 'javascript': ['eslint'] }
+"let g:ale_fixers = { 'javascript': ['eslint'] }
+let g:ale_fix_on_save = 1
+nmap <silent> <C-a> <Plug>(ale_next_wrap)
+
+" ack config
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " vim test
 nmap <silent> <C-t><C-n> :TestNearest<CR>

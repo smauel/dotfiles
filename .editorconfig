@@ -1,10 +1,20 @@
 root = true
 
 [*]
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
+end_of_line = lf
+indent_size = 2
+indent_style = space
 insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{tf,tfvars}]
+indent_size = 2
+indent_style = space
+
+[*.md]
+max_line_length = 0
+trim_trailing_whitespace = false
 
 [vcbuild.bat]
 end_of_line = crlf
@@ -27,7 +37,7 @@ indent_size = 2
 
 [Makefile]
 indent_style = tab
-indent_size = 8
+tab_width = 2
 
 [{deps,tools}/**]
 indent_style = ignore
