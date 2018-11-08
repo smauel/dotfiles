@@ -1,21 +1,31 @@
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
-Plug 'cormacrelf/vim-colors-github'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'mhinz/vim-signify'
-Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'pangloss/vim-javascript'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-sensible'
-Plug 'valloric/youcompleteme', { 'for': 'javascript' }
+Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
 Plug 'w0rp/ale'
 call plug#end()
+
+" lazy-load youcompleteme for faster startup times
+augroup load_ycm
+  autocmd!
+  autocmd CursorHold, CursorHoldI * call plug#load('YouCompleteMe')
+                                \ | autocmd! load_ycm
+augroup END
 
 " general
 filetype plugin indent on
@@ -30,6 +40,7 @@ set modeline
 set modelines=4
 set lazyredraw
 set ambiwidth=double
+set noshowmode                                          " handled by lightline
 
 " backup/swap
 set noswapfile
@@ -48,21 +59,25 @@ set expandtab
 set smarttab
 set autoindent
 set smartindent
+set formatoptions+=j                                    " swallow comment when joining lines of comments
+set nojoinspaces                                        " don't insert space when joing lines
 
 " visual
 syntax on
 set number
+set relativenumber
 set ruler
 set showtabline=2
 set showcmd
+set cursorline
 set novisualbell
 set noerrorbells
-set scrolloff=3
 set laststatus=2
 set conceallevel=0
 set guioptions=
 set background=dark
-colorscheme github
+set termguicolors
+colorscheme onedark
 set guifont=HackNerdFontComplete-Regular:h14
 
 " search
@@ -75,12 +90,18 @@ set smartcase
 
 " key mappings
 let mapleader=","
-let g:mapleader=","
 set backspace=indent,eol,start
 set mouse=a
 set mousehide
-nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <C-p> :Files<CR>
+" clear search highlights
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
+" write silently
+nnoremap <silent> <Leader>w :silent w<CR>
+" switch to previous buffer
+nnoremap <Leader><Leader> <C-^>
+" close all but the current buffer
+nnoremap <Leader>o :only<CR>
 
 " buffers
 nnoremap <tab><tab> :bn<CR>
@@ -95,8 +116,31 @@ set splitbelow
 set splitright
 
 " scrolling
+set scrolloff=3
 nnoremap j gj
 nnoremap k gk
+
+" visual move
+xnoremap <silent> K :call MoveUp()<CR>
+xnoremap <silent> J :call MoveDown()<CR>
+function! MoveUp() abort range
+  let l:at_top=a:firstline == 1
+  call s:Move("'<-2", l:at_top)
+endfunction
+function! MoveDown() abort range
+  let l:at_bottom=a:lastline == line('$')
+  call s:Move("'>+1", l:at_bottom)
+endfunction
+function! s:Move(address, at_limit)
+  if s:Visual() && !a:at_limit
+    execute "'<,'>move " . a:address
+    call feedkeys('gv=', 'n')
+  endif
+  call feedkeys('gv', 'n')
+endfunction
+function! s:Visual()
+  return visualmode() == 'V'
+endfunction
 
 " ale
 let g:ale_linters = {
@@ -109,7 +153,7 @@ let g:ale_fix_on_save = 1
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [['mode', 'paste'], ['filename', 'modified']],
       \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
@@ -152,10 +196,14 @@ map <Leader>l :NERDTreeFind<cr>
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
 let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeWinSize=60
+let NERDTreeWinSize=40
+let NERDTreeMinimalUI = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if only nerdtree
 
 " youcompleteme
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
+
+" delimitmate
+let delimitMate_expand_cr = 1
