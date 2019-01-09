@@ -7,23 +7,21 @@ unsetopt beep notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/927019/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  alias vim='/Applications/MacVim.app/Contents/bin/vim'
-  export EDITOR='/Applications/MacVim.app/Contents/bin/vim'
-  export VISUAL='/Applications/MacVim.app/Contents/bin/mvim'
+  export EDITOR='vim'
+  export VISUAL='mvim'
 else
   export EDITOR=/usr/bin/vim
 fi
 
 PATH="${HOME}/.npm-packages/bin:$PATH"
 PATH="${HOME}/go/bin:$PATH"
-eval $(thefuck --alias)
 
 autoload -U promptinit; promptinit
 prompt pure

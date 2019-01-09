@@ -18,6 +18,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
 Plug 'w0rp/ale'
