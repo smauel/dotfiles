@@ -4,6 +4,7 @@
 .gitconfig
 .gitignore
 .npmrc
+.ripgreprc
 .taps
 .tern-config
 .tern-project

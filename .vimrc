@@ -257,10 +257,17 @@ nmap <silent> <C-t><C-n> :TestNearest<CR>
 nmap <silent> <C-t><C-f> :TestFile<CR>
 
 " fzf config
+" search for occurrences with ripgrep using <leader>r
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 nmap <leader>r :Rg<space>
+
+" search git commits with fzf
+let g:fzf_commits_log_options = '--graph --color=always
+  \ --format="%C(yellow)%h%C(red)%d%C(reset)
+  \ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"'
+nnoremap <silent> <leader>c  :Commits<CR>

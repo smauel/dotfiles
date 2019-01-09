@@ -36,3 +36,5 @@ vim
 xz
 zsh
 zsh-completions
+fd
+bat
