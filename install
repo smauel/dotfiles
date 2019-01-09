@@ -50,6 +50,23 @@ function install_apps {
   done
 }
 
+function setup_git_author {
+  if [ ! -f $HOME/.gitauthor ]; then
+    echo 'creating .gitauthor file...'
+
+    read -p "Enter your name : " name
+    read -p "Enter your email : " email
+
+    touch $HOME/.gitauthor
+    cat <<EOF >> $HOME/.gitauthor
+export GIT_AUTHOR_NAME="$name"
+export GIT_AUTHOR_EMAIL="$email"
+export GIT_COMMITTER_NAME="$name"
+export GIT_COMMITTER_EMAIL="$email"
+EOF
+  fi
+}
+
 function symlink_dotfiles {
   echo 'creating symlinks for dotfiles'
   for dotfile in ${DOTFILES[@]}; do
@@ -60,6 +77,7 @@ function symlink_dotfiles {
 
 function install {
   install_apps
+  setup_git_author
   symlink_dotfiles
 }
 

@@ -1,6 +1,3 @@
-[user]
-	name = Sam Morrison
-	email = samuelmorrison87@gmail.com
 [core]
 	editor = vim
 	excludesfile = $HOME/.gitignore
@@ -14,7 +11,7 @@
   le = log --oneline --decorate
   fl = log -u
   dl = "!git ll -1"
-  dlc = diff --cached HEAD^
+  dc = diff --cached
   la = "!git config -l | grep alias | cut -c 7-"
   st = status -s
   cl = clone
@@ -22,5 +19,4 @@
   co = checkout
   br = branch
   diff = diff --word-diff
-  dc = diff --cached
 	d = difftool

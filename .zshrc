@@ -30,6 +30,9 @@ prompt pure
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 RPROMPT='$(kube_ps1)'
 
+# source git author details from file
+[ -f $HOME/.gitauthor ] && source $HOME/.gitauthor
+
 # aliases
 # general aliases
 alias p='./projects'
