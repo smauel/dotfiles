@@ -9,10 +9,10 @@ declare -a DOTFILES=()
 # user installs a new brew, automatically with aliases
 while IFS='' read -r line || [[ -n "$line" ]]; do TAPS+=($line); done < ".taps"
 while IFS='' read -r line || [[ -n "$line" ]]; do BREWS+=($line); done < ".brews"
-while IFS='' read -r line || [[ -n "$line" ]]; do CASKS+=($line); done < ".brews"
+while IFS='' read -r line || [[ -n "$line" ]]; do CASKS+=($line); done < ".casks"
 while IFS='' read -r line || [[ -n "$line" ]]; do DOTFILES+=($line); done < ".dotfiles"
 
-function install_apps {
+function update_brew {
   which -s brew
   if [[ $? != 0 ]] ; then
     echo 'installing brew...'
@@ -21,6 +21,10 @@ function install_apps {
     echo 'updating brew...'
     brew update
   fi
+}
+
+function install_apps {
+  update_brew
 
   echo 'installing taps...'
   installed_taps=$(brew tap-info --installed)
@@ -68,7 +72,7 @@ EOF
 }
 
 function symlink_dotfiles {
-  echo 'creating symlinks for dotfiles'
+  echo 'symlinking dotfiles...'
   for dotfile in ${DOTFILES[@]}; do
     echo " - ${dotfile}"
     ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
