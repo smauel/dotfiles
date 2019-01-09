@@ -1,11 +1,111 @@
 #! /bin/sh
 
-declare -a DOTFILES=(
-.vimrc
-.zshrc
+declare -a TAPS=(
+  homebrew/cask-fonts
 )
 
-# TODO: figure out how to have a work and a personal version of my gitconfig
+declare -a BREWS=(
+  autoconf
+  bash
+  brew-cask-completion
+  highlight
+  docker-completion
+  kube-ps1
+  docker-compose-completion
+  kubernetes-cli
+  fzf
+  gdbm
+  gettext
+  git
+  libevent
+  libyaml
+  lua
+  ncurses
+  node-build
+  nodenv
+  openssl
+  pcre
+  pcre2
+  perl
+  pkg-config
+  python
+  python@2
+  readline
+  ruby
+  sqlite
+  the_silver_searcher
+  tmux
+  tmuxinator-completion
+  vim
+  xz
+  zsh
+  zsh-completions
+)
+
+declare -a CASKS=(
+  1password
+  font-sourcecodepro-nerd-font-mono
+  qlmarkdown
+  quicklook-json
+  transmission
+  betterzip
+  google-chrome
+  qlprettypatch
+  spectacle
+  vlc
+  docker
+  iterm2
+  qlstephen
+  suspicious-package
+  webpquicklook
+  dropbox
+  qlcolorcode
+  quicklook-csv
+  the-unarchiver
+)
+
+declare -a DOTFILES=(
+  .vimrc
+  .zshrc
+)
+
+function install_apps {
+  which -s brew
+  if [[ $? != 0 ]] ; then
+    echo 'installing brew...'
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo 'updating brew...'
+    brew update
+  fi
+
+  echo 'installing taps...'
+  installed_taps=$(brew tap-info --installed)
+  for tap in ${TAPS[@]}; do
+    if [[ ${installed_taps} != *"$tap"* ]]; then
+      echo " - ${tap}"
+      brew tap ${tap}
+    fi
+  done
+
+  echo 'installing brews...'
+  installed_brews=$(brew list)
+  for brew in ${BREWS[@]}; do
+    if [[ ${installed_brews} != *"$brew"* ]]; then
+      echo " - ${brew}"
+      brew install $brew
+    fi
+  done
+
+  echo 'installing casks...'
+  installed_casks=$(brew cask list)
+  for cask in ${CASKS[@]}; do
+    if [[ ${installed_casks} != *"$cask"* ]]; then
+      echo " - ${cask}"
+      brew cask install $cask
+    fi
+  done
+}
 
 function symlink_dotfiles {
   echo 'creating symlinks for dotfiles'
@@ -16,6 +116,7 @@ function symlink_dotfiles {
 }
 
 function install {
+  install_apps
   symlink_dotfiles
 }
 
