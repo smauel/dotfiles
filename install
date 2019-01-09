@@ -1,73 +1,16 @@
 #! /bin/sh
 
-declare -a TAPS=(
-  homebrew/cask-fonts
-)
+declare -a TAPS=()
+declare -a BREWS=()
+declare -a CASKS=()
+declare -a DOTFILES=()
 
-declare -a BREWS=(
-  autoconf
-  bash
-  brew-cask-completion
-  highlight
-  docker-completion
-  kube-ps1
-  docker-compose-completion
-  kubernetes-cli
-  fzf
-  gdbm
-  gettext
-  git
-  libevent
-  libyaml
-  lua
-  ncurses
-  node-build
-  nodenv
-  openssl
-  pcre
-  pcre2
-  perl
-  pkg-config
-  python
-  python@2
-  readline
-  ruby
-  sqlite
-  the_silver_searcher
-  tmux
-  tmuxinator-completion
-  vim
-  xz
-  zsh
-  zsh-completions
-)
-
-declare -a CASKS=(
-  1password
-  font-sourcecodepro-nerd-font-mono
-  qlmarkdown
-  quicklook-json
-  transmission
-  betterzip
-  google-chrome
-  qlprettypatch
-  spectacle
-  vlc
-  docker
-  iterm2
-  qlstephen
-  suspicious-package
-  webpquicklook
-  dropbox
-  qlcolorcode
-  quicklook-csv
-  the-unarchiver
-)
-
-declare -a DOTFILES=(
-  .vimrc
-  .zshrc
-)
+# load config from disk. this allows us to update these files for example when the
+# user installs a new brew, automatically with aliases
+while IFS='' read -r line || [[ -n "$line" ]]; do TAPS+=($line); done < ".taps"
+while IFS='' read -r line || [[ -n "$line" ]]; do BREWS+=($line); done < ".brews"
+while IFS='' read -r line || [[ -n "$line" ]]; do CASKS+=($line); done < ".brews"
+while IFS='' read -r line || [[ -n "$line" ]]; do DOTFILES+=($line); done < ".dotfiles"
 
 function install_apps {
   which -s brew
