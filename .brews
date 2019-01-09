@@ -1,4 +1,5 @@
 autoconf
+awscli
 bash
 brew-cask-completion
 diff-so-fancy
@@ -25,6 +26,7 @@ pkg-config
 python
 python@2
 readline
+ripgrep
 ruby
 sqlite
 the_silver_searcher

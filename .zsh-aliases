@@ -1,3 +1,34 @@
+# Custom brew function to help version control brew.
+# These overrides write to the corresponding .brews, .casks
+# or .taps file when a new brew, cask or tap is installed.
+# All other brew commands are passed through
+function brew() {
+  if [ $# -eq 0 ]; then
+    /usr/local/bin/brew
+  elif [[ "$1" == "install" ]]; then
+    shift
+    for formulae in "${@}"; do
+      /usr/local/bin/brew install ${formulae}
+      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.brews
+    done
+  elif [[ "$1" == "cask" && "$2" == "install" ]]; then
+    shift
+    shift
+    for formulae in "${@}"; do
+      /usr/local/bin/brew cask install ${formulae}
+      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.casks
+    done
+  elif [[ "$1" == "tap" ]]; then
+    shift
+    for formulae in "${@}"; do
+      /usr/local/bin/brew tap ${formulae}
+      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.taps
+    done
+  else
+    /usr/local/bin/brew "$@"
+  fi
+}
+
 # general aliases
 alias p='./projects'
 alias ll='ls -aFGhl'

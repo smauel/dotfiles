@@ -1,7 +1,10 @@
+.brews
+.casks
 .editorconfig
 .gitconfig
 .gitignore
 .npmrc
+.taps
 .tern-config
 .tern-project
 .tmux.conf

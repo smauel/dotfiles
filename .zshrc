@@ -14,10 +14,11 @@ compinit
 # End of lines added by compinstall
 
 [ -f $HOME/.gitauthor ] && source $HOME/.gitauthor
-[ -f $HOME/.zsh-aliases ] && source $HOME/.zsh-aliases
 [ -f $HOME/.zsh-path ] && source $HOME/.zsh-path
 [ -f $HOME/.zsh-prompt ] && source $HOME/.zsh-prompt
 [ -f $HOME/.zsh-env ] && source $HOME/.zsh-env
+# Important to load this last as it contains the brew overrides
+[ -f $HOME/.zsh-aliases ] && source $HOME/.zsh-aliases
 
 # load nodenv for handling versions of node
 eval "$(nodenv init -)"
