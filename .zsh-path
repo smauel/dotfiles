@@ -1,0 +1,7 @@
+NPM="${HOME}/.npm-packages/bin"
+GO="${HOME}/go/bin"
+YARN="$HOME/.yarn/bin"
+PG="/usr/local/opt/postgresql@9.6/bin"
+
+export PATH="${NPM}:${GO}:${YARN}:${PG}:${PATH}"
+
