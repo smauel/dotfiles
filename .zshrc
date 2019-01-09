@@ -30,8 +30,7 @@ prompt pure
 
 # add kube to prompt
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PROMPT='$(kube_ps1)'$PROMPT
-kubeoff
+RPROMPT='$(kube_ps1)'
 
 # aliases
 # general aliases
@@ -85,4 +84,4 @@ eval "$(nodenv init -)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # respect .gitignore
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid {}'"

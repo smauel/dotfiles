@@ -79,7 +79,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 colorscheme onedark
-set guifont=HackNerdFontComplete-Regular:h14
+set guifont=SauceCodeProNerdFontCompleteM-Regular:h13
 highlight Visual guibg=Green guifg=Black
 
 " visual
@@ -220,8 +220,8 @@ endfunction
 autocmd User ALELint call lightline#update()
 
 " nerdtree
-map <Leader>n :NERDTreeToggle<cr>
-map <Leader>l :NERDTreeFind<cr>
+map <leader>n :NERDTreeFind<cr>
+map <leader>l :NERDTreeToggle<cr>
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
 let NERDTreeAutoDeleteBuffer = 1
@@ -254,3 +254,12 @@ endif
 " vim test
 nmap <silent> <C-t><C-n> :TestNearest<CR>
 nmap <silent> <C-t><C-f> :TestFile<CR>
+
+" fzf config
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+nmap <leader>r :Rg<space>

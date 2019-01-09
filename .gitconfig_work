@@ -19,9 +19,11 @@
   diff = diff --word-diff
   dc = diff --cached
 	d = difftool
+  cz = npx git-cz
+  tagsince = log $(git describe --tags --abbrev=0)..HEAD --oneline
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
