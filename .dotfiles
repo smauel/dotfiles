@@ -1,3 +1,9 @@
+.editorconfig
 .gitconfig
+.gitignore
+.npmrc
+.tern-config
+.tern-project
+.tmux.conf
 .vimrc
 .zshrc
