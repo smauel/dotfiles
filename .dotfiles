@@ -10,8 +10,8 @@
 .tern-project
 .tmux.conf
 .vimrc
-.zshrc
 .zsh-aliases
 .zsh-env
 .zsh-path
 .zsh-prompt
+.zshrc

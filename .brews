@@ -1,10 +1,12 @@
 autoconf
 awscli
 bash
+bat
 brew-cask-completion
 diff-so-fancy
 docker-completion
 docker-compose-completion
+fd
 fzf
 gdbm
 gettext
@@ -36,5 +38,3 @@ vim
 xz
 zsh
 zsh-completions
-fd
-bat
