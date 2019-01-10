@@ -5,6 +5,7 @@
 .gitignore
 .npmrc
 .ripgreprc
+.ssh-config:.ssh/config
 .taps
 .tern-config
 .tern-project

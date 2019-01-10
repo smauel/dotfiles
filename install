@@ -74,8 +74,14 @@ EOF
 function symlink_dotfiles {
   echo 'symlinking dotfiles...'
   for dotfile in ${DOTFILES[@]}; do
-    echo " - ${dotfile}"
-    ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
+    if [[ $dotfile == *":"* ]]; then
+      IFS=':' read -r -a array <<< "$dotfile"
+      echo " - ${array[0]} to ${array[1]}"
+      ln -sf "${PWD}/${array[0]}" "${HOME}/${array[1]}"
+    else
+      echo " - ${dotfile}"
+      ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
+    fi
   done
 }
 
