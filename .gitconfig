@@ -20,3 +20,5 @@
   br = branch
   diff = diff --word-diff
 	d = difftool
+[credential]
+	helper = osxkeychain
