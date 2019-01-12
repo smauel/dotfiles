@@ -20,5 +20,6 @@ compinit
 # Important to load this last as it contains the brew overrides
 [ -f $HOME/.zsh-aliases ] && source $HOME/.zsh-aliases
 
-# load nodenv for handling versions of node
-eval "$(nodenv init -)"
+# addons
+[ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
+[ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
