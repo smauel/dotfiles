@@ -7,17 +7,22 @@ function brew() {
     /usr/local/bin/brew
   elif [[ "$1" == "install" ]]; then
     shift
-    for formulae in "${@}"; do
-      /usr/local/bin/brew install ${formulae}
-      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.brews
-    done
+    /usr/local/bin/brew install "$@"
+    /usr/local/bin/brew list > $HOME/.brews
+  elif [[ "$1" == uninstall ]]; then
+    shift
+    /usr/local/bin/brew uninstall "$@"
+    /usr/local/bin/brew list > $HOME/.brews
   elif [[ "$1" == "cask" && "$2" == "install" ]]; then
     shift
     shift
-    for formulae in "${@}"; do
-      /usr/local/bin/brew cask install ${formulae}
-      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.casks
-    done
+    /usr/local/bin/brew cask install "$@"
+    /usr/local/bin/brew cask list > $HOME/.casks
+  elif [[ "$1" == "cask" && "$2" == "uninstall" ]]; then
+    shift
+    shift
+    /usr/local/bin/brew cask uninstall ${formulae}
+    /usr/local/bin/brew cask list > $HOME/.casks
   elif [[ "$1" == "tap" ]]; then
     shift
     for formulae in "${@}"; do
