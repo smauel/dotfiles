@@ -92,11 +92,4 @@ function install {
 }
 
 install
-echo
-echo
-echo "Finished."
-echo "Open a new terminal window or run"
-echo
-echo "  'source $HOME/.zshrc' "
-echo
-echo "to reload latest changes"
+echo "Finished. Open a new terminal window or run 'source $HOME/.zshrc' to reload latest changes"
