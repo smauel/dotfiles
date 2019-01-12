@@ -7,10 +7,10 @@ declare -a DOTFILES=()
 
 # load config from disk. this allows us to update these files for example when the
 # user installs a new brew, automatically with aliases
-while IFS='' read -r line || [[ -n "$line" ]]; do TAPS+=($line); done < ".taps"
-while IFS='' read -r line || [[ -n "$line" ]]; do BREWS+=($line); done < ".brews"
-while IFS='' read -r line || [[ -n "$line" ]]; do CASKS+=($line); done < ".casks"
-while IFS='' read -r line || [[ -n "$line" ]]; do DOTFILES+=($line); done < ".dotfiles"
+while IFS='' read -r line || [[ -n "${line}" ]]; do TAPS+=(${line}); done < ".taps"
+while IFS='' read -r line || [[ -n "${line}" ]]; do BREWS+=(${line}); done < ".brews"
+while IFS='' read -r line || [[ -n "${line}" ]]; do CASKS+=(${line}); done < ".casks"
+while IFS='' read -r line || [[ -n "${line}" ]]; do DOTFILES+=(${line}); done < ".dotfiles"
 
 function update_brew {
   which -s brew
@@ -29,7 +29,7 @@ function install_apps {
   echo 'installing taps...'
   installed_taps=$(brew tap-info --installed)
   for tap in ${TAPS[@]}; do
-    if [[ ${installed_taps} != *"$tap"* ]]; then
+    if [[ ${installed_taps} != *"${tap}"* ]]; then
       echo " - ${tap}"
       brew tap ${tap}
     fi
@@ -38,35 +38,35 @@ function install_apps {
   echo 'installing brews...'
   installed_brews=$(brew list)
   for brew in ${BREWS[@]}; do
-    if [[ ${installed_brews} != *"$brew"* ]]; then
+    if [[ ${installed_brews} != *"${brew}"* ]]; then
       echo " - ${brew}"
-      brew install $brew
+      brew install ${brew}
     fi
   done
 
   echo 'installing casks...'
   installed_casks=$(brew cask list)
   for cask in ${CASKS[@]}; do
-    if [[ ${installed_casks} != *"$cask"* ]]; then
+    if [[ ${installed_casks} != *"${cask}"* ]]; then
       echo " - ${cask}"
-      brew cask install $cask
+      brew cask install ${cask}
     fi
   done
 }
 
 function setup_git_author {
-  if [ ! -f $HOME/.gitauthor ]; then
+  if [ ! -f ${HOME}/.gitauthor ]; then
     echo 'creating .gitauthor file...'
 
     read -p "Enter your name : " name
     read -p "Enter your email : " email
 
-    touch $HOME/.gitauthor
-    cat <<EOF >> $HOME/.gitauthor
-export GIT_AUTHOR_NAME="$name"
-export GIT_AUTHOR_EMAIL="$email"
-export GIT_COMMITTER_NAME="$name"
-export GIT_COMMITTER_EMAIL="$email"
+    touch ${HOME}/.gitauthor
+    cat <<EOF >> ${HOME}/.gitauthor
+export GIT_AUTHOR_NAME="${name}"
+export GIT_AUTHOR_EMAIL="${email}"
+export GIT_COMMITTER_NAME="${name}"
+export GIT_COMMITTER_EMAIL="${email}"
 EOF
   fi
 }
@@ -74,8 +74,8 @@ EOF
 function symlink_dotfiles {
   echo 'symlinking dotfiles...'
   for dotfile in ${DOTFILES[@]}; do
-    if [[ $dotfile == *":"* ]]; then
-      IFS=':' read -r -a array <<< "$dotfile"
+    if [[ ${dotfile} == *":"* ]]; then
+      IFS=':' read -r -a array <<< "${dotfile}"
       echo " - ${array[0]} to ${array[1]}"
       ln -sf "${PWD}/${array[0]}" "${HOME}/${array[1]}"
     else
@@ -92,4 +92,4 @@ function install {
 }
 
 install
-echo "Finished. Open a new terminal window or run 'source $HOME/.zshrc' to reload latest changes"
+echo "Finished. Open a new terminal window or run 'source ${HOME}/.zshrc' to reload latest changes"
