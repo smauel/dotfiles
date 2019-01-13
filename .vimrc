@@ -9,6 +9,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'pangloss/vim-javascript'
@@ -187,40 +188,29 @@ nmap <silent> <C-a> <Plug>(ale_next_wrap)
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
-      \   'left': [['mode', 'paste'], ['filename', 'modified']],
-      \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+      \   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
+      \   'right': [['lineinfo'], ['percent'], ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok'], ['fileformat', 'fileencoding', 'filetype']]
       \ },
       \ 'component_expand': {
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK'
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
       \ },
       \ 'component_type': {
-      \   'readonly': 'error',
+      \   'linter_checking': 'left',
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',
-      \   'linter_ok': 'ok'
+      \   'linter_ok': 'left'
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ▲', all_non_errors)
-endfunction
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓' : ''
-endfunction
-autocmd User ALELint call lightline#update()
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 " nerdtree
 map <leader>n :NERDTreeFind<cr>
