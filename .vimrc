@@ -28,6 +28,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
 Plug 'w0rp/ale'
+Plug 'whatyouhide/vim-gotham'
 call plug#end()
 
 " lazy-load youcompleteme for faster startup times
@@ -85,7 +86,7 @@ set nojoinspaces                                        " don't insert space whe
 if (has("termguicolors"))
   set termguicolors
 endif
-colorscheme onedark
+colorscheme gotham
 set guifont=SauceCodeProNerdFontCompleteM-Regular:h13
 highlight Visual guibg=Green guifg=Black
 
@@ -189,7 +190,7 @@ nmap <silent> <C-a> <Plug>(ale_next_wrap)
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'gotham',
       \ 'active': {
       \   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
       \   'right': [['lineinfo'], ['percent'], ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok'], ['fileformat', 'fileencoding', 'filetype']]
