@@ -35,7 +35,8 @@ function brew() {
 }
 
 # general aliases
-alias p='./projects'
+alias dotfiles="cd ${HOME}/dotfiles"
+alias scripts="cd ${HOME}/scripts"
 alias ll='ls -aFGhl'
 alias ls='ls -aFG'
 alias x='exit'
@@ -43,6 +44,20 @@ alias rm='rm -i'
 alias tmux='tmux -2'
 alias ping='prettyping --nolegend'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias b64='function(){echo $1 | base64}'
+alias ub64='function(){echo $1 | base64 -D}'
+
+# git aliases
+alias g='git'
+alias gc='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias ga='git add'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gp='git pull'
+alias gpom='git push origin master'
+alias gpot='git push origin --tags'
 
 # docker aliases
 alias d='docker'
@@ -72,3 +87,23 @@ alias kgd='kubectl get deployment'
 alias kpf='kubectl port-forward'
 alias kns='kubens'
 alias kctx='kubectx'
+
+# suffix aliases
+alias -s md='vim'
+alias -s js='node'
+function extract() {
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf "$1";;
+    *.tar.xz) tar Jxvf "$1";;
+    *.zip) unzip "$1";;
+    *.lzh) lha e "$1";;
+    *.tar.bz2|*.tbz) tar xjvf "$1";;
+    *.tar.Z) tar zxvf "$1";;
+    *.gz) gzip -d "$1";;
+    *.bz2) bzip2 -dc "$1";;
+    *.Z) uncompress "$1";;
+    *.tar) tar xvf "$1";;
+    *.arj) unarj "$1";;
+  esac
+}
+alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
