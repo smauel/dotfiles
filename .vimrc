@@ -18,11 +18,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
 Plug 'w0rp/ale'
 call plug#end()
