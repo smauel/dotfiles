@@ -1,7 +1,0 @@
-autoload -U promptinit; promptinit
-prompt pure
-
-# add kube to prompt
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-RPROMPT='$(kube_ps1)'
-

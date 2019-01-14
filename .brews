@@ -14,7 +14,6 @@ cmake
 coreutils
 dep
 diff-so-fancy
-docker
 docker-completion
 docker-compose-completion
 docker-machine
@@ -33,7 +32,6 @@ gmp
 gnupg
 gnutls
 go
-go@1.9
 graphite2
 hadolint
 harfbuzz
@@ -49,16 +47,15 @@ kube-ps1
 kubectx
 kubernetes-cli
 kubernetes-helm
-lab
 libassuan
 libcroco
-libev
 libevent
 libffi
 libgcrypt
 libgpg-error
 libidn2
 libksba
+libomp
 libpng
 librsvg
 libtasn1
@@ -75,7 +72,6 @@ lua
 luajit
 mdp
 msgpack
-n
 ncurses
 nettle
 node-build
@@ -93,11 +89,9 @@ pcre
 pcre2
 perl
 pinentry
-pip-gitlint
 pixman
 pkg-config
 postgresql
-postgresql@9.6
 prettyping
 python
 python@2
@@ -110,10 +104,8 @@ shpotify
 sops
 sphinx-doc
 sqlite
-task
 terraform
 terraform_landscape
-tflint
 the_silver_searcher
 tig
 tmux
