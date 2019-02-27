@@ -45,6 +45,11 @@ if [ -f ~/.fzf.zsh ]; then
   export FZF_DEFAULT_OPTS="--ansi --reverse --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid {}'"
 fi
 
+# kubernetes
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
 # addons
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 [ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
@@ -101,7 +106,7 @@ alias ub64='function(){echo $1 | base64 -D}'
 
 # git aliases
 alias g='git'
-alias gc='git checkout'
+alias gc='git clone'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias ga='git add'
@@ -139,6 +144,15 @@ alias kgd='kubectl get deployment'
 alias kpf='kubectl port-forward'
 alias kns='kubens'
 alias kctx='kubectx'
+
+# helm aliases
+HELM="${HOME}/.helm"
+HELM_DEV="${HOME}/.helm/dev"
+HELM_DEMO="${HOME}/.helm/demo"
+HELM_PROD="${HOME}/.helm/prod"
+alias hdev="ln -sf ${HELM_DEV}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEV}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEV}/helm.key.pem ${HELM}/key.pem"
+alias hdemo="ln -sf ${HELM_DEMO}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEMO}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEMO}/helm.key.pem ${HELM}/key.pem"
+alias hprod="ln -sf ${HELM_PROD}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_PROD}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_PROD}/helm.key.pem ${HELM}/key.pem"
 
 # suffix aliases
 alias -s md='vim'
