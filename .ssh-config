@@ -4,7 +4,19 @@ Host *
   IdentityFile ~/.ssh/keys/id_rsa
 
 Host gitlab-dominium-dev
-  Hostname ec2-54-144-41-40.compute-1.amazonaws.com
+  Hostname ec2-3-84-80-169.compute-1.amazonaws.com
+  Port 22
+  User ubuntu
+  IdentityFile ~/.ssh/keys/dominium-gitlab-runner
+
+Host gitlab-dominium-demo
+  Hostname ec2-3-91-154-162.compute-1.amazonaws.com
+  Port 22
+  User ubuntu
+  IdentityFile ~/.ssh/keys/dominium-gitlab-runner
+
+Host gitlab-dominium-prod
+  Hostname ec2-3-90-52-242.compute-1.amazonaws.com
   Port 22
   User ubuntu
   IdentityFile ~/.ssh/keys/dominium-gitlab-runner
