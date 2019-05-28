@@ -20,12 +20,6 @@ YARN="$HOME/.yarn/bin"
 PG="/usr/local/opt/postgresql@9.6/bin"
 export PATH="${NPM}:${GO}:${YARN}:${PG}:${PATH}"
 
-# prompt
-autoload -U promptinit; promptinit
-prompt pure
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-RPROMPT='$(kube_ps1)'
-
 # editor
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export EDITOR=$(which vim)
@@ -42,7 +36,7 @@ if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # respect .gitignore
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS="--ansi --reverse --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid {}'"
+  export FZF_DEFAULT_OPTS="--ansi --reverse --preview-window 'right:60%' --preview 'bat {}'"
 fi
 
 # kubernetes
@@ -54,48 +48,12 @@ fi
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 [ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
 
-# functions
-# Custom brew function to help version control brew.
-# These overrides write to the corresponding .brews, .casks
-# or .taps file when a new brew, cask or tap is installed.
-# All other brew commands are passed through
-function brew() {
-  if [ $# -eq 0 ]; then
-    /usr/local/bin/brew
-  elif [[ "$1" == "install" ]]; then
-    shift
-    /usr/local/bin/brew install "$@"
-    /usr/local/bin/brew list > $HOME/.brews
-  elif [[ "$1" == uninstall ]]; then
-    shift
-    /usr/local/bin/brew uninstall "$@"
-    /usr/local/bin/brew list > $HOME/.brews
-  elif [[ "$1" == "cask" && "$2" == "install" ]]; then
-    shift
-    shift
-    /usr/local/bin/brew cask install "$@"
-    /usr/local/bin/brew cask list > $HOME/.casks
-  elif [[ "$1" == "cask" && "$2" == "uninstall" ]]; then
-    shift
-    shift
-    /usr/local/bin/brew cask uninstall ${formulae}
-    /usr/local/bin/brew cask list > $HOME/.casks
-  elif [[ "$1" == "tap" ]]; then
-    shift
-    for formulae in "${@}"; do
-      /usr/local/bin/brew tap ${formulae}
-      [ $? -eq 0 ] && echo ${formulae} >> ${HOME}/.taps
-    done
-  else
-    /usr/local/bin/brew "$@"
-  fi
-}
-
 # general aliases
 alias dotfiles="cd ${HOME}/dotfiles"
 alias scripts="cd ${HOME}/scripts"
 alias ll='ls -aFGhl'
 alias ls='ls -aFG'
+alias l='exa -lah --git'
 alias x='exit'
 alias rm='rm -i'
 alias tmux='tmux -2'
@@ -130,9 +88,13 @@ alias dstop='docker stop $(docker ps -aq)'
 alias dprune='docker system prune && docker volume prune'
 
 # aws aliases
-alias mfa-start-session='function(){eval $(command mfa-start-session $@);}'
-alias mfa-end-session='function(){eval $(command mfa-end-session); unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID}'
+function start-session() {
+  local selected_profile=$(cat ~/.aws/config| awk '/\[profile.+\]/{ print substr($0, 10, length($0) - 10) }' | fzf --height 30% --reverse -1 -0 --header 'Select Profile')
+  command aws-session --profile $selected_profile
+}
+alias mfa-end-session='function(){unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID}'
 alias assume-role='function(){eval $(command assume-role $@);}'
+alias ss='start-session'
 
 # kubectl aliases
 alias k='kubectl'
@@ -154,6 +116,12 @@ alias hdev="ln -sf ${HELM_DEV}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEV}/he
 alias hdemo="ln -sf ${HELM_DEMO}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEMO}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEMO}/helm.key.pem ${HELM}/key.pem"
 alias hprod="ln -sf ${HELM_PROD}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_PROD}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_PROD}/helm.key.pem ${HELM}/key.pem"
 
+# fzf aliases
+function fssh() {
+  local selected_host=$(ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf --height 30% -1 -0 --header 'Select Host')
+  ssh $selected_host
+}
+
 # suffix aliases
 alias -s md='vim'
 alias -s js='node'
@@ -173,3 +141,41 @@ function extract() {
   esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
+
+# prompt
+#
+# git clone https://github.com/romkatv/powerlevel10k.git ~/dev/powerlevel10k
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
+POWERLEVEL9K_VCS_GIT_GITLAB_ICON=''
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON=''
+POWERLEVEL9K_VCS_GIT_ICON=''
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' '
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='black'
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
+POWERLEVEL9K_DIR_HOME_BACKGROUND='black'
+POWERLEVEL9K_DIR_HOME_FOREGROUND='white'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='black'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='white'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='red'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
+POWERLEVEL9K_AWS_BACKGROUND='yellow'
+POWERLEVEL9K_AWS_FOREGROUND='black'
+POWERLEVEL9K_KUBECONTEXT_BACKGROUND='black'
+POWERLEVEL9K_KUBECONTEXT_FOREGROUND='white'
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯ "
+POWERLEVEL9K_STATUS_OK=false
+POWERLEVEL9K_STATUS_CROSS=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext aws)
+source ~/dev/powerlevel10k/powerlevel10k.zsh-theme

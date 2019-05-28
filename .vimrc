@@ -86,8 +86,8 @@ set nojoinspaces                                        " don't insert space whe
 if (has("termguicolors"))
   set termguicolors
 endif
-colorscheme gotham
-set guifont=SauceCodeProNerdFontCompleteM-Regular:h13
+colorscheme onedark
+set guifont=RobotoMonoNerdFontCompleteM-Medium:h12
 highlight Visual guibg=Green guifg=Black
 
 " visual
