@@ -236,6 +236,7 @@ set completeopt-=preview
 
 " delimitmate
 let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 
 " ale config
 "let g:ale_linters = { 'javascript': ['eslint'] }

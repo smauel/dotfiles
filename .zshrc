@@ -36,7 +36,7 @@ if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # respect .gitignore
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS="--ansi --reverse --preview-window 'right:60%' --preview 'bat {}'"
+  export FZF_DEFAULT_OPTS="--reverse"
 fi
 
 # kubernetes
@@ -73,6 +73,16 @@ alias gdc='git diff --cached'
 alias gp='git pull'
 alias gpom='git push origin master'
 alias gpot='git push origin --tags'
+gl() {
+  git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"  | \
+   fzf --ansi --no-sort --reverse --tiebreak=index --preview \
+   'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1 ; }; f {}' \
+   --bind "j:down,k:up,alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,q:abort,ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF" --preview-window=right:60%
+}
 
 # docker aliases
 alias d='docker'
@@ -121,6 +131,26 @@ function fssh() {
   local selected_host=$(ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf --height 30% -1 -0 --header 'Select Host')
   ssh $selected_host
 }
+function fgitlab() {
+  local ip
+  local natdns
+
+  natdns=$(aws ec2 describe-instances \
+    --query "Reservations[*].Instances[*].[Tags[?Key=='Name'].Value | \
+    [0], PublicDnsName]" \
+    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=nat-az-1 --output text | \
+    tr ' ' '-' | \
+    column -t -s $'\t' | awk '{print $2}')
+
+  ip=$(aws ec2 describe-instances \
+    --query "Reservations[*].Instances[*].[Tags[?Key=='Name'].Value | \
+    [0], LaunchTime, PublicDnsName,PrivateIpAddress]" \
+    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=gitlab-runner --output text | \
+    tr ' ' '-' | \
+    column -t -s $'\t' | fzf | awk '{print $4}')
+
+  ssh -i ~/.ssh/keys/dominium-gitlab-runner ubuntu@$ip -o "proxycommand ssh -W %h:%p -i ~/.ssh/keys/dominium-gitlab-runner ec2-user@$natdns"
+}
 
 # suffix aliases
 alias -s md='vim'
@@ -168,14 +198,29 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='red'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
-POWERLEVEL9K_AWS_BACKGROUND='yellow'
-POWERLEVEL9K_AWS_FOREGROUND='black'
 POWERLEVEL9K_KUBECONTEXT_BACKGROUND='black'
 POWERLEVEL9K_KUBECONTEXT_FOREGROUND='white'
+POWERLEVEL9K_CUSTOM_AWS_BACKGROUND='yellow'
+POWERLEVEL9K_CUSTOM_AWS_FOREGROUND='black'
+POWERLEVEL9K_CUSTOM_AWS="custom_aws"
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯ "
 POWERLEVEL9K_STATUS_OK=false
 POWERLEVEL9K_STATUS_CROSS=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext aws)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext custom_aws)
+
+
+custom_aws() {
+  local aws_profile="${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}"
+
+  if [[ ! -z "$ASSUMED_ROLE" ]]; then
+    aws_profile="$ASSUMED_ROLE"
+  fi
+
+  if [[ -n "$aws_profile" ]]; then
+    echo -e "$aws_profile \uf270"
+  fi
+}
+
 source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
