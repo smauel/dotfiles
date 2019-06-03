@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
-Plug 'Raimondi/delimitMate', { 'for': 'javascript' }
 Plug 'airblade/vim-gitgutter'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -10,13 +9,12 @@ Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'mhinz/vim-signify'
-Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'pangloss/vim-javascript'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
@@ -25,17 +23,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'valloric/youcompleteme', { 'for': 'javascript', 'on': [] }
-Plug 'whatyouhide/vim-gotham'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 call plug#end()
-
-" lazy-load youcompleteme for faster startup times
-augroup load_ycm
-  autocmd!
-  autocmd CursorHold, CursorHoldI * call plug#load('YouCompleteMe')
-                                \ | autocmd! load_ycm
-augroup END
 
 " general
 filetype plugin indent on
@@ -147,6 +135,9 @@ nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <Tab><Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
+" maintain indent on new lines
+inoremap <CR> <CR>x<BS>
+
 " split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -204,7 +195,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -256,7 +247,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'gotham',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
       \   'right': [['lineinfo'], ['percent'], ['cocstatus'], ['fileformat', 'fileencoding', 'filetype']]
@@ -279,11 +270,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " editorconfig config
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" youcompleteme config
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
 
 " delimitmate
 let delimitMate_expand_cr = 1
