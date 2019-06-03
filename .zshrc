@@ -61,6 +61,7 @@ alias ping='prettyping --nolegend'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
+alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
 
 # git aliases
 alias g='git'
@@ -73,6 +74,7 @@ alias gdc='git diff --cached'
 alias gp='git pull'
 alias gpom='git push origin master'
 alias gpot='git push origin --tags'
+# git commit browser
 gl() {
   git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"  | \
    fzf --ansi --no-sort --reverse --tiebreak=index --preview \
@@ -102,9 +104,14 @@ function start-session() {
   local selected_profile=$(cat ~/.aws/config| awk '/\[profile.+\]/{ print substr($0, 10, length($0) - 10) }' | fzf --height 30% --reverse -1 -0 --header 'Select Profile')
   command aws-session --profile $selected_profile
 }
-alias mfa-end-session='function(){unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID}'
-alias assume-role='function(){eval $(command assume-role $@);}'
 alias ss='start-session'
+alias assume-role='function(){eval $(command assume-role $@);}'
+ams() {
+  local profile
+
+  profile=$(ls ~/dev/dominium/infrastructure/aws-manage-sg/*.json | fzf)
+  aws-manage-sg -u smorrison -f $profile
+}
 
 # kubectl aliases
 alias k='kubectl'
@@ -114,8 +121,8 @@ alias kgs='kubectl get service'
 alias kgi='kubectl get ingress'
 alias kgd='kubectl get deployment'
 alias kpf='kubectl port-forward'
-alias kns='kubens'
-alias kctx='kubectx'
+alias kn='kubens'
+alias kc='kubectx'
 
 # helm aliases
 HELM="${HOME}/.helm"
@@ -131,6 +138,7 @@ function fssh() {
   local selected_host=$(ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf --height 30% -1 -0 --header 'Select Host')
   ssh $selected_host
 }
+# fuzzy search and ssh onto gitlab instances
 function fgitlab() {
   local ip
   local natdns
@@ -150,6 +158,20 @@ function fgitlab() {
     column -t -s $'\t' | fzf | awk '{print $4}')
 
   ssh -i ~/.ssh/keys/dominium-gitlab-runner ubuntu@$ip -o "proxycommand ssh -W %h:%p -i ~/.ssh/keys/dominium-gitlab-runner ec2-user@$natdns"
+}
+# fuzzy search and describe kubernetes objects
+function fkd() {
+  local types="pod\nservice\ningress\ndeployment\nstatefulset\nconfigmap\nsecret"
+  local object=$(echo $types | fzf)
+  local instance
+
+  instance=$(kubectl get $object | fzf | awk '{print $1}')
+
+  if [[ "$object" == "configmap" || "$object" == "secret" ]]; then
+    kubectl get $object $instance -oyaml
+  else
+    kubectl describe $object $instance
+  fi
 }
 
 # suffix aliases
@@ -171,6 +193,36 @@ function extract() {
   esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
+
+# dominium aliases
+issuerlink() {
+  local invitationId
+
+  invitationId=$(echo 'type=ISSUER' | base64)
+  echo "invitationId=$invitationId"
+}
+reviewerlink() {
+  local invitationId
+
+  invitationId=$(echo 'type=REVIEWER' | base64)
+  echo "invitationId=$invitationId"
+}
+ownerlink() {
+  local invitationId
+
+  invitationId=$(echo 'type=OWNER' | base64)
+  echo "invitationId=$invitationId"
+}
+memberlink() {
+  if [[ -z "$1" ]]; then
+    echo 'Requires a groupId!'
+  else
+    local invitationId
+
+    invitationId=$(echo "type=USER&groupId=$1" | base64)
+    echo "invitationId=$invitationId"
+  fi
+}
 
 # prompt
 #
@@ -210,7 +262,7 @@ POWERLEVEL9K_STATUS_CROSS=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext custom_aws)
 
-
+# custom aws prompt to display role if assumed
 custom_aws() {
   local aws_profile="${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}"
 
