@@ -62,6 +62,7 @@ alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
 alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
+alias uuid="uuidgen |tr '[:upper:]' '[:lower:]'"
 
 # git aliases
 alias g='git'
@@ -276,3 +277,15 @@ custom_aws() {
 }
 
 source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
+
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+		man "$@"
+}
