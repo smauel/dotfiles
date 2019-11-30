@@ -195,6 +195,12 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
+# update list of installed brews and casks in dotfiles
+function update-brews() {
+  brew list > ~/dev/dotfiles/.brews
+  brew cask list > ~/dev/dotfiles/.casks
+}
+
 # dominium aliases
 issuerlink() {
   local invitationId
