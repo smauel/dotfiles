@@ -78,7 +78,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 colorscheme onedark
-set guifont=RobotoMonoNerdFontCompleteM-Medium:h12
+set guifont=SpaceMonoNerdFontComplete-Regular:h15
 highlight Visual guibg=Green guifg=Black
 
 " visual
