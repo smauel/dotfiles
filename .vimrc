@@ -1,29 +1,67 @@
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tpope/vim-fugitive'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 call plug#end()
 
+" colors
+set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
+let g:purify_italic = 0
+colorscheme purify
+set background=dark
+
+" bindings
+let mapleader=","
+
+" leader bindings
+nnoremap <leader>a :CocAction<CR>
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>r :Rg<space>
+nnoremap <silent> <leader>c :Commits<CR>
+nnoremap <silent> <leader>f :NERDTreeFind<CR>
+nnoremap <silent> <leader>l :NERDTreeToggle<CR>
+nnoremap <silent> <leader>v :e ~/.vimrc<CR>
+nmap <leader>qf <Plug>(coc-fix-current)
+
+" goto bindings
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> rn <Plug>(coc-rename)
+
+" coclist bindings
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+
+" fat finger bindings
+:command W w
+:command Wq wq
+:command Qa qa
+:command QA qa
+:command WQ wq
+
 " general
-filetype plugin indent on
-syntax on
 set hidden
 set nocompatible
 set runtimepath+=~/.vim
-set wildmenu
-set history=256
 set clipboard=unnamed
 set binary
 set noeol
@@ -33,7 +71,7 @@ set cmdheight=2
 set ttyfast
 set lazyredraw
 set ambiwidth=double
-set noshowmode                                          " handled by lightline
+set noshowmode
 set updatetime=300
 set shortmess+=c
 
@@ -42,72 +80,40 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-" encoding
-set encoding=UTF-8
-set fileencodings=UTF-8
-
-" bindings
-let mapleader=","
-nnoremap <c-p> :Files<CR>
-nnoremap <silent> <leader>/ :nohlsearch<CR>
-" fat finger bindings
-:command W w
-:command Qa qa
-:command WQ wq
 
 " formatting
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set smarttab
-set autoindent
 set smartindent
-set formatoptions+=j                                    " swallow comment when joining lines of comments
-set nojoinspaces                                        " don't insert space when joing lines
-
-" colors
-set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
-set background=dark
-colorscheme gruvbox
+set nojoinspaces
 
 " search
 set showmatch
 set matchtime=5
-set hlsearch " highlight matches...
-set incsearch " ...dynamically while typing
+set hlsearch
 set ignorecase " ignore case when searching...
 set smartcase " ...except when you're explicit with caps
 
 " visual
-syntax on
 set number
 set relativenumber
-set ruler
 set showtabline=2
 set showcmd
 set cursorline
 set novisualbell
 set noerrorbells
-set laststatus=2
 set conceallevel=0
 set guioptions=
-set background=dark
-set signcolumn=yes
 
-""""""""""
 " plugins
-"""""""""""
+
 " nerdtree
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
-map <Leader>l : NERDTreeToggle<CR>
-nnoremap <silent> <Leader>f :NERDTreeFind<CR>
-" autocmd VimEnter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
@@ -119,12 +125,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-nmap <leader>r :Rg<space>
-
-" search git commits with fzf
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-nnoremap <silent> <leader>c  :Commits<CR>
-nnoremap <silent> <leader>bc  :BCommits<CR>
 
 
 " coc
@@ -145,16 +145,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " use <cr> to confirm completion
 inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -164,15 +154,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for code action
-nmap <leader>a :CocAction<CR>
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
