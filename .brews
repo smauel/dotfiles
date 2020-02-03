@@ -18,7 +18,9 @@ diff-so-fancy
 docker-completion
 docker-compose-completion
 docker-machine
+emacs-plus
 fd
+findutils
 fontconfig
 freetype
 fribidi
@@ -108,6 +110,7 @@ postgresql
 prettyping
 python
 python@2
+python@3.8
 readline
 redis
 ripgrep
