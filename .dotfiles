@@ -3,6 +3,7 @@
 .gitignore
 .npmrc
 .ripgreprc
+.spacemacs
 .ssh-config:.ssh/config
 .tern-config
 .tern-project

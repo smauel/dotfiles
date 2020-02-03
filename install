@@ -85,10 +85,16 @@ function symlink_dotfiles {
   done
 }
 
+function setup_spacemacs() {
+  echo 'cloning spacemacs repo into ~/.emacs.d...'
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+}
+
 function install {
   install_apps
   setup_git_author
   symlink_dotfiles
+  setup_spacemacs
 }
 
 install
