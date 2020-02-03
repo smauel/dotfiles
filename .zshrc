@@ -18,7 +18,8 @@ NPM="${HOME}/.npm-packages/bin"
 GO="${HOME}/go/bin"
 YARN="$HOME/.yarn/bin"
 PG="/usr/local/opt/postgresql@9.6/bin"
-export PATH="${NPM}:${GO}:${YARN}:${PG}:${PATH}"
+SBIN="/usr/local/sbin"
+export PATH="${NPM}:${GO}:${YARN}:${PG}:${SBIN}:${PATH}"
 
 # editor
 if [[ "$OSTYPE" == "darwin"* ]]; then
