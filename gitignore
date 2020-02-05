@@ -1,0 +1,26 @@
+##
+# OS X
+##
+.DS_Store
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+##
+# Vim
+##
+# swap
+[._]*.sw[a-z]
+[._]sw[a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags

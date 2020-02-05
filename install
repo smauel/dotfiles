@@ -65,21 +65,6 @@ function symlink_dotfiles {
     ln -sf ".ssh-config" "${HOME}"/.ssh/config
   fi
 
-  if [ ! -f ${HOME}/.gitauthor ]; then
-    echo 'creating .gitauthor file...'
-
-    read -p "Enter your name : " name
-    read -p "Enter your email : " email
-
-    touch ${HOME}/.gitauthor
-    cat <<EOF >> ${HOME}/.gitauthor
-export GIT_AUTHOR_NAME="${name}"
-export GIT_AUTHOR_EMAIL="${email}"
-export GIT_COMMITTER_NAME="${name}"
-export GIT_COMMITTER_EMAIL="${email}"
-EOF
-  fi
-
   echo 'updating spacemacs...'
   [ -d "~/.emacs.d" ] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d || git -C ~/.emacs.d pull
 }
