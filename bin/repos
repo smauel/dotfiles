@@ -1,0 +1,67 @@
+#! /usr/bin/env bash
+
+usage() {
+cat <<EOS
+  Repos
+  A git tool for managing multiple repos.
+
+  USAGE: repos [command]
+
+  COMMANDS:
+  list              List discovered repos
+  status            Show git status of each repo (get details with 'repos status -l')
+  latest            Show the latest tag for each repo
+  update            Pull latest changes for each repo
+  unpushed          Show commits that have not yet been pushed for each repo
+  untagged          Show commits since the last tag for each repo
+  unreleased        Show tags that have not been pushed yet for each repo
+
+  repos can also run any arbitrary command on each repo. Note there is no validation
+  done on these commands so be careful!
+
+  examples:
+    - repos list
+    - repos status
+    - repos git log -n 3
+EOS
+}
+
+function iter() {
+  local command=$@
+
+  for repo in `repos list`
+  do 
+    echo $repo
+    cd $repo
+    $command
+    cd ..
+    echo
+  done
+}
+
+if [ "$1" != "" ]; then
+  case "$1" in
+    list )        fd -H -td '^\.git$' -x echo {//}
+      ;;
+    update )      iter git pull
+      ;;
+    status )      iter git status -s
+      ;;
+    unpushed )    iter git log origin/master..master
+      ;;
+    untagged )    iter git log $(git describe --tags --abbrev=0)..HEAD --oneline
+      ;;
+    unreleased )  iter git show-ref --tags | grep -v -F "$(git ls-remote --tags origin | cut -f 2)" | cut -d " " -f 2 | sed "s|refs/tags/||"
+      ;;
+    latest )      iter git describe --tags
+      ;;
+    help )        usage
+      exit
+      ;;
+    * )           iter $@
+      ;;
+  esac
+else
+  usage
+  exit 1
+fi

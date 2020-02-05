@@ -3,14 +3,12 @@
 declare -a TAPS=()
 declare -a BREWS=()
 declare -a CASKS=()
-declare -a DOTFILES=()
 
 # load config from disk. this allows us to update these files for example when the
 # user installs a new brew, automatically with aliases
-while IFS='' read -r line || [[ -n "${line}" ]]; do TAPS+=(${line}); done < ".taps"
-while IFS='' read -r line || [[ -n "${line}" ]]; do BREWS+=(${line}); done < ".brews"
-while IFS='' read -r line || [[ -n "${line}" ]]; do CASKS+=(${line}); done < ".casks"
-while IFS='' read -r line || [[ -n "${line}" ]]; do DOTFILES+=(${line}); done < ".dotfiles"
+while IFS='' read -r line || [[ -n "${line}" ]]; do TAPS+=(${line}); done < "taps"
+while IFS='' read -r line || [[ -n "${line}" ]]; do BREWS+=(${line}); done < "brews"
+while IFS='' read -r line || [[ -n "${line}" ]]; do CASKS+=(${line}); done < "casks"
 
 function update_brew {
   which -s brew
@@ -23,9 +21,7 @@ function update_brew {
   fi
 }
 
-function install_apps {
-  update_brew
-
+function install_taps {
   echo 'installing taps...'
   installed_taps=$(brew tap-info --installed)
   for tap in ${TAPS[@]}; do
@@ -34,7 +30,9 @@ function install_apps {
       brew tap ${tap}
     fi
   done
+}
 
+function install_brews {
   echo 'installing brews...'
   installed_brews=$(brew list)
   for brew in ${BREWS[@]}; do
@@ -43,7 +41,9 @@ function install_apps {
       brew install ${brew}
     fi
   done
+}
 
+function install_casks {
   echo 'installing casks...'
   installed_casks=$(brew cask list)
   for cask in ${CASKS[@]}; do
@@ -54,7 +54,17 @@ function install_apps {
   done
 }
 
-function setup_git_author {
+function symlink_dotfiles {
+  echo 'symlinking dotfiles...'
+  for dotfile in $(find . -name ".*" -type f -not -name ".ssh-config"); do
+    echo " - ${dotfile}"
+    ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
+  done
+
+  if [[ -d ~/.ssh ]]; then
+    ln -sf ".ssh-config" "${HOME}"/.ssh/config
+  fi
+
   if [ ! -f ${HOME}/.gitauthor ]; then
     echo 'creating .gitauthor file...'
 
@@ -69,33 +79,60 @@ export GIT_COMMITTER_NAME="${name}"
 export GIT_COMMITTER_EMAIL="${email}"
 EOF
   fi
+
+  echo 'updating spacemacs...'
+  [ -d "~/.emacs.d" ] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d || git -C ~/.emacs.d pull
 }
 
-function symlink_dotfiles {
-  echo 'symlinking dotfiles...'
-  for dotfile in ${DOTFILES[@]}; do
-    if [[ ${dotfile} == *":"* ]]; then
-      IFS=':' read -r -a array <<< "${dotfile}"
-      echo " - ${array[0]} to ${array[1]}"
-      ln -sf "${PWD}/${array[0]}" "${HOME}/${array[1]}"
-    else
-      echo " - ${dotfile}"
-      ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
-    fi
+function symlink_scripts {
+  echo 'installing scripts...'
+  for script in ${SCRIPTS[@]}; do
+    echo " - ${script}"
+    ln -sf "${PWD}/${script}" "/usr/local/bin/${script}"
   done
 }
 
-function setup_spacemacs() {
-  echo 'cloning spacemacs repo into ~/.emacs.d...'
-  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-}
-
-function install {
-  install_apps
-  setup_git_author
-  symlink_dotfiles
-  setup_spacemacs
-}
-
-install
-echo "Finished. Open a new terminal window or run 'source ${HOME}/.zshrc' to reload latest changes"
+case $1 in
+    all)
+    symlink_dotfiles
+    symlink_scripts
+    update_brew
+    install_taps
+    install_brews
+    install_casks
+    shift
+    ;;
+    dotfiles)
+    symlink_dotfiles
+    shift
+    ;;
+    scripts)
+    symlink_scripts
+    shift
+    ;;
+    taps)
+    update_brew
+    install_taps
+    shift
+    ;;
+    brews)
+    update_brew
+    install_brews
+    shift
+    ;;
+    casks)
+    update_brew
+    install_casks
+    shift
+    ;;
+    *)
+    echo "usage: $programname [option]"
+    echo "  all        install dotfiles, scripts and all brews, taps and casks"
+    echo "  dotfiles   install dotfiles into ${HOME}"
+    echo "  scripts    install scripts into /usr/local/bin"
+    echo "  brews      install brews"
+    echo "  taps       install taps"
+    echo "  casks      install casks"
+    exit 1
+    ;;
+esac

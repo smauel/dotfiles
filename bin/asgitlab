@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+asg=$(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names gitlab-runner-asg | jq '.AutoScalingGroups[] | select(.AutoScalingGroupName == "gitlab-runner-asg")')
+
+current=$(echo $asg | jq .DesiredCapacity)
+min=$(echo $asg | jq .MinSize)
+max=$(echo $asg | jq .MaxSize)
+
+echo "Current number of gitlab runners: $current"
+echo "  - Min: $min"
+echo "  - Max: $max"
+
+read -p "Enter desired number of runners: "  desired
+
+echo "Updating autoscaling group to: $desired runners"
+aws autoscaling update-auto-scaling-group --auto-scaling-group-name gitlab-runner-asg --desired-capacity $desired
+
+echo "Done"

@@ -198,9 +198,9 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 # update list of installed brews and casks in dotfiles
 function update-brews() {
-  brew list > ~/dev/dotfiles/.brews
-  brew cask list > ~/dev/dotfiles/.casks
-  brew tap > ~/dev/dotfiles/.taps
+  brew list > ~/dev/dotfiles/brews
+  brew cask list > ~/dev/dotfiles/casks
+  brew tap > ~/dev/dotfiles/taps
 }
 
 # dominium aliases
