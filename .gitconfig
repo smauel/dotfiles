@@ -1,41 +1,48 @@
-[core]
-	editor = vim
-	excludesfile = $HOME/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  ldr = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-  le = log --oneline --decorate
-  fl = log -u
-  dl = "!git ll -1"
-  dc = diff --cached
-  la = "!git config -l | grep alias | cut -c 7-"
-  st = status -s
-  cl = clone
-  ci = commit
-  co = checkout
-  br = branch
-  diff = diff --word-diff
-	d = difftool
+
+  # short status
+  s = status -s
+
+  # short log
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+  # diff with summary
+  d = !"git --no-pager diff --compact-summary"
+
+  # clone a repository including all submodules
+	c = clone --recursive
+
+  # normal diff
+  patch = !git --no-pager diff --no-color
+
+  # color graph log view
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+	# show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+  # remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+
+[core]
+
+	editor = vim
+
+	excludesfile = $HOME/.gitignore
+
 [credential]
+
 	helper = osxkeychain
-[user]
-	name = Sam Morrison
-	email = sam.d.morrison@uk.pwc.com
-[diff]
-  tool = meld
-[difftool]
-  prompt = false
-[difftool "meld"]
-  trustExitCode = true
-  cmd = open -W -a Meld --args \"$LOCAL\" \"$REMOTE\"
-[merge]
-  tool = meld
-[mergetool]
-  prompt = false
-[mergetool "meld"]
-  trustExitCode = true
-  cmd = open -W -a Meld --args --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"
+
+[help]
+
+  # Automatically correct and execute mistyped commands
+  autocorrect = 1
+
+[pager]
+
+  diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
+
