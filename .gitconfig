@@ -12,6 +12,9 @@
   # clone a repository including all submodules
 	c = clone --recursive
 
+  # checkout
+  co = checkout
+
   # normal diff
   patch = !git --no-pager diff --no-color
 
