@@ -66,14 +66,15 @@ function symlink_dotfiles {
   fi
 
   echo 'updating spacemacs...'
-  [ -d "~/.emacs.d" ] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d || git -C ~/.emacs.d pull
+  [[ ! -d "~/.emacs.d" ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d || git -C ~/.emacs.d pull
 }
 
 function symlink_scripts {
   echo 'installing scripts...'
-  for script in ${SCRIPTS[@]}; do
+  for file in bin/*; do
+    local script=${file##*/}
     echo " - ${script}"
-    ln -sf "${PWD}/${script}" "/usr/local/bin/${script}"
+    ln -sf "${PWD}/bin/${script}" "/usr/local/bin/${script}"
   done
 }
 
