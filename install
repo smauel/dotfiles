@@ -60,13 +60,6 @@ function symlink_dotfiles {
     echo " - ${dotfile}"
     ln -sf "${PWD}/${dotfile}" "${HOME}/${dotfile}"
   done
-
-  if [[ -d ~/.ssh ]]; then
-    ln -sf ".ssh-config" "${HOME}"/.ssh/config
-  fi
-
-  echo 'updating spacemacs...'
-  [[ ! -d "~/.emacs.d" ]] && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d || git -C ~/.emacs.d pull
 }
 
 function symlink_scripts {

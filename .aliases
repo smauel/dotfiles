@@ -1,5 +1,6 @@
 # general aliases
 alias dotfiles="cd ${HOME}/dotfiles"
+alias vim=nvim
 
 alias l='ls -hlFG'
 alias ll='ls -ahlFG'
@@ -148,3 +149,8 @@ function update-brews() {
   brew tap > ~/dev/dotfiles/taps
 }
 
+jdk() {
+   version=$1
+   export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+   java -version
+ }

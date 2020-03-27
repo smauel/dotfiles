@@ -23,7 +23,7 @@ export PATH="${NPM}:${GO}:${YARN}:${PG}:${SBIN}:${PATH}"
 
 # editor
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export EDITOR=$(which vim)
+  export EDITOR=$(which nvim)
   export VISUAL=$(which mvim)
 else
   export EDITOR=$(which vim)
@@ -45,8 +45,10 @@ if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
 
-# addons
-[ -x "$(command -v nodenv)" ] && eval "$(nodenv init -)"
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # aliases
 [ -f ~/.aliases ] && source ~/.aliases
