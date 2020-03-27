@@ -1,15 +1,5 @@
 #! /usr/bin/env bash
 
-declare -a TAPS=()
-declare -a BREWS=()
-declare -a CASKS=()
-
-# load config from disk. this allows us to update these files for example when the
-# user installs a new brew, automatically with aliases
-while IFS='' read -r line || [[ -n "${line}" ]]; do TAPS+=(${line}); done < "taps"
-while IFS='' read -r line || [[ -n "${line}" ]]; do BREWS+=(${line}); done < "brews"
-while IFS='' read -r line || [[ -n "${line}" ]]; do CASKS+=(${line}); done < "casks"
-
 function update_brew {
   which -s brew
   if [[ $? != 0 ]] ; then
@@ -21,37 +11,11 @@ function update_brew {
   fi
 }
 
-function install_taps {
-  echo 'installing taps...'
-  installed_taps=$(brew tap-info --installed)
-  for tap in ${TAPS[@]}; do
-    if [[ ${installed_taps} != *"${tap}"* ]]; then
-      echo " - ${tap}"
-      brew tap ${tap}
-    fi
-  done
-}
-
 function install_brews {
-  echo 'installing brews...'
-  installed_brews=$(brew list)
-  for brew in ${BREWS[@]}; do
-    if [[ ${installed_brews} != *"${brew}"* ]]; then
-      echo " - ${brew}"
-      brew install ${brew}
-    fi
-  done
-}
+  update_brew
 
-function install_casks {
-  echo 'installing casks...'
-  installed_casks=$(brew cask list)
-  for cask in ${CASKS[@]}; do
-    if [[ ${installed_casks} != *"${cask}"* ]]; then
-      echo " - ${cask}"
-      brew cask install ${cask}
-    fi
-  done
+  echo 'installing taps, brews and casks...'
+  brew bundle
 }
 
 function symlink_dotfiles {
@@ -75,10 +39,7 @@ case $1 in
     all)
     symlink_dotfiles
     symlink_scripts
-    update_brew
-    install_taps
     install_brews
-    install_casks
     shift
     ;;
     dotfiles)
@@ -89,19 +50,8 @@ case $1 in
     symlink_scripts
     shift
     ;;
-    taps)
-    update_brew
-    install_taps
-    shift
-    ;;
     brews)
-    update_brew
     install_brews
-    shift
-    ;;
-    casks)
-    update_brew
-    install_casks
     shift
     ;;
     *)
@@ -110,8 +60,6 @@ case $1 in
     echo "  dotfiles   install dotfiles into ${HOME}"
     echo "  scripts    install scripts into /usr/local/bin"
     echo "  brews      install brews"
-    echo "  taps       install taps"
-    echo "  casks      install casks"
     exit 1
     ;;
 esac
