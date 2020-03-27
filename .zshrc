@@ -5,11 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt appendhistory autocd extendedglob nomatch
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+setopt autocd
+setopt extendedglob
+setopt nomatch
 unsetopt beep notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -60,18 +64,6 @@ export NVM_DIR="$HOME/.nvm"
 # aliases
 [ -f ~/.aliases ] && source ~/.aliases
 
-man() {
-	env \
-		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-		LESS_TERMCAP_md=$(printf "\e[1;31m") \
-		LESS_TERMCAP_me=$(printf "\e[0m") \
-		LESS_TERMCAP_se=$(printf "\e[0m") \
-		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-		LESS_TERMCAP_ue=$(printf "\e[0m") \
-		LESS_TERMCAP_us=$(printf "\e[1;32m") \
-		man "$@"
-}
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
@@ -79,3 +71,15 @@ man() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "ael-code/zsh-colored-man-pages"
+zplug "peterhurford/git-it-on.zsh"
+zplug "diazod/git-prune"
+zplug "Dbz/kube-aliases"
+zplug "greymd/docker-zsh-completion"
+zplug "caarlos0/zsh-open-pr"
+zplug load

@@ -25,15 +25,6 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 # OS X has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
-# git aliases
-alias g='git'
-alias gc='git commit'
-alias gs='git s'
-alias ga='git add .'
-alias gd='git diff'
-alias gl='git l'
-alias gb='gcs'
-
 # docker aliases
 alias d='docker'
 alias dc='docker-compose'
@@ -60,17 +51,6 @@ ams() {
   profile=$(ls ~/dev/dominium/infrastructure/aws-manage-sg/*.json | fzf)
   aws-manage-sg -u smorrison -f $profile
 }
-
-# kubectl aliases
-alias k='kubectl'
-alias kgn='kubectl get nodes'
-alias kgp='kubectl get pods'
-alias kgs='kubectl get service'
-alias kgi='kubectl get ingress'
-alias kgd='kubectl get deployment'
-alias kpf='kubectl port-forward'
-alias kn='kubens'
-alias kc='kubectx'
 
 # helm aliases
 HELM="${HOME}/.helm"

@@ -144,6 +144,7 @@ brew "ttygif"
 brew "vim", link: false
 brew "wget"
 brew "zookeeper"
+brew "zplug"
 brew "zsh"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
