@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -53,58 +60,6 @@ export NVM_DIR="$HOME/.nvm"
 # aliases
 [ -f ~/.aliases ] && source ~/.aliases
 
-# prompt
-# git clone https://github.com/romkatv/powerlevel10k.git ~/dev/powerlevel10k
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
-POWERLEVEL9K_VCS_GIT_GITLAB_ICON=''
-POWERLEVEL9K_VCS_GIT_GITHUB_ICON=''
-POWERLEVEL9K_VCS_GIT_ICON=''
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=
-POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=
-POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' '
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='black'
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
-POWERLEVEL9K_DIR_HOME_BACKGROUND='black'
-POWERLEVEL9K_DIR_HOME_FOREGROUND='white'
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='black'
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='white'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='black'
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='red'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
-POWERLEVEL9K_KUBECONTEXT_BACKGROUND='black'
-POWERLEVEL9K_KUBECONTEXT_FOREGROUND='white'
-POWERLEVEL9K_CUSTOM_AWS_BACKGROUND='yellow'
-POWERLEVEL9K_CUSTOM_AWS_FOREGROUND='black'
-POWERLEVEL9K_CUSTOM_AWS="custom_aws"
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯ "
-POWERLEVEL9K_STATUS_OK=false
-POWERLEVEL9K_STATUS_CROSS=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext custom_aws)
-
-# custom aws prompt to display role if assumed
-custom_aws() {
-  local aws_profile="${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}"
-
-  if [[ ! -z "$ASSUMED_ROLE" ]]; then
-    aws_profile="$ASSUMED_ROLE"
-  fi
-
-  if [[ -n "$aws_profile" ]]; then
-    echo -e "$aws_profile \uf270"
-  fi
-}
-
-source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
-
 man() {
 	env \
 		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -120,3 +75,7 @@ man() {
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
