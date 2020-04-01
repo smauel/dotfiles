@@ -82,4 +82,5 @@ zplug "diazod/git-prune"
 zplug "Dbz/kube-aliases"
 zplug "greymd/docker-zsh-completion"
 zplug "caarlos0/zsh-open-pr"
+zplug "djui/alias-tips"
 zplug load

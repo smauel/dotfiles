@@ -134,3 +134,5 @@ jdk() {
    export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
    java -version
  }
+
+alias note="vim ${HOME}/notes/$(date +%d-%m-%Y).md"
