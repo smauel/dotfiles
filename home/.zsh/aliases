@@ -2,6 +2,9 @@
 alias dotfiles="cd ${HOME}/dotfiles"
 alias vim=nvim
 
+# use a newer version of less than what comes with OSX by default
+alias less=/usr/local/Cellar/less/551/bin/less
+
 alias l='ls -hlFG'
 alias ll='ls -ahlFG'
 alias ls='ls -aFG'
@@ -24,6 +27,16 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 
 # OS X has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# git aliases
+alias g='git'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gst='git status -s'
+alias gl='git pull'
+alias glo='git log'
+alias gco='git checkout'
+alias gcb= 'git branch'
 
 # docker aliases
 alias d='docker'

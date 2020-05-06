@@ -1,0 +1,6 @@
+export KUBECONFIG="/usr/local/etc/bosun/kubeconfig.yaml"
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
+

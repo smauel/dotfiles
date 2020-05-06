@@ -1,0 +1,15 @@
+SYSTEM_PATH=$PATH
+unset PATH
+
+PATH=$HOME/bin
+PATH=$PATH:$HOME/.zsh/bin
+
+if [ -d /usr/local/opt/postgresql@12/bin ]; then
+  PATH=$PATH:/usr/local/opt/postgresql@12/bin
+fi
+
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:/usr/local/sbin
+PATH=$PATH:$SYSTEM_PATH
+
+export PATH
