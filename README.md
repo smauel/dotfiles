@@ -1,5 +1,7 @@
 # dotfiles
 
+![](screenshot.png)
+
 ## Installing
 
 To install everything:
