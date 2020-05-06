@@ -30,15 +30,20 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
 alias g='git'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gst='git status -s'
-alias gl='git pull'
-alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glo="git log -10 --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'"
-alias gco='git checkout'
-alias gcb= 'git branch'
-alias gwc='git whatchanged'
+alias gs='git s'
+alias gl='git l'
+alias glg='git lg'
+alias gd='git d'
+alias gdi='git di'
+alias gdc='git di --cached'
+alias gca='git ca'
+alias ggo='git go'
+alias gpr='git pr'
+alias ga='git amend'
+alias gdm='git dm'
+alias gwc='git wc'
+alias gp='git pull'
+alias gco='git co'
 
 # docker aliases
 alias d='docker'
