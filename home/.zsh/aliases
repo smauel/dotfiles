@@ -34,9 +34,11 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gst='git status -s'
 alias gl='git pull'
-alias glo='git log'
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glo="git log -10 --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'"
 alias gco='git checkout'
 alias gcb= 'git branch'
+alias gwc='git whatchanged'
 
 # docker aliases
 alias d='docker'
