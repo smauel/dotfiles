@@ -6,7 +6,12 @@ DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
 SCRIPTS := $(addprefix /usr/local/bin/,$(shell ls -A bin))
 VSCODES := $(addprefix $(VSCODE_DIR)/,$(shell ls -A vscode))
 
-.PHONY: link unlink brew brews vscode help
+# space safe notdir check
+s? = $(subst $(empty) ,?,$1)
+?s = $(subst ?, ,$1)
+notdirx = $(call ?s,$(notdir $(call s?,$1)))
+
+.PHONY: link unlink brew brews vscode help $(VSCODES)
 
 help:
 	@cat banner
@@ -55,7 +60,7 @@ $(AUTHORFILE):
   echo "export GIT_COMMITTER_EMAIL=$${EMAIL}" >> "$(AUTHORFILE)"; \
 
 $(VSCODES):
-	@ln -sf "$(PWD)/vscode/$(notdir $@)" "$@"
+	@ln -sf "$(PWD)/vscode/$(call notdirx,$@)" "$@"
 
 $(BREW):
 	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
