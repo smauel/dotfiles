@@ -1,5 +1,17 @@
 {
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.settings.editor": "json",
     "editor.fontSize": 16,
+    "editor.fontFamily": "ShureTechMono Nerd Font",
+    "debug.console.fontFamily": "ShureTechMono Nerd Font",
+    "debug.console.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "soruce.fixAll.eslint": true,
+    },
     "vim.autoindent": true,
     "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
@@ -7,14 +19,11 @@
     "vim.smartcase": true,
     "vim.mouseSelectionGoesIntoVisualMode": true,
     "vim.incsearch": true,
-    "workbench.colorTheme": "Nord",
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true,
-        "soruce.fixAll.eslint": true,
-    },
-    "editor.formatOnSave": false,
-    "workbench.iconTheme": "material-icon-theme",
     "[javascript]": {
+        "editor.formatOnSave": false,
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "files.insertFinalNewline": true,
+    "editor.matchBrackets": "always",
+    "editor.parameterHints.enabled": false,
 }
