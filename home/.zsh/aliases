@@ -1,6 +1,7 @@
 # general aliases
 alias dotfiles="cd ${HOME}/dev/dotfiles"
 alias vim=nvim
+alias tmux='tmux -2'
 
 # use a newer version of less than what comes with OSX by default
 alias less=/usr/local/Cellar/less/551/bin/less

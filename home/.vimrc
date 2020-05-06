@@ -1,20 +1,21 @@
 call plug#begin('~/.vim/plugged')
-Plug 'editorconfig/editorconfig-vim'
-Plug 'arcticicestudio/nord-vim'
 Plug '/usr/local/opt/fzf'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'arcticicestudio/nord-vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'leafgarland/typescript-vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'yuezk/vim-js'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'yuezk/vim-js'
 call plug#end()
 
 " colors
@@ -52,6 +53,14 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 
+" split bindings
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
 " fat finger bindings
 :command W w
 :command Wq wq
@@ -68,7 +77,7 @@ set binary
 set noeol
 set modeline
 set modelines=4
-set cmdheight=2
+set cmdheight=1
 set ttyfast
 set lazyredraw
 set ambiwidth=double
