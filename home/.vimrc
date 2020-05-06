@@ -167,3 +167,6 @@ endfunction
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" airline
+let g:airline_powerline_fonts = 1
