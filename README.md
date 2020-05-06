@@ -82,3 +82,4 @@ brew bundle dump
 Double-clicking the `nord.itermcolors` file will load the colors. 
 
 Then go to `Settings` -> `Profiles` -> `Colors` -> `Color Presets...` and select `nord`
+
