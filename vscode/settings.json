@@ -7,7 +7,7 @@
     "vim.smartcase": true,
     "vim.mouseSelectionGoesIntoVisualMode": true,
     "vim.incsearch": true,
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Nord",
     "editor.codeActionsOnSave": {
         "source.fixAll": true,
         "soruce.fixAll.eslint": true,
