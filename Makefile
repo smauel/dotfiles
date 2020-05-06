@@ -31,8 +31,8 @@ $(SCRIPTS):
 
 $(AUTHORFILE):
 	@read -p "What is your git author name? " NAME; \
-  echo "export GIT_AUTHOR_NAME=$${NAME}" > "$(AUTHORFILE)"; \
-  echo "export GIT_COMMITTER_NAME=$${NAME}" >> "$(AUTHORFILE)";
+  echo "export GIT_AUTHOR_NAME=\"$${NAME}\"" > "$(AUTHORFILE)"; \
+  echo "export GIT_COMMITTER_NAME=\"$${NAME}\"" >> "$(AUTHORFILE)";
 	@read -p "What is your git author email? " EMAIL; \
   echo "export GIT_AUTHOR_EMAIL=$${EMAIL}" >> "$(AUTHORFILE)"; \
   echo "export GIT_COMMITTER_EMAIL=$${EMAIL}" >> "$(AUTHORFILE)"; \
