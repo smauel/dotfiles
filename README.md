@@ -83,3 +83,6 @@ Double-clicking the `nord.itermcolors` file will load the colors.
 
 Then go to `Settings` -> `Profiles` -> `Colors` -> `Color Presets...` and select `nord`
 
+### VSCode
+
+VSCode settings, keybindings and extensions configurations can be found under `vscode`

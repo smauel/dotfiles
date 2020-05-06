@@ -1,0 +1,20 @@
+{
+    "editor.fontSize": 16,
+    "vim.autoindent": true,
+    "vim.useSystemClipboard": true,
+    "vim.hlsearch": true,
+    "vim.surround": true,
+    "vim.smartcase": true,
+    "vim.mouseSelectionGoesIntoVisualMode": true,
+    "vim.incsearch": true,
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "soruce.fixAll.eslint": true,
+    },
+    "editor.formatOnSave": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
