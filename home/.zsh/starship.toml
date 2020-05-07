@@ -1,0 +1,14 @@
+[package]
+disabled = true
+
+[kubernetes]
+disabled=true
+
+[aws]
+disabled=true
+
+[cmd_duration]
+disabled=true
+
+[java]
+style="red"

@@ -2,4 +2,5 @@
 # [[ ! -f "$HOME/.zsh/p10k" ]] || source "$HOME/.zsh/p10k"
 # source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
+export STARSHIP_CONFIG=~/.zsh/starship.toml
 eval "$(starship init zsh)"
