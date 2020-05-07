@@ -10,6 +10,8 @@ alias l='ls -hlFG'
 alias ll='ls -ahlFG'
 alias ls='ls -aFG'
 
+alias cc='clear'
+
 # List only directories
 alias lsd="ls -lhFG | grep --color=never '^d'"
 alias x='exit'
