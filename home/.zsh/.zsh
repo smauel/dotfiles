@@ -1,1 +1,0 @@
-/Users/sam.morrison/dev/dotfiles/./.zsh
