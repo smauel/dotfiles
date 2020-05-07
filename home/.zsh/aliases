@@ -12,9 +12,12 @@ alias ls='ls -aFG'
 
 alias cc='clear'
 
+alias x='exit'
+alias :wq='exit'
+alias :bd='exit'
+
 # List only directories
 alias lsd="ls -lhFG | grep --color=never '^d'"
-alias x='exit'
 alias rm='rm -i'
 alias tmux='tmux -2'
 alias ping='prettyping --nolegend'
