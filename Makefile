@@ -46,15 +46,15 @@ vscode: | $(VSCODES)
 
 $(DOTFILES):
 	@echo "- $(notdir $@)"
-	@ln -sf "$(PWD)/home/$(notdir $@)" $@
+	@ln -sfn "$(PWD)/home/$(notdir $@)" $@
 
 $(SCRIPTS):
 	@echo "- $(notdir $@)"
-	@ln -sf "$(PWD)/bin/$(notdir $@)" $@
+	@ln -sfn "$(PWD)/bin/$(notdir $@)" $@
 
 $(NVIMS):
 	@echo "- $(notdir $@)"
-	@ln -sf "$(PWD)/nvim/$(notdir $@)" $@
+	@ln -sfn "$(PWD)/nvim/$(notdir $@)" $@
 
 $(AUTHORFILE):
 	@read -p "What is your git author name? " NAME; \
