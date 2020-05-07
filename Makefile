@@ -5,13 +5,14 @@ VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
 DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
 SCRIPTS := $(addprefix /usr/local/bin/,$(shell ls -A bin))
 VSCODES := $(addprefix $(VSCODE_DIR)/,$(shell ls -A vscode))
+NVIMS := $(addprefix $(HOME)/.config/nvim/,$(shell ls -A nvim))
 
 # space safe notdir check
 s? = $(subst $(empty) ,?,$1)
 ?s = $(subst ?, ,$1)
 notdirx = $(call ?s,$(notdir $(call s?,$1)))
 
-.PHONY: link unlink brew brews vscode help $(VSCODES)
+.PHONY: link unlink brew brews vscode help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
 
 help:
 	@cat banner
@@ -24,9 +25,7 @@ help:
 
 all: | link brews vscode
 
-link: | $(DOTFILES) $(SCRIPTS) $(AUTHORFILE)
-	mkdir -p $(HOME)/.config/nvim
-	@ln -sf "$(PWD)/home/.vimrc" "$(HOME)/.config/nvim/init.vim"
+link: | $(DOTFILES) $(SCRIPTS) $(NVIMS) $(AUTHORFILE)
 
 unlink:
 	@echo 'unlinking'
@@ -46,10 +45,16 @@ vscode: | $(VSCODES)
 	done < $(PWD)/vscode/extensions.txt;
 
 $(DOTFILES):
+	@echo "- $(notdir $@)"
 	@ln -sf "$(PWD)/home/$(notdir $@)" $@
 
 $(SCRIPTS):
+	@echo "- $(notdir $@)"
 	@ln -sf "$(PWD)/bin/$(notdir $@)" $@
+
+$(NVIMS):
+	@echo "- $(notdir $@)"
+	@ln -sf "$(PWD)/nvim/$(notdir $@)" $@
 
 $(AUTHORFILE):
 	@read -p "What is your git author name? " NAME; \
