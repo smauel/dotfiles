@@ -45,6 +45,8 @@ alias gdm='git dm'
 alias gwc='git wc'
 alias gp='git pull'
 alias gco='git co'
+alias gcm='git co master'
+alias gb='git branch'
 
 # docker aliases
 alias d='docker'
