@@ -2,5 +2,6 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 zplug "caarlos0/zsh-open-pr"
 zplug "djui/alias-tips"
+zplug 'wfxr/forgit'
 zplug load
 

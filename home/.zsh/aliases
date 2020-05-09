@@ -39,19 +39,25 @@ alias g='git'
 alias gs='git s'
 alias gl='git l'
 alias glg='git lg'
-alias gd='git d'
 alias gdi='git di'
 alias gdc='git di --cached'
 alias gca='git ca'
 alias ggo='git go'
 alias gpr='git pr'
-alias ga='git amend'
 alias gdm='git dm'
 alias gwc='git wc'
 alias gp='git pull'
 alias gco='git co'
 alias gcm='git co master'
 alias gb='git branch'
+forgit_log=glo
+forgit_diff=gd
+forgit_add=ga
+forgit_reset_head=grh
+forgit_ignore=gi
+forgit_restore=gcf
+forgit_clean=gclean
+forgit_stash_show=gss
 
 # docker aliases
 alias d='docker'

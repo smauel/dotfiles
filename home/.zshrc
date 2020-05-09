@@ -47,6 +47,7 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/exports
 source $HOME/.zsh/path
 source $HOME/.zsh/prompt
+source $HOME/.zsh/z
 source $HOME/.zsh/fzf
 source $HOME/.zsh/nvm
 source $HOME/.zsh/kube
