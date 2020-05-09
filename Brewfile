@@ -38,6 +38,7 @@ brew "docker-completion"
 brew "docker-compose", link: false
 brew "docker-compose-completion"
 brew "docker-machine"
+brew "exa"
 brew "fasd"
 brew "fd"
 brew "findutils"

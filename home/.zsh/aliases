@@ -6,9 +6,8 @@ alias tmux='tmux -2'
 # use a newer version of less than what comes with OSX by default
 alias less=/usr/local/Cellar/less/551/bin/less
 
-alias l='ls -hlFG'
-alias ll='ls -ahlFG'
-alias ls='ls -aFG'
+alias ls='exa'
+alias ll='exa -l'
 
 alias cc='clear'
 
