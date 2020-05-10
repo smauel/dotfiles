@@ -2,6 +2,7 @@
 alias dotfiles="cd ${HOME}/dev/dotfiles"
 alias vim=nvim
 alias tmux='tmux -2'
+alias fv='vim $(fzf)'
 
 # use a newer version of less than what comes with OSX by default
 alias less=/usr/local/Cellar/less/551/bin/less
@@ -93,47 +94,6 @@ HELM_PROD="${HOME}/.helm/prod"
 alias hdev="ln -sf ${HELM_DEV}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEV}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEV}/helm.key.pem ${HELM}/key.pem"
 alias hdemo="ln -sf ${HELM_DEMO}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEMO}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEMO}/helm.key.pem ${HELM}/key.pem"
 alias hprod="ln -sf ${HELM_PROD}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_PROD}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_PROD}/helm.key.pem ${HELM}/key.pem"
-
-# fzf aliases
-function fssh() {
-  local selected_host=$(ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf --height 30% -1 -0 --header 'Select Host')
-  ssh $selected_host
-}
-# fuzzy search and ssh onto gitlab instances
-function fgitlab() {
-  local ip
-  local natdns
-
-  natdns=$(aws ec2 describe-instances \
-    --query "Reservations[*].Instances[*].[Tags[?Key=='Name'].Value | \
-    [0], PublicDnsName]" \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=nat-az-1 --output text | \
-    tr ' ' '-' | \
-    column -t -s $'\t' | awk '{print $2}')
-
-  ip=$(aws ec2 describe-instances \
-    --query "Reservations[*].Instances[*].[Tags[?Key=='Name'].Value | \
-    [0], LaunchTime, PublicDnsName,PrivateIpAddress]" \
-    --filters Name=instance-state-name,Values=running Name=tag:Name,Values=gitlab-runner --output text | \
-    tr ' ' '-' | \
-    column -t -s $'\t' | fzf | awk '{print $4}')
-
-  ssh -i ~/.ssh/keys/dominium-gitlab-runner ubuntu@$ip -o "proxycommand ssh -W %h:%p -i ~/.ssh/keys/dominium-gitlab-runner ec2-user@$natdns"
-}
-# fuzzy search and describe kubernetes objects
-function fkd() {
-  local types="pod\nservice\ningress\ndeployment\nstatefulset\nconfigmap\nsecret"
-  local object=$(echo $types | fzf)
-  local instance
-
-  instance=$(kubectl get $object | fzf | awk '{print $1}')
-
-  if [[ "$object" == "configmap" || "$object" == "secret" ]]; then
-    kubectl get $object $instance -oyaml
-  else
-    kubectl describe $object $instance
-  fi
-}
 
 # suffix aliases
 alias -s md='vim'
