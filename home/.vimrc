@@ -3,10 +3,10 @@ Plug '/usr/local/opt/fzf'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -17,6 +17,14 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'yuezk/vim-js'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 call plug#end()
 
 " colors
@@ -29,30 +37,18 @@ colorscheme nord
 let mapleader=","
 
 " leader bindings
-nnoremap <leader>a :CocAction<CR>
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>r :Rg<space>
 nnoremap <silent> <leader>c :Commits<CR>
-nnoremap <silent> <leader>f :NERDTreeFind<CR>
 nnoremap <silent> <leader>l :NERDTreeToggle<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
-nmap <leader>qf <Plug>(coc-fix-current)
 
 " goto bindings
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> rn <Plug>(coc-rename)
-
-" coclist bindings
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
+nmap <silent> <leader>f :ALEFix
+nmap <silent> <leader>d :ALEGoToDefinition
+nmap <silent> <leader>h :ALEHover
 
 " split bindings
 nnoremap <C-J> <C-W><C-J>
@@ -140,36 +136,23 @@ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
-" coc
-" use tab for completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" c-space to trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" use <cr> to confirm completion
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " airline
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+
+" ale
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
