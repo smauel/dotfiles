@@ -17,6 +17,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'yuezk/vim-js'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -32,6 +34,7 @@ syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
 set background=dark
 colorscheme nord
+set enc=utf-8
 
 " bindings
 let mapleader=","
@@ -153,6 +156,10 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 1
+let g:ale_set_highlights = 0
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
+
+
+" ultisnips
+let g:UltiSnipsEditSplit="vertical"
