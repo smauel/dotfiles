@@ -34,7 +34,7 @@ syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
 set background=dark
 colorscheme nord
-set enc=utf-8
+set encoding=utf-8
 
 " bindings
 let mapleader=","
