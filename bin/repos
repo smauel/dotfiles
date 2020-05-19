@@ -1,4 +1,7 @@
-#! /usr/bin/env bash
+#! /usr/bin/env zsh
+
+setopt aliases complete_aliases
+source ~/.zsh/aliases
 
 usage() {
 cat <<EOS
@@ -30,10 +33,10 @@ function iter() {
   local command=$@
 
   for repo in `repos list`
-  do 
+  do
     echo $repo
     cd $repo
-    $command
+    eval $command
     cd ..
     echo
   done
