@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
-Plug 'Yggdroot/indentLine'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
