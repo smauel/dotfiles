@@ -16,7 +16,7 @@ Or to run the dotfile linker only:
 make link
 ```
 
-For full list of commands available run: 
+For full list of commands available run:
 
 ```bash
 make help
@@ -28,19 +28,22 @@ make help
 
 All zsh configuration can be found in `home/.zsh` and `home/.zshrc`.
 
-Where possible features have been split out into separate files and the `.zshrc` sources them.
+Where possible features have been split out into separate files and the `.zshrc`
+sources them.
 
 Some notable features:
 
-* Uses [p10k](https://github.com/romkatv/powerlevel10k) for prompt customization
+* Uses [starship](https://starship.rs) for prompt customization
 * Uses Nord for dir colors to match theme
 * Configures a number of aliases for common operations (see `home/.zsh/aliases`)
 
 ### Vim
 
-Vim configuration can be found in `home/.vimrc`. At link time this is also symlinked to `~/.config/nvim/init.vim` for NVim use.
+Vim configuration can be found in `home/.vimrc`. At link time this is also
+symlinked to `~/.config/nvim/init.vim` for NVim use.
 
-Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A small set of plugins are installed including:
+Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A
+small set of plugins are installed including:
 
 * The Nord theme
 * Airline for status line
@@ -49,15 +52,22 @@ Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A s
 
 For a full list of bindings that are configured see the `home/.vimrc`
 
+### Tmux
+
+Tmux configuration can be found in `home/.tmux.conf`. Uses
+[tpm](https://github.com/tmux-plugins/tpm) for plugin management, and is
+configured so that keybindings play nicely with tmux panes and vim splits
+
 ### Colors
 
-Uses the excellent [Nord](https://www.nordtheme.com/) theme for vim and iTerm.
+Uses the excellent [Nord](https://www.nordtheme.com/) theme for vim, tmux and iTerm.
 
 For other ports see [here](https://www.nordtheme.com/ports)
 
 ### Git Author
 
-Will create a `~/.gitauthor` file in the home directory which exports git author information
+Will create a `~/.gitauthor` file in the home directory which exports git author
+information
 
 ```bash
 GIT_AUTHOR_NAME="Your Name"
@@ -70,7 +80,7 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 
 ### Homebrew
 
-An included `Brewfile` will install `brews`, `casks` and `taps`. 
+An included `Brewfile` will install `brews`, `casks` and `taps`.
 
 To regenerate the `Brewfile` run:
 
@@ -83,9 +93,10 @@ brew bundle dump
 
 All iTerm2 configuration can be found in the `iterm2` folder.
 
-Double-clicking the `nord.itermcolors` file will load the colors. 
+Double-clicking the `nord.itermcolors` file will load the colors.
 
-Then go to `Settings` -> `Profiles` -> `Other actions...` -> `Import JSON profiles...` and select `profile.json`
+Then go to `Settings` -> `Profiles` -> `Other actions...` ->
+`Import JSON profiles...` and select `profile.json`
 
 ### VSCode
 
