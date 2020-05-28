@@ -1,4 +1,5 @@
 BREW := /usr/local/bin/brew
+VIM_PLUG := $(HOME)/.config/nvim/autoload/plug.vim
 AUTHORFILE := $(HOME)/.gitauthor
 VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
 COC_DIR := $(HOME)/.config/coc
