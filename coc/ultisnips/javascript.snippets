@@ -1,0 +1,65 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet af "arrow function" i
+($1) => $2
+endsnippet
+
+snippet log "console.log"
+console.log($1);
+endsnippet
+
+snippet "imp(o|or|ort)?" "import" !br
+import $1 from '$2';
+endsnippet
+
+snippet "req(u|ui|uir|uire)?" "require" !br
+const $1 = require('$2');
+endsnippet
+
+# jest
+
+snippet "desc(r|ri|rib|ribe)?" "describe" b
+describe('$1', () => {
+	$2
+});
+endsnippet
+
+snippet "bef(o|or|ore)" "before" b
+beforeEach(() => {
+	$1
+});
+endsnippet
+
+snippet it "it" b
+it('$1', () => {
+	$2
+});
+endsnippet
+
+snippet "ex(p|pe|pec|pect)?" "expect" b
+expect($1).to$2($3);
+endsnippet

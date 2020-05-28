@@ -24,3 +24,10 @@ Session.vim
 *~
 # auto-generated tag files
 tags
+
+coc/*
+!/coc/ultisnips
+!/coc/extensions
+/coc/extensions/*
+!/coc/extensions/package.json
+!/coc/extensions/yarn.lock

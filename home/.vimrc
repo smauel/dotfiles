@@ -163,12 +163,12 @@ let g:airline_powerline_fonts = 1
 
 
 " coc
-" use tab for completion
+" use tab for trigger completion, completion confirm and snippet expand
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -177,12 +177,8 @@ endfunction
 " <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" <cr> to confirm completion
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" use tab for snippet jump
+let g:coc_snippet_next = '<tab>'
 
 " K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
