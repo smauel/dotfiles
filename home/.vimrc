@@ -92,7 +92,6 @@ set modelines=4
 set cmdheight=1
 set ttyfast
 set lazyredraw
-set ambiwidth=double
 set noshowmode
 set updatetime=300
 set shortmess+=c
