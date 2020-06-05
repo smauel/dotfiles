@@ -6,7 +6,7 @@
     "coc-git": ">=1.7.13",
     "coc-highlight": ">=1.2.5",
     "coc-html": ">=1.2.4",
-    "coc-java": ">=1.4.10",
+    "coc-java": ">=1.4.11",
     "coc-json": ">=1.2.6",
     "coc-markdownlint": ">=1.4.0",
     "coc-snippets": ">=2.1.26",
