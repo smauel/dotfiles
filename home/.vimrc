@@ -4,13 +4,13 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
+Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -39,6 +39,7 @@ let mapleader=","
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>r :Rg<space>
 nnoremap <leader>a :CocAction<CR>
+nnoremap <silent> <leader>bd :bd<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>l :NERDTreeToggle<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
