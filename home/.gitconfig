@@ -7,7 +7,7 @@
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
   # color graph log view
-	lg = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	lo = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 
   # diff with summary
   d = !"git --no-pager diff --compact-summary"
@@ -54,6 +54,8 @@
 
 	excludesfile = ~/.gitignore
 
+  pager = delta --theme="Nord"
+
 [commit]
 
   template = ~/.gitcommit
@@ -66,10 +68,6 @@
 
   # Automatically correct and execute mistyped commands
   autocorrect = 1
-
-[pager]
-
-  diff = diff-so-fancy | less --tabs=4 -RFXS
 
 [push]
 

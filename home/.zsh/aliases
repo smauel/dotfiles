@@ -36,28 +36,25 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
 alias g='git'
-alias gs='git s'
+alias gf='git fuzzy'
+alias gfs='git fuzzy status'
+alias gfl='git fuzzy log'
+alias gfd='git fuzzy diff'
+alias gfb='git fuzzy branch'
 alias gl='git l'
-alias glg='git lg'
-alias gdi='git di'
-alias gdc='git di --cached'
+alias glo='git lo'
+alias gd='git diff'
+alias gdc='git diff --cached'
 alias gca='git ca'
+alias gb='git branch'
 alias ggo='git go'
-alias gpr='git pr'
 alias gdm='git dm'
 alias gwc='git wc'
 alias gp='git pull'
-alias gco='git co'
+alias gppr='git push && open-pr'
 alias gcm='git co master'
+alias gcd='git co develop'
 alias gb='git branch'
-forgit_log=glo
-forgit_diff=gd
-forgit_add=ga
-forgit_reset_head=grh
-forgit_ignore=gi
-forgit_restore=gcf
-forgit_clean=gclean
-forgit_stash_show=gss
 
 # docker aliases
 alias d='docker'
