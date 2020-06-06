@@ -14,7 +14,7 @@ s? = $(subst $(empty) ,?,$1)
 ?s = $(subst ?, ,$1)
 notdirx = $(call ?s,$(notdir $(call s?,$1)))
 
-.PHONY: link unlink brew brews vscode coc help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
+.PHONY: link unlink brew brews brewfile vscode coc help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
 
 help:
 	@cat banner
@@ -22,6 +22,7 @@ help:
 	@echo 'make link         link dotfiles'
 	@echo 'make unlink       unlink dotfiles'
 	@echo 'make brews        install all brews, casks and taps'
+	@echo 'make brewfile     update Brewfile'
 	@echo 'make vscode       install vscode settings and extensions'
 	@echo 'make help         this help message'
 
@@ -37,8 +38,11 @@ unlink:
 	@if [ -h $(COC_DIR) ]; then rm -ri $(COC_DIR); fi
 	@if [ -f $(AUTHOR_FILE) ]; then rm -i $(AUTHORFILE); fi
 
+brewfile: | brew
+	brew bundle dump --force --describe
+
 brews: | brew
-	brew bundle
+	brew bundle --no-update
 
 brew: | $(BREW)
 	brew update
