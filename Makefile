@@ -1,4 +1,5 @@
 BREW := /usr/local/bin/brew
+GIT_FUZZY := $(HOME)/dev/git-fuzzy
 VIM_PLUG := $(HOME)/.config/nvim/autoload/plug.vim
 AUTHORFILE := $(HOME)/.gitauthor
 VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
@@ -14,7 +15,7 @@ s? = $(subst $(empty) ,?,$1)
 ?s = $(subst ?, ,$1)
 notdirx = $(call ?s,$(notdir $(call s?,$1)))
 
-.PHONY: link unlink brew brews brewfile vscode coc help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
+.PHONY: all link unlink brew brews brewfile vscode coc help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
 
 help:
 	@cat banner
@@ -42,14 +43,14 @@ brewfile: | brew
 	brew bundle dump --force --describe
 
 brews: | brew
-	brew bundle --no-update
+	brew bundle --no-upgrade
 
 brew: | $(BREW)
 	brew update
 
 vscode: | $(VSCODES)
 	while read EXTENSION; do \
-	  code --install-extension $${EXTENSION}; \
+	  code --install-extension $${EXTENSION} --force; \
 	done < $(PWD)/vscode/extensions.txt;
 
 coc:
@@ -58,9 +59,12 @@ coc:
 	@echo "- installing coc extensions"
 	@cd $(PWD)/coc; yarn
 
-$(DOTFILES):
+$(DOTFILES): | $(GIT_FUZZY)
 	@echo "- $(notdir $@)"
 	@ln -sfn "$(PWD)/home/$(notdir $@)" $@
+
+$(GIT_FUZZY):
+	@git clone https://github.com/bigH/git-fuzzy.git $(GIT_FUZZY)
 
 $(SCRIPTS):
 	@echo "- $(notdir $@)"
@@ -71,7 +75,7 @@ $(NVIMS): | $(VIM_PLUG)
 	@ln -sfn "$(PWD)/nvim/$(notdir $@)" $@
 
 $(VIM_PLUG):
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	curl -fLo $(VIM_PLUG) --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 $(AUTHORFILE):
 	@read -p "What is your git author name? " NAME; \
