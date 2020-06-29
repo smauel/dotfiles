@@ -54,7 +54,7 @@
 
 	excludesfile = ~/.gitignore
 
-  pager = delta --theme="Nord"
+  pager = delta --theme="Dracula"
 
 [commit]
 

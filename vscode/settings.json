@@ -1,29 +1,29 @@
 {
-    "workbench.colorTheme": "Nord",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.settings.editor": "json",
-    "editor.fontSize": 22,
-    "editor.fontFamily": "ProggyCleanTT Nerd Font",
-    "debug.console.fontFamily": "ProggyCleanTT Nerd Font",
-    "debug.console.fontSize": 22,
-    "terminal.integrated.fontSize": 22,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true,
-        "soruce.fixAll.eslint": true,
-    },
-    "vim.autoindent": true,
-    "vim.useSystemClipboard": true,
-    "vim.hlsearch": true,
-    "vim.surround": true,
-    "vim.smartcase": true,
-    "vim.mouseSelectionGoesIntoVisualMode": true,
-    "vim.incsearch": true,
-    "[javascript]": {
-        "editor.formatOnSave": false,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "files.insertFinalNewline": true,
-    "editor.matchBrackets": "always",
-    "editor.parameterHints.enabled": false,
+  "workbench.colorTheme": "Dracula",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.settings.editor": "json",
+  "editor.fontSize": 16,
+  "editor.fontFamily": "'IBM Plex Mono'",
+  "debug.console.fontFamily": "'IBM Plex Mono'",
+  "debug.console.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "soruce.fixAll.eslint": true
+  },
+  "vim.autoindent": true,
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.surround": true,
+  "vim.smartcase": true,
+  "vim.mouseSelectionGoesIntoVisualMode": true,
+  "vim.incsearch": true,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.insertFinalNewline": true,
+  "editor.matchBrackets": "always",
+  "editor.parameterHints.enabled": false
 }

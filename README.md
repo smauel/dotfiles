@@ -34,7 +34,7 @@ sources them.
 Some notable features:
 
 * Uses [starship](https://starship.rs) for prompt customization
-* Uses Nord for dir colors to match theme
+* Uses Dracula for dir colors to match theme
 * Configures a number of aliases for common operations (see `home/.zsh/aliases`)
 
 ### Vim
@@ -45,7 +45,7 @@ symlinked to `~/.config/nvim/init.vim` for NVim use.
 Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A
 small set of plugins are installed including:
 
-* The Nord theme
+* The Dracula theme
 * Airline for status line
 * FZF for fuzzy-finding
 * Coc for LSP integrations
@@ -60,9 +60,9 @@ configured so that keybindings play nicely with tmux panes and vim splits
 
 ### Colors
 
-Uses the excellent [Nord](https://www.nordtheme.com/) theme for vim, tmux and iTerm.
+Uses the excellent [Dracula](https://draculatheme.com/) theme for vim, tmux and iTerm.
 
-For other ports see [here](https://www.nordtheme.com/ports)
+See the link above for more ports.
 
 ### Git Author
 
@@ -93,10 +93,21 @@ brew bundle dump
 
 All iTerm2 configuration can be found in the `iterm2` folder.
 
-Double-clicking the `nord.itermcolors` file will load the colors.
+Double-clicking the `Dracula.itermcolors` file will load the colors.
 
 Then go to `Settings` -> `Profiles` -> `Other actions...` ->
 `Import JSON profiles...` and select `profile.json`
+
+### Terminal.app
+
+All terminal configuration can be found in the `terminal` folder.
+
+Double-clicking the `Dracula.terminal` file will load the profile.
+
+### Alfred
+
+Dracula color theme is available in the `alfred` folder. Double-click
+the `Dracula.alfredapperance` file to load the color scheme.
 
 ### VSCode
 

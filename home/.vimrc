@@ -5,7 +5,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
@@ -28,7 +28,7 @@ call plug#end()
 syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
 set background=dark
-colorscheme nord
+colorscheme dracula
 
 
 " bindings
