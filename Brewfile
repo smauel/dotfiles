@@ -1,4 +1,4 @@
-tap "bazaarvoice/bazaarvoice"
+tap "bazaarvoice/bazaarvoice", "git@github.com:bazaarvoice/homebrew-bazaarvoice.git"
 tap "d12frosted/emacs-plus"
 tap "ethereum/ethereum"
 tap "homebrew/bundle"
@@ -21,8 +21,18 @@ brew "autoconf"
 brew "autojump"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
+# GNU database manager
+brew "gdbm"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
+# Library for command-line editing
+brew "readline"
+# Command-line interface for SQLite
+brew "sqlite"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -43,6 +53,8 @@ brew "fontconfig"
 brew "libffi"
 # Core application library for C
 brew "glib"
+# Real-time data compression library
+brew "lzo"
 # Low-level library for pixel manipulation
 brew "pixman"
 # Vector graphics library with cross-device output support
@@ -53,12 +65,16 @@ brew "cmake"
 brew "coreutils"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Go dependency management tool
+brew "dep"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
 # Pack, ship and run any application as a lightweight container
 brew "docker", link: false
 # Bash, Zsh and Fish completion for Docker
 brew "docker-completion"
+# YAML Parser
+brew "libyaml"
 # Isolated development environments using Docker
 brew "docker-compose", link: false
 # Docker-compose completion script
@@ -79,18 +95,20 @@ brew "fribidi"
 brew "fzf"
 # GNU multiple precision arithmetic library
 brew "gmp"
+# C library for multiple-precision floating-point computations
+brew "mpfr"
 # GNU awk utility
 brew "gawk"
 # Integer Set Library for the polyhedral model
 brew "isl"
+# C library for the arithmetic of high precision complex numbers
+brew "libmpc"
 # GNU compiler collection
 brew "gcc"
 # Image manipulation library
 brew "jpeg"
 # TIFF library and utilities
 brew "libtiff"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
 # Distributed revision control system
@@ -99,6 +117,8 @@ brew "git"
 brew "git-delta"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
+# Asynchronous event library
+brew "libevent"
 # C string library for manipulating Unicode strings
 brew "libunistring"
 # International domain name library (IDNA2008, Punycode and TR46)
@@ -109,6 +129,8 @@ brew "libtasn1"
 brew "nettle"
 # Library to load and enumerate PKCS#11 modules
 brew "p11-kit"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
 # Common error values for all GnuPG components
@@ -127,6 +149,8 @@ brew "npth"
 brew "pinentry"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg", link: false
+# Manage compile and link flags for libraries
+brew "pkg-config"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
 # Smart font renderer for non-Roman scripts
@@ -139,16 +163,32 @@ brew "icu4c"
 brew "harfbuzz"
 # The Kubernetes package manager
 brew "helm"
+# Powerful, lightweight programming language
+brew "lua"
 # Convert source code to formatted text with syntax highlighting
 brew "highlight"
+# OpenEXR ILM Base libraries (high dynamic-range image file format)
+brew "ilmbase"
+# Open h.265 video codec implementation
+brew "libde265"
 # Database of common MIME types
 brew "shared-mime-info"
+# H.265/HEVC encoder
+brew "x265"
+# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
+brew "libheif"
+# LLVM's OpenMP runtime library
+brew "libomp"
 # Generic library support script
 brew "libtool"
 # Color management engine supporting ICC profiles
 brew "little-cms2"
+# High dynamic-range image file format
+brew "openexr"
 # Library for JPEG-2000 image manipulation
 brew "openjpeg"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Tools and libraries to manipulate images in many formats
@@ -173,6 +213,8 @@ brew "kube-ps1"
 brew "kubectx"
 # Pager program similar to more
 brew "less"
+# Interpreted, interactive, object-oriented programming language
+brew "python"
 # CSS parsing and manipulation toolkit for GNOME
 brew "libcroco"
 # Framework for layout and rendering of i18n text
@@ -213,12 +255,14 @@ brew "nvm"
 brew "packer"
 # Bash completion for Packer
 brew "packer-completion"
+# Highly capable, feature-rich programming language
+brew "perl"
 # Object-relational database system
 brew "postgresql", restart_service: true
 # Wrapper to colorize and simplify ping's output
 brew "prettyping"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2"
+# Reattach process (e.g., tmux) to background
+brew "reattach-to-user-namespace"
 # Persistent key-value database, with built-in net interface
 brew "redis"
 # Search tool like grep and The Silver Searcher
@@ -279,8 +323,10 @@ brew "zsh-completions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# Bosun kubectl config file for users and admins
+brew "bazaarvoice/bazaarvoice/bosuncfg"
 # GNU Emacs text editor
-brew "d12frosted/emacs-plus/emacs-plus"
+brew "d12frosted/emacs-plus/emacs-plus@26", link: false
 # Manage shell sessions with temporary AWS credentials
 brew "ksperling/tap/aws-session"
 # Easily assume AWS roles in your terminal
@@ -296,6 +342,7 @@ cask "authy"
 cask "bartender"
 cask "bettertouchtool"
 cask "betterzip"
+cask "brave-browser"
 cask "docker"
 cask "drawio"
 cask "dropbox"
@@ -388,8 +435,8 @@ cask "font-ubuntumono-nerd-font-mono"
 cask "fork"
 cask "ganache"
 cask "github"
-cask "google-chrome"
 cask "gpg-suite"
+cask "inkscape"
 cask "insomnia"
 cask "intellij-idea-ce"
 cask "iterm2"
@@ -397,8 +444,6 @@ cask "java"
 cask "macdown"
 cask "macvim"
 cask "meld"
-cask "minikube"
-cask "nightowl"
 cask "notion"
 cask "plug"
 cask "postman"
@@ -411,7 +456,6 @@ cask "quicklook-json"
 cask "shiftit"
 cask "simplenote"
 cask "skype"
-cask "slack"
 cask "sourcetree"
 cask "spectacle"
 cask "spotify"
@@ -419,7 +463,6 @@ cask "suspicious-package"
 cask "tableplus"
 cask "the-unarchiver"
 cask "transmission"
-cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
 cask "webpquicklook"
