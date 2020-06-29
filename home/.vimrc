@@ -79,6 +79,11 @@ set splitright
 :command WQ wq
 
 
+" handle wrapped lines nicely
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
+
 " general
 set hidden
 set nocompatible
