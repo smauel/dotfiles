@@ -50,9 +50,9 @@ if [ "$1" != "" ]; then
       ;;
     status )      iter git status -s
       ;;
-    unpushed )    iter git log origin/master..master
+    unpushed )    iter git log --branches --not --remotes --decorate --oneline
       ;;
-    untagged )    iter git log $(git describe --tags --abbrev=0)..HEAD --oneline
+    untagged )    iter 'git --no-pager log $(git describe --tags --abbrev=0)..HEAD --oneline'
       ;;
     unreleased )  iter git show-ref --tags | grep -v -F "$(git ls-remote --tags origin | cut -f 2)" | cut -d " " -f 2 | sed "s|refs/tags/||"
       ;;
