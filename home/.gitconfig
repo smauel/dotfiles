@@ -54,7 +54,15 @@
 
 	excludesfile = ~/.gitignore
 
-  pager = delta --theme="Dracula"
+  pager = delta
+
+[delta]
+
+  syntax-theme = Dracula
+
+  line-numbers = true
+
+  side-by-side = true
 
 [commit]
 
