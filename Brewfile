@@ -11,6 +11,7 @@ tap "ksperling/tap"
 tap "remind101/formulae"
 tap "romkatv/powerlevel10k"
 tap "wata727/tflint"
+tap "wfxr/code-minimap"
 # C/C++ resolver library and DNS resolver utilities
 brew "adns"
 # CLI tool for working with Architecture Decision Records
@@ -77,7 +78,7 @@ brew "docker-completion"
 brew "libyaml"
 # Isolated development environments using Docker
 brew "docker-compose", link: false
-# Docker-compose completion script
+# Completion script for docker-compose
 brew "docker-compose-completion"
 # Create Docker hosts locally and on cloud providers
 brew "docker-machine"
@@ -117,10 +118,14 @@ brew "git"
 brew "git-delta"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
-# Asynchronous event library
-brew "libevent"
+# Generic library support script
+brew "libtool"
 # C string library for manipulating Unicode strings
 brew "libunistring"
+# Manage compile and link flags for libraries
+brew "pkg-config"
+# Asynchronous event library
+brew "libevent"
 # International domain name library (IDNA2008, Punycode and TR46)
 brew "libidn2"
 # ASN.1 structure parser library
@@ -149,8 +154,6 @@ brew "npth"
 brew "pinentry"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg", link: false
-# Manage compile and link flags for libraries
-brew "pkg-config"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
 # Smart font renderer for non-Roman scripts
@@ -161,7 +164,7 @@ brew "hadolint"
 brew "icu4c"
 # OpenType text shaping engine
 brew "harfbuzz"
-# The Kubernetes package manager
+# Kubernetes package manager
 brew "helm"
 # Powerful, lightweight programming language
 brew "lua"
@@ -179,8 +182,6 @@ brew "x265"
 brew "libheif"
 # LLVM's OpenMP runtime library
 brew "libomp"
-# Generic library support script
-brew "libtool"
 # Color management engine supporting ICC profiles
 brew "little-cms2"
 # High dynamic-range image file format
@@ -213,8 +214,6 @@ brew "kube-ps1"
 brew "kubectx"
 # Pager program similar to more
 brew "less"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
 # CSS parsing and manipulation toolkit for GNOME
 brew "libcroco"
 # Framework for layout and rendering of i18n text
@@ -233,6 +232,8 @@ brew "libvterm"
 brew "luajit"
 # Mac App Store command-line interface
 brew "mas"
+# Development kit for the Java programming language
+brew "openjdk"
 # Java-based project management
 brew "maven"
 # Bash completion for Maven
@@ -281,7 +282,7 @@ brew "shpotify"
 brew "sops"
 # Tool to create intelligent and beautiful documentation
 brew "sphinx-doc"
-# The cross-shell prompt for astronauts
+# Cross-shell prompt for astronauts
 brew "starship"
 # Tool to build, change, and version infrastructure
 brew "terraform"
@@ -311,7 +312,7 @@ brew "wget"
 brew "z"
 # Centralized server for distributed coordination of services
 brew "zookeeper"
-# The next-generation plugin manager for zsh
+# Next-generation plugin manager for zsh
 brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
@@ -325,14 +326,16 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 # Bosun kubectl config file for users and admins
 brew "bazaarvoice/bazaarvoice/bosuncfg"
-# GNU Emacs text editor
 brew "d12frosted/emacs-plus/emacs-plus@26", link: false
+brew "d12frosted/emacs-plus/emacs-plus@27", link: false
 # Manage shell sessions with temporary AWS credentials
 brew "ksperling/tap/aws-session"
 # Easily assume AWS roles in your terminal
 brew "remind101/formulae/assume-role"
 # A Zsh Theme
 brew "romkatv/powerlevel10k/powerlevel10k"
+# A high performance code minimap generator written in rust
+brew "wfxr/code-minimap/code-minimap"
 cask "1password"
 cask "1password-cli"
 cask "adoptopenjdk8"
@@ -470,4 +473,5 @@ cask "webstorm"
 cask "whatsapp"
 cask "wireshark"
 mas "Pages", id: 409201541
+mas "Pomo Timer", id: 1447569061
 mas "Trello", id: 1278508951
