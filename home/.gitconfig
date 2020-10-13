@@ -58,7 +58,7 @@
 
 [delta]
 
-  syntax-theme = Dracula
+  syntax-theme = gruvbox
 
   line-numbers = true
 

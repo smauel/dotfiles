@@ -45,7 +45,7 @@ symlinked to `~/.config/nvim/init.vim` for NVim use.
 Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A
 small set of plugins are installed including:
 
-* The Dracula theme
+* The Gruvbox theme
 * Airline for status line
 * FZF for fuzzy-finding
 * Coc for LSP integrations
@@ -60,9 +60,7 @@ configured so that keybindings play nicely with tmux panes and vim splits
 
 ### Colors
 
-Uses the excellent [Dracula](https://draculatheme.com/) theme for vim, tmux and iTerm.
-
-See the link above for more ports.
+Uses the excellent `gruvbox` theme for vim, tmux and iTerm.
 
 ### Git Author
 
@@ -93,7 +91,7 @@ brew bundle dump
 
 All iTerm2 configuration can be found in the `iterm2` folder.
 
-Double-clicking the `Dracula.itermcolors` file will load the colors.
+Double-clicking the `gruvbox.itermcolors` file will load the colors.
 
 Then go to `Settings` -> `Profiles` -> `Other actions...` ->
 `Import JSON profiles...` and select `profile.json`
