@@ -9,8 +9,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sainnhe/gruvbox-material'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -29,7 +29,8 @@ call plug#end()
 syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox-material
+hi CursorLine cterm=NONE ctermbg=black
 
 
 " bindings
