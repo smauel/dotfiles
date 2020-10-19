@@ -58,7 +58,7 @@
 
 [delta]
 
-  syntax-theme = gruvbox
+  syntax-theme = Nord
 
   line-numbers = true
 

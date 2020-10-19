@@ -5,6 +5,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
+Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
@@ -20,7 +21,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'yuezk/vim-js'
 call plug#end()
 
@@ -28,9 +28,9 @@ call plug#end()
 " colors
 syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
+set termguicolors
 set background=dark
-colorscheme gruvbox-material
-hi CursorLine cterm=NONE ctermbg=black
+colorscheme nord
 
 
 " bindings
@@ -165,7 +165,7 @@ command! -bang -nargs=? -complete=dir Files
 
 " airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='minimalist'
+let g:airline_theme='nord'
 
 
 " coc
