@@ -4,7 +4,7 @@ disabled = true
 [kubernetes]
 symbol = "☸  "
 style = "bold blue"
-disabled = false
+disabled = true
 [kubernetes.context_aliases]
 "prod-us-a" = "prod"
 "qa-eu-a" = "qa"
