@@ -16,6 +16,9 @@ indent_style = space
 max_line_length = 0
 trim_trailing_whitespace = false
 
+[*.java]
+indent_size = 4
+
 [vcbuild.bat]
 end_of_line = crlf
 
