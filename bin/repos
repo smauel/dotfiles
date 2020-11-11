@@ -35,9 +35,9 @@ function iter() {
   for repo in `repos list`
   do
     echo $repo
-    cd $repo
+    pushd $repo
     eval $command
-    cd ..
+    popd
     echo
   done
 }
