@@ -98,5 +98,20 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+
 [pull]
 	rebase = true
+
+[filter "git-crypt-qa"]
+    smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-qa"
+    clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-qa"
+
+[diff "git-crypt-qa"]
+    textconv = "git-crypt" diff "$HOME/.git-keys/curalate-qa"
+
+[filter "git-crypt-prod"]
+    smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-prod"
+    clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-prod"
+
+[diff "git-crypt-prod"]
+    textconv = "git-crypt" diff "$HOME/.git-keys/curalate-prod"

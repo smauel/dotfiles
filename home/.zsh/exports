@@ -42,3 +42,9 @@ export LESS_TERMCAP_us=$'\E[04;38;5;111m'
 
 # set theme for bat
 export BAT_THEME=Nord
+
+# curalate
+export CURALATE_HOME="$HOME/dev/curalate"
+export SBT_CREDENTIALS="$HOME/.sbt/credentials"
+export MAVEN_OPTS="-Xmx1024M -Xms1024M -Djava.awt.headless=true"
+export JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8"

@@ -1,2 +1,4 @@
 .gitauthor
+.project
+.settings
 Brewfile.lock.json

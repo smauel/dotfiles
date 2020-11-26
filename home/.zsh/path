@@ -14,6 +14,7 @@ fi
 
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
+PATH=$PATH:/usr/local/opt/scala@2.12/bin
 PATH=$PATH:$SYSTEM_PATH
 
 export PATH
