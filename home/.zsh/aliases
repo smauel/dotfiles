@@ -129,8 +129,6 @@ jdk() {
    java -version
  }
 
-alias note="vim ${HOME}/notes/$(date +%d-%m-%Y).md"
-
 # curalate aws workarounds
 alias crl8-qa-aws="export \$(aws sts assume-role --role-arn arn:aws:iam::176853725791:role/ReadOnlyEngineer --role-session-name $(whoami) | jq '.Credentials' | jq -r '\"AWS_ACCESS_KEY_ID=\" + .AccessKeyId, \"AWS_SECRET_ACCESS_KEY=\" + .SecretAccessKey, \"AWS_SESSION_TOKEN=\" + .SessionToken')"
 alias crl8-prod-aws="export \$(aws sts assume-role --role-arn arn:aws:iam::492572841545:role/ReadOnlyEngineer --role-session-name $(whoami) | jq '.Credentials' | jq -r '\"AWS_ACCESS_KEY_ID=\" + .AccessKeyId, \"AWS_SECRET_ACCESS_KEY=\" + .SecretAccessKey, \"AWS_SESSION_TOKEN=\" + .SessionToken')"
