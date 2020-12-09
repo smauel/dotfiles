@@ -22,7 +22,8 @@ alias rm='rm -i'
 alias tmux='tmux -2'
 alias ping='prettyping --nolegend'
 alias grep='grep --color=auto '
-alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias preview="fzf --border --layout reverse --preview 'bat --style=numbers --color=always {}' --preview-window down:85% --info inline"
+alias vp='vim $(preview)'
 alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
 alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
