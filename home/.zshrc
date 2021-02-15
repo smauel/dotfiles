@@ -53,4 +53,4 @@ source $HOME/.zsh/nvm
 source $HOME/.zsh/kube
 source $HOME/.zsh/git
 source $HOME/.zsh/zplug
-
+source $HOME/.secrets
