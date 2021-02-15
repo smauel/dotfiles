@@ -99,3 +99,14 @@ Then go to `Settings` -> `Profiles` -> `Other actions...` ->
 ### VSCode
 
 VSCode settings, keybindings and extensions configurations can be found under `vscode`
+
+### Secrets
+
+For any secrets that you need to export into your shell these can be exported
+from a file called `~/.secrets`:
+
+```bash
+export MY_SECRET=xxx
+```
+
+This file will be imported by `~/.zshrc` but is not included in source control
