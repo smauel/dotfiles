@@ -1,3 +1,5 @@
 {
-  "eslint.autoFixOnSave":true
+  "eslint.autoFixOnSave":true,
+  "metals.statusBarEnabled": true,
+  "coc.preferences.formatOnSaveFiletypes": ["scala"]
 }

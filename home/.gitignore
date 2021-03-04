@@ -2,3 +2,7 @@
 .project
 .settings
 Brewfile.lock.json
+.bloop
+.metals
+metals.sbt
+.scalafmt.conf
