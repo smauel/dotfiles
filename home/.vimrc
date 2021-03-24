@@ -11,8 +11,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ruanyl/vim-gh-line'
 Plug 'sainnhe/gruvbox-material'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -44,6 +45,7 @@ nnoremap <leader>a :CocAction<CR>
 nnoremap <silent> <leader>bd :bd<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>l :NERDTreeToggle<CR>
+nnoremap <silent> <leader>f :NERDTreeFind<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 nnoremap <silent> <leader>/ :noh<cr>
 nmap <leader>q <Plug>(coc-fix-current)
