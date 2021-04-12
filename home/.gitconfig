@@ -54,7 +54,7 @@
 
 	excludesfile = ~/.gitignore
 
-  pager = delta
+  pager = delta --side-by-side -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS}
 
 [delta]
 

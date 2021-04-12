@@ -4,9 +4,6 @@ alias vim=nvim
 alias tmux='tmux -2'
 alias fv='vim $(fzf)'
 
-# use a newer version of less than what comes with OSX by default
-alias less=/usr/local/Cellar/less/551/bin/less
-
 alias ls='exa'
 alias ll='exa -l'
 
