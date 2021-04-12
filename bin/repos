@@ -18,6 +18,7 @@ cat <<EOS
   unpushed          Show commits that have not yet been pushed for each repo
   untagged          Show commits since the last tag for each repo
   unreleased        Show tags that have not been pushed yet for each repo
+  clean             Remove all local branches except master or development (this does a force delete so be careful not to lose work)
 
   repos can also run any arbitrary command on each repo. Note there is no validation
   done on these commands so be careful!
@@ -57,6 +58,8 @@ if [ "$1" != "" ]; then
     unreleased )  iter git show-ref --tags | grep -v -F "$(git ls-remote --tags origin | cut -f 2)" | cut -d " " -f 2 | sed "s|refs/tags/||"
       ;;
     latest )      iter git describe --tags
+      ;;
+    clean )      iter 'git branch | egrep -v "(^\*|master|develop|main|dev|development)" | xargs git branch -D'
       ;;
     help )        usage
       exit
