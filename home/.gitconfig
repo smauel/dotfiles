@@ -122,3 +122,7 @@
 	process = git-lfs filter-process
 [rebase]
 	autostash = true
+
+# force ssh
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
