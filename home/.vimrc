@@ -41,7 +41,9 @@ let mapleader=","
 " leader bindings
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>r :Rg<space>
-nnoremap <leader>a :CocAction<CR>
+"nnoremap <leader>a :CocAction<CR>
+xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 nnoremap <silent> <leader>bd :bd<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>l :NERDTreeToggle<CR>
@@ -49,12 +51,16 @@ nnoremap <silent> <leader>f :NERDTreeFind<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 nnoremap <silent> <leader>/ :noh<cr>
 nmap <leader>q <Plug>(coc-fix-current)
+nnoremap <leader>jp :call  CocAction('runCommand', 'jest.projectTest')<CR>
+nnoremap <leader>jc :call  CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
+nnoremap <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
 
 
 " goto bindings
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 
@@ -142,6 +148,12 @@ set novisualbell
 set noerrorbells
 set conceallevel=0
 set guioptions=
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " plugins
 

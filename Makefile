@@ -3,7 +3,7 @@ GIT_FUZZY := $(HOME)/dev/git-fuzzy
 VIM_PLUG := $(HOME)/.config/nvim/autoload/plug.vim
 AUTHORFILE := $(HOME)/.gitauthor
 VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
-COC_DIR := $(HOME)/.config/coc
+COC_DIR := $(HOME)/.config
 
 DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
 SCRIPTS := $(addprefix /usr/local/bin/,$(shell ls -A bin))
