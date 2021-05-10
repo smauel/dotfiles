@@ -18,10 +18,6 @@ brew "adns"
 brew "adr-tools"
 # Automatic configure script builder
 brew "autoconf"
-# Shell extension to jump to frequently used directories
-brew "autojump"
-# Tool for generating GNU Standards-compliant Makefiles
-brew "automake"
 # GNU database manager
 brew "gdbm"
 # Cryptography and SSL/TLS Toolkit
@@ -32,8 +28,10 @@ brew "readline"
 brew "sqlite"
 # General-purpose data compression with high compression ratio
 brew "xz"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
+# Shell extension to jump to frequently used directories
+brew "autojump"
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -54,6 +52,8 @@ brew "fontconfig"
 brew "libffi"
 # Core application library for C
 brew "glib"
+# Manage compile and link flags for libraries
+brew "pkg-config"
 # Real-time data compression library
 brew "lzo"
 # Low-level library for pixel manipulation
@@ -122,8 +122,8 @@ brew "gnu-sed"
 brew "libtool"
 # C string library for manipulating Unicode strings
 brew "libunistring"
-# Manage compile and link flags for libraries
-brew "pkg-config"
+# Implementation of malloc emphasizing fragmentation avoidance
+brew "jemalloc"
 # Asynchronous event library
 brew "libevent"
 # International domain name library (IDNA2008, Punycode and TR46)
@@ -196,8 +196,6 @@ brew "imagemagick"
 brew "imagemagick@6"
 # Istio configuration command-line utility
 brew "istioctl"
-# Implementation of malloc emphasizing fragmentation avoidance
-brew "jemalloc"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -262,6 +260,8 @@ brew "perl"
 brew "postgresql", restart_service: true
 # Wrapper to colorize and simplify ping's output
 brew "prettyping"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Reattach process (e.g., tmux) to background
 brew "reattach-to-user-namespace"
 # Persistent key-value database, with built-in net interface
@@ -319,7 +319,7 @@ brew "zsh"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Additional completion definitions for zsh
-brew "zsh-completions"
+brew "zsh-completions", link: false
 # Zsh port of Fish shell's history search
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
@@ -336,141 +336,116 @@ brew "remind101/formulae/assume-role"
 brew "romkatv/powerlevel10k/powerlevel10k"
 # A high performance code minimap generator written in rust
 brew "wfxr/code-minimap/code-minimap"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line helper for the 1Password password manager
 cask "1password-cli"
+# Prebuilt OpenJDK binaries
 cask "adoptopenjdk8"
+# Application launcher and productivity software
 cask "alfred"
 cask "apptrap"
+# Two-factor authentication software
 cask "authy"
+# Menu bar icon organizer
 cask "bartender"
+# Tool to customize input devices and automate computer systems
 cask "bettertouchtool"
+# Utility to create and modify archives
 cask "betterzip"
+# Web browser focusing on privacy
 cask "brave-browser"
+# App to build and share containerized applications and microservices
 cask "docker"
+# Draw.io is free online diagram software
 cask "drawio"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
+# App for note taking, organizing, task lists, and archiving
 cask "evernote"
+# Collaborative team software
 cask "figma"
+# Web browser
 cask "firefox-developer-edition"
-cask "font-3270-nerd-font-mono"
-cask "font-anonymouspro-nerd-font"
-cask "font-anonymouspro-nerd-font-mono"
 cask "font-arimo-nerd-font"
-cask "font-arimo-nerd-font-mono"
-cask "font-aurulentsansmono-nerd-font"
-cask "font-aurulentsansmono-nerd-font-mono"
-cask "font-bitstreamverasansmono-nerd-font"
-cask "font-bitstreamverasansmono-nerd-font-mono"
-cask "font-cascadia"
-cask "font-codenewroman-nerd-font"
-cask "font-codenewroman-nerd-font-mono"
 cask "font-cousine-nerd-font"
-cask "font-cousine-nerd-font-mono"
-cask "font-dejavusansmono-nerd-font"
-cask "font-dejavusansmono-nerd-font-mono"
-cask "font-droidsansmono-nerd-font"
-cask "font-droidsansmono-nerd-font-mono"
-cask "font-fantasquesansmono-nerd-font"
-cask "font-fantasquesansmono-nerd-font-mono"
-cask "font-firacode-nerd-font"
-cask "font-firacode-nerd-font-mono"
-cask "font-firamono-nerd-font"
-cask "font-firamono-nerd-font-mono"
 cask "font-go-mono-nerd-font"
-cask "font-go-mono-nerd-font-mono"
-cask "font-gohu-nerd-font"
-cask "font-gohu-nerd-font-mono"
 cask "font-hack-nerd-font"
-cask "font-hack-nerd-font-mono"
-cask "font-hasklig-nerd-font"
-cask "font-hasklig-nerd-font-mono"
-cask "font-heavydata-nerd-font"
-cask "font-heavydata-nerd-font-mono"
-cask "font-hermit-nerd-font"
-cask "font-hermit-nerd-font-mono"
 cask "font-ibm-plex"
 cask "font-inconsolata-nerd-font"
-cask "font-inconsolata-nerd-font-mono"
-cask "font-inconsolatago-nerd-font"
-cask "font-inconsolatago-nerd-font-mono"
-cask "font-inconsolatalgc-nerd-font"
-cask "font-inconsolatalgc-nerd-font-mono"
 cask "font-iosevka-nerd-font"
-cask "font-iosevka-nerd-font-mono"
 cask "font-lekton-nerd-font"
-cask "font-lekton-nerd-font-mono"
-cask "font-liberationmono-nerd-font"
-cask "font-liberationmono-nerd-font-mono"
-cask "font-meslo-nerd-font"
-cask "font-meslo-nerd-font-mono"
 cask "font-monofur-nerd-font"
-cask "font-monofur-nerd-font-mono"
 cask "font-monoid-nerd-font"
-cask "font-monoid-nerd-font-mono"
 cask "font-mononoki-nerd-font"
-cask "font-mononoki-nerd-font-mono"
 cask "font-mplus-nerd-font"
-cask "font-mplus-nerd-font-mono"
 cask "font-noto-nerd-font"
-cask "font-noto-nerd-font-mono"
 cask "font-profont-nerd-font"
-cask "font-profont-nerd-font-mono"
-cask "font-proggyclean-nerd-font"
-cask "font-proggyclean-nerd-font-mono"
-cask "font-roboto"
-cask "font-robotomono-nerd-font"
-cask "font-robotomono-nerd-font-mono"
-cask "font-sharetechmono-nerd-font"
-cask "font-sharetechmono-nerd-font-mono"
-cask "font-source-code-pro"
-cask "font-sourcecodepro-nerd-font"
-cask "font-sourcecodepro-nerd-font-mono"
-cask "font-spacemono-nerd-font"
-cask "font-spacemono-nerd-font-mono"
-cask "font-terminus-nerd-font"
-cask "font-terminus-nerd-font-mono"
 cask "font-tinos-nerd-font"
-cask "font-tinos-nerd-font-mono"
 cask "font-ubuntu-nerd-font"
-cask "font-ubuntu-nerd-font-mono"
-cask "font-ubuntumono-nerd-font"
-cask "font-ubuntumono-nerd-font-mono"
+# GIT client
 cask "fork"
+# Personal blockchain for Ethereum development
 cask "ganache"
+# Desktop client for GitHub repositories
 cask "github"
+# Tools to protect your emails and files
 cask "gpg-suite"
+# Vector graphics editor
 cask "inkscape"
+# HTTP and GraphQL Client
 cask "insomnia"
+# IDE for Java development - community edition
 cask "intellij-idea-ce"
+# Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-cask "java"
+# Open-source Markdown editor
 cask "macdown"
-cask "macvim"
+# Visual diff and merge tool
 cask "meld"
+# App to write, plan, collaborate, and get organized
 cask "notion"
+# Music player for The Hype Machine
 cask "plug"
+# Collaboration platform for API development
 cask "postman"
+# QuickLook plug-in that renders source code with syntax highlighting
 cask "qlcolorcode"
+# QuickLook generator for Markdown files
 cask "qlmarkdown"
 cask "qlprettypatch"
 cask "qlstephen"
 cask "quicklook-csv"
 cask "quicklook-json"
+# Tool to manage the size and position of windows
 cask "shiftit"
 cask "simplenote"
+# Video chat, voice call and instant messaging application
 cask "skype"
+# Graphical client for Git version control
 cask "sourcetree"
+# Move and resize windows with ease
 cask "spectacle"
+# Music streaming service
 cask "spotify"
+# Application for inspecting installer packages
 cask "suspicious-package"
+# Native GUI tool for relational databases
 cask "tableplus"
+# Unpacks archive files
 cask "the-unarchiver"
+# Open-source BitTorrent client
 cask "transmission"
+# Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
 cask "vlc"
 cask "webpquicklook"
+# JavaScript IDE
 cask "webstorm"
+# Desktop client for WhatsApp
 cask "whatsapp"
+# Network protocol analyzer
 cask "wireshark"
 mas "Pages", id: 409201541
 mas "Pomo Timer", id: 1447569061

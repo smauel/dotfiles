@@ -49,8 +49,11 @@ source $HOME/.zsh/path
 source $HOME/.zsh/prompt
 source $HOME/.zsh/fzf
 source $HOME/.zsh/fasd
-source $HOME/.zsh/nvm
 source $HOME/.zsh/kube
 source $HOME/.zsh/git
 source $HOME/.zsh/zplug
 source $HOME/.secrets
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
