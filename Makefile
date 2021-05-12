@@ -27,7 +27,7 @@ help:
 	@echo 'make vscode       install vscode settings and extensions'
 	@echo 'make help         this help message'
 
-all: | link brews vscode
+all: | brews link vscode
 
 link: | $(DOTFILES) $(SCRIPTS) $(NVIMS) $(AUTHORFILE) coc
 
