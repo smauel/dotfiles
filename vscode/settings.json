@@ -2,7 +2,7 @@
   "workbench.colorTheme": "Dracula",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
-  "editor.fontSize": 16,
+  "editor.fontSize": 22,
   "editor.fontFamily": "'IBM Plex Mono'",
   "debug.console.fontFamily": "'IBM Plex Mono'",
   "debug.console.fontSize": 16,
