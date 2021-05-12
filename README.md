@@ -37,6 +37,13 @@ Some notable features:
 * Uses Nord for dir colors to match theme
 * Configures a number of aliases for common operations (see `home/.zsh/aliases`)
 
+To install `zplug` ZSH plugins:
+
+```bash
+zplug install
+source ~/.zshrc
+```
+
 ### Vim
 
 Vim configuration can be found in `home/.vimrc`. At link time this is also
@@ -57,6 +64,12 @@ For a full list of bindings that are configured see the `home/.vimrc`
 Tmux configuration can be found in `home/.tmux.conf`. Uses
 [tpm](https://github.com/tmux-plugins/tpm) for plugin management, and is
 configured so that keybindings play nicely with tmux panes and vim splits
+
+To Install tmux plugins, from within tmux:
+
+```bash
+prefix+I
+```
 
 ### Colors
 
