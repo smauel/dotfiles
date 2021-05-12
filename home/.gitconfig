@@ -52,7 +52,7 @@
 
 	editor = nvim
 
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/sam.morrison/.gitignore
 
   pager = delta --side-by-side -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS}
 
@@ -126,3 +126,9 @@
 # force ssh
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
