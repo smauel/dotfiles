@@ -100,6 +100,11 @@ Then go to `Settings` -> `Profiles` -> `Other actions...` ->
 
 VSCode settings, keybindings and extensions configurations can be found under `vscode`
 
+### IntelliJ
+
+IntelliJ settings are exported to the zip file in `intellij`. See the README for
+details on how to import and update
+
 ### Secrets
 
 For any secrets that you need to export into your shell these can be exported
