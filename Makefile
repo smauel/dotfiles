@@ -1,5 +1,4 @@
 BREW := /usr/local/bin/brew
-GIT_FUZZY := $(HOME)/dev/git-fuzzy
 VIM_PLUG := $(HOME)/.config/nvim/autoload/plug.vim
 AUTHORFILE := $(HOME)/.gitauthor
 VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
@@ -59,12 +58,9 @@ coc:
 	@echo "- installing coc extensions"
 	@cd $(PWD)/coc; yarn
 
-$(DOTFILES): | $(GIT_FUZZY)
+$(DOTFILES):
 	@echo "- $(notdir $@)"
 	@ln -sfn "$(PWD)/home/$(notdir $@)" $@
-
-$(GIT_FUZZY):
-	@git clone https://github.com/bigH/git-fuzzy.git $(GIT_FUZZY)
 
 $(SCRIPTS):
 	@echo "- $(notdir $@)"

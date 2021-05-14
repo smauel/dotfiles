@@ -8,10 +8,6 @@ if [ -d /usr/local/opt/postgresql@12/bin ]; then
   PATH=$PATH:/usr/local/opt/postgresql@12/bin
 fi
 
-if [ -d $HOME/dev/git-fuzzy ]; then
-  PATH=$PATH:$HOME/dev/git-fuzzy/bin
-fi
-
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:/usr/local/opt/scala@2.12/bin
