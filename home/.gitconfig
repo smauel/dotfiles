@@ -4,19 +4,13 @@
   s = status -s
 
   # short log
-  l = log --pretty=oneline -n 20 --graph --abbrev-commit
-
-  # color graph log view
-	lo = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+  l = log --pretty=oneline -n 5 --graph --abbrev-commit
 
   # diff with summary
   d = !"git --no-pager diff --compact-summary"
 
   # diff between latest commit and current state
   di = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
-
-  # commit all changes
-  ca = !git add -A && git commit -av
 
   # switch to a branch, creating it if necessary
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
@@ -30,17 +24,13 @@
 	remotes = remote -v
 
   # open a pr from the command line
-	pr = open-pr
+	pr = !"git push origin HEAD && open-pr"
 
   # show aliases
   aliases = config --get-regexp alias
 
   # amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
-
-  # remove branches that have already been merged with master
-	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
   # whatchanged
   wc = whatchanged
@@ -128,7 +118,7 @@
   insteadOf = https://github.com/
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

@@ -33,25 +33,61 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
-alias g='git'
-alias gs='git s'
-alias gl='git l'
-alias glo='git lo'
+alias gb='git branches'
 alias gd='git diff'
-alias gdc='git diff --cached'
-alias gca='git ca'
-alias gb='git branch'
-alias ggo='git go'
-alias gdm='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias gwc='git wc'
+alias gl='git l'
 alias gp='git pull'
-alias gpom='git push origin master'
-alias gptom='git push --tags origin master'
-alias pr='git push origin HEAD && open-pr'
-alias gcm='git co master'
-alias gcd='git co develop'
-alias gb='git branch'
+alias gr='git remotes'
+alias gs='git s'
+alias gt='git tags'
 alias gu='git reset --soft HEAD~1'
+# delete all branches other than important ones and the one I'm in
+# CAPS by choice as this is a pretty devastating command
+alias gCB='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+alias gcd='git co develop'
+alias gcm='git co master'
+alias gdc='git diff --cached'
+alias ggo='git go'
+alias gpr='git pr'
+# git log browser
+function gli() {
+  # param validation
+  if [[ ! `git log -n 1 $@ | head -n 1` ]] ;then
+    return
+  fi
+
+  # filter by file string
+  local filter
+  # param existed, git log for file if existed
+  if [ -n $@ ] && [ -f $@ ]; then
+    filter="-- $@"
+  fi
+
+  # git command
+  local gitlog=(
+    git log
+    --graph --color=always
+    --abbrev=7
+    --format='%C(auto)%h %an %C(blue)%s %C(yellow)%cr'
+    $@
+  )
+
+  # fzf command
+  local fzf=(
+    fzf
+    --ansi --no-sort --reverse --tiebreak=index
+    --preview "f() { set -- \$(echo -- \$@ | grep -o '[a-f0-9]\{7\}'); [ \$# -eq 0 ] || git show --color=always \$1 $filter; }; f {}"
+    --bind "ctrl-q:abort,ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % $filter | less -R') << 'FZF-EOF'
+                {}
+                FZF-EOF"
+   --preview-window=right:60%
+  )
+
+  # piping them
+  $gitlog | $fzf
+}
 
 # docker aliases
 alias d='docker'
