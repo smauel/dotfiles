@@ -33,7 +33,7 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
-alias gb='git branches'
+alias gb='git branch'
 alias gd='git diff'
 alias gl='git l'
 alias gp='git pull'
@@ -41,9 +41,10 @@ alias gr='git remotes'
 alias gs='git s'
 alias gt='git tags'
 alias gu='git reset --soft HEAD~1'
+alias gbr='git branches'
 # delete all branches other than important ones and the one I'm in
 # CAPS by choice as this is a pretty devastating command
-alias gCB='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+alias gCB='git branch | egrep -v "(master|develop|main|\*)" | xargs git branch -D'
 alias gcd='git co develop'
 alias gcm='git co master'
 alias gdc='git diff --cached'
