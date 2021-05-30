@@ -24,7 +24,19 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet af "arrow function" i
+snippet fun(c) "function" !br
+function $1() {
+	$2
+}
+endsnippet
+
+snippet af "arrow function" !br
+const $1 = ($2) => {
+	$3
+}
+endsnippet
+
+snippet aaf "anonymous arrow function" i
 ($1) => $2
 endsnippet
 

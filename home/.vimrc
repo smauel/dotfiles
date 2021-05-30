@@ -40,14 +40,17 @@ let mapleader=","
 
 " leader bindings
 nnoremap <leader>p :Files<CR>
-nnoremap <leader>r :Rg<space>
+nnoremap <leader>r :Rg<CR>
 "nnoremap <leader>a :CocAction<CR>
 xmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
-nnoremap <silent> <leader>bd :bd<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
-nnoremap <silent> <leader>l :NERDTreeToggle<CR>
+nnoremap <silent> <leader>d :bd<CR>
+nnoremap <silent> <leader>f :GFiles?<CR>
 nnoremap <silent> <leader>f :NERDTreeFind<CR>
+nnoremap <silent> <leader>l :NERDTreeToggle<CR>
+nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 nnoremap <silent> <leader>/ :noh<cr>
 nmap <leader>q <Plug>(coc-fix-current)
@@ -166,6 +169,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 " fzf
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'border': 'rounded' } }
 " search for occurrences with ripgrep using <leader>r
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -174,7 +178,7 @@ command! -bang -nargs=* Rg
 
 " fuzzy file search with preview <leader>p
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 " airline
