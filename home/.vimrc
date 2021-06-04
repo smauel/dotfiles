@@ -21,8 +21,8 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
 Plug 'yuezk/vim-js'
+Plug 'hoob3rt/lualine.nvim'
 call plug#end()
 
 
@@ -41,9 +41,7 @@ let mapleader=","
 " leader bindings
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>r :Rg<CR>
-"nnoremap <leader>a :CocAction<CR>
-xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+nnoremap <leader>a :CocAction<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>d :bd<CR>
@@ -181,9 +179,8 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
-" airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='nord'
+" lualine status line
+lua require('lualine').setup{ options = { theme = 'nord', icons_enabled = false, section_separators = '' }}
 
 
 " coc
