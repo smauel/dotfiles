@@ -5,36 +5,41 @@ colors
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr "%F{green}●%f" # default 'S'
-zstyle ':vcs_info:*' unstagedstr "%F{red}●%f" # default 'U'
+zstyle ':vcs_info:*' stagedstr "+"
+zstyle ':vcs_info:*' unstagedstr "!"
 zstyle ':vcs_info:*' use-simple true
-zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-outgoing
-zstyle ':vcs_info:git*:*' formats '%F{blue}%r%f:%F{yellow}%b%f%m%c%u ' # default ' (%s)-[%b]%c%u-'
-zstyle ':vcs_info:git*:*' actionformats '[%b|%a%m%c%u] ' # default ' (%s)-[%b|%a]%c%u-'
+zstyle ':vcs_info:git+set-message:*' hooks git-stashed git-untracked git-ahead-behind
+zstyle ':vcs_info:git*:*' formats '%F{blue}%r%f:%F{yellow}%b%f %B%F{red}%m%c%u%f '
+zstyle ':vcs_info:git*:*' actionformats '%F{blue}%r%f:%F{yellow}%b%f:%B(%a)%%b %B%F{red}%m%c%u%f '
 
-function +vi-git-untracked() {
-  emulate -L zsh
-  if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
-    hook_com[unstaged]+="%F{blue}●%f"
+# hook for untracked files
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        # This will show the marker if there are any untracked files in repo.
+        # If instead you want to show the marker only if there are untracked
+        # files in $PWD, use:
+        #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+        hook_com[staged]+='?'
+    fi
+}
+
+# hook for stashed files
+function +vi-git-stashed() {
+  if git rev-parse --verify refs/stash &>/dev/null ; then
+    hook_com[staged]+='$'
   fi
 }
 
-# unpushed commits
-function +vi-git-outgoing() {
-local gitdir="$(git rev-parse --git-dir 2>/dev/null)"
-  [ -n "$gitdir" ] || return 0
-
-  if [ -r "${gitdir}/refs/remotes/git-svn" ] ; then
-    local count=$(git rev-list remotes/git-svn.. 2>/dev/null | wc -l)
-  else
-    local branch="$(cat ${gitdir}/HEAD 2>/dev/null)"
-    branch=${branch##*/heads/}
-    local count=$(git rev-list remotes/origin/${branch}.. 2>/dev/null | wc -l)
-  fi
-
-  if [[ "$count" -gt 0 ]] ; then
-    hook_com[staged]+="|↑$count"
-  fi
+# hook to check if we are ahead/behind of upstream
+function +vi-git-ahead-behind() {
+    local ahead behind
+    local -a branchstatus
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | xargs)
+    (( $ahead )) && branchstatus+=( "⇡${ahead}" )
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | xargs)
+    (( $behind )) && branchstatus+=( "⇣${behind}" )
+    hook_com[branch]+="%B%F{red}${branchstatus}%f%b"
 }
 
 RPROMPT_BASE="\${vcs_info_msg_0_}"
