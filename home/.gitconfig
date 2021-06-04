@@ -44,15 +44,11 @@
 
 	excludesfile = /Users/sam.morrison/.gitignore
 
-  pager = delta --side-by-side -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS}
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
-[delta]
+[pager]
 
-  syntax-theme = Nord
-
-  line-numbers = true
-
-  side-by-side = true
+  diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
 
 [commit]
 
@@ -88,6 +84,7 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+	func = 146 bold
 
 [pull]
 	rebase = true
@@ -122,3 +119,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[interactive]
+	diffFilter = diff-so-fancy --patch
