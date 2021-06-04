@@ -45,7 +45,7 @@ nnoremap <leader>a :CocAction<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>d :bd<CR>
-nnoremap <silent> <leader>f :GFiles?<CR>
+nnoremap <silent> <leader>g :GFiles?<CR>
 nnoremap <silent> <leader>f :NERDTreeFind<CR>
 nnoremap <silent> <leader>l :NERDTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
