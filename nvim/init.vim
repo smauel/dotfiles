@@ -1,31 +1,36 @@
 scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
-  Plug 'MaxMEllon/vim-jsx-pretty'
   Plug 'Raimondi/delimitMate'
   Plug 'airblade/vim-gitgutter'
-  Plug 'arcticicestudio/nord-vim'
-  Plug 'christoomey/vim-tmux-navigator'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'leafgarland/typescript-vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'ruanyl/vim-gh-line'
+
+  Plug 'arcticicestudio/nord-vim'
   Plug 'sainnhe/gruvbox-material'
-  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+
+  Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
+
+  Plug 'MaxMEllon/vim-jsx-pretty'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'yuezk/vim-js'
+
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
-  Plug 'yuezk/vim-js'
 
   if has('nvim')
     Plug 'hoob3rt/lualine.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
   endif
 call plug#end()
 
@@ -43,8 +48,8 @@ nnoremap <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
 nnoremap <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
 nnoremap <leader>a :CocAction<CR>
 nnoremap <silent> <leader>d :bd<CR>
-nnoremap <silent> <leader>f :NERDTreeFind<CR>
-nnoremap <silent> <leader>l :NERDTreeToggle<CR>
+nnoremap <silent> <leader>f :NvimTreeFindFile<CR>
+nnoremap <silent> <leader>l :NvimTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 nnoremap <silent> <leader>/ :noh<cr>
@@ -92,13 +97,6 @@ nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " plugins
-
-" nerdtree
-let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen=1
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['^\.git$', '^node_modules$', '^\.idea$']
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " coc
 " use tab for trigger completion, completion confirm and snippet expand
