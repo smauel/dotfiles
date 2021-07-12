@@ -1,38 +1,33 @@
 scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'Raimondi/delimitMate'
-Plug 'airblade/vim-gitgutter'
-Plug 'arcticicestudio/nord-vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ruanyl/vim-gh-line'
-Plug 'sainnhe/gruvbox-material'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'yuezk/vim-js'
-Plug 'hoob3rt/lualine.nvim'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+  Plug 'MaxMEllon/vim-jsx-pretty'
+  Plug 'Raimondi/delimitMate'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'ruanyl/vim-gh-line'
+  Plug 'sainnhe/gruvbox-material'
+  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+  Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
+  Plug 'yuezk/vim-js'
+
+  if has('nvim')
+    Plug 'hoob3rt/lualine.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+  endif
 call plug#end()
-
-
-" colors
-syntax on
-set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
-set termguicolors
-set background=dark
-colorscheme nord
 
 
 " bindings
@@ -53,7 +48,7 @@ nnoremap <silent> <leader>l :NERDTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 nnoremap <silent> <leader>/ :noh<cr>
-nmap <leader>q <Plug>(coc-fix-current)
+" nmap <leader>q <Plug>(coc-fix-current)
 nnoremap <leader>jp :call  CocAction('runCommand', 'jest.projectTest')<CR>
 nnoremap <leader>jc :call  CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
 nnoremap <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
@@ -96,68 +91,6 @@ set splitright
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-
-" general
-set hidden
-set nocompatible
-set runtimepath+=~/.vim
-set clipboard=unnamed
-set binary
-set noeol
-set modeline
-set modelines=4
-set cmdheight=1
-set ttyfast
-set lazyredraw
-set noshowmode
-set updatetime=300
-set shortmess+=c
-set scrolloff=3
-set encoding=utf-8
-
-" backup and swap
-set noswapfile
-set nobackup
-set nowritebackup
-
-
-" formatting
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set smartindent
-set smarttab
-set nojoinspaces
-set autoindent
-set formatoptions+=j
-
-
-" search
-set showmatch
-set matchtime=5
-set hlsearch
-set ignorecase " ignore case when searching...
-set smartcase " ...except when you're explicit with caps
-
-
-" visual
-set number
-set relativenumber
-set showtabline=2
-set showcmd
-set cursorline
-set novisualbell
-set noerrorbells
-set conceallevel=0
-set guioptions=
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 " plugins
 
 " nerdtree
@@ -197,5 +130,6 @@ endfunction
 
 lua << EOF
 require('plugins')
+require('settings')
 EOF
 
