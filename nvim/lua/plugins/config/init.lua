@@ -18,6 +18,8 @@ end
 M.setup = function()
   add 'telescope'
   add 'lualine'
+  add 'compe'
+  add 'lspsaga'
 end
 
 return M

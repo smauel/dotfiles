@@ -4,11 +4,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
   Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'ruanyl/vim-gh-line'
 
   Plug 'arcticicestudio/nord-vim'
-  Plug 'sainnhe/gruvbox-material'
 
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -31,8 +29,19 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'glepnir/lspsaga.nvim'
   endif
 call plug#end()
+
+" setup
+lua << EOF
+require('plugins')
+require('settings')
+require('keymappings')
+require('lsp.tsserver')
+EOF
 
 
 " bindings
@@ -40,40 +49,42 @@ let mapleader=","
 
 
 " leader bindings
-nnoremap <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
-nnoremap <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
-nnoremap <leader>b <cmd>lua require('plugins.config.telescope').buffers()<CR>
-nnoremap <leader>c <cmd>lua require('plugins.config.telescope').commits()<CR>
-nnoremap <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
-nnoremap <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
-nnoremap <leader>a :CocAction<CR>
+nnoremap <silent> <leader>/ :noh<cr>
+nnoremap <silent> <leader>b <cmd>lua require('plugins.config.telescope').buffers()<CR>
+nnoremap <silent> <leader>c <cmd>lua require('plugins.config.telescope').commits()<CR>
 nnoremap <silent> <leader>d :bd<CR>
 nnoremap <silent> <leader>f :NvimTreeFindFile<CR>
+nnoremap <silent> <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
 nnoremap <silent> <leader>l :NvimTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
+nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
+nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
+nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
-nnoremap <silent> <leader>/ :noh<cr>
-" nmap <leader>q <Plug>(coc-fix-current)
-nnoremap <leader>jp :call  CocAction('runCommand', 'jest.projectTest')<CR>
-nnoremap <leader>jc :call  CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
-nnoremap <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
-
 
 " goto bindings
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> gk <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" nnoremap <silent> gn <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap <silent> gp <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> gn <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> gp <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
 
+" codeaction bindings
+nnoremap <silent> ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent> ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+nnoremap <silent> cr <cmd>lua require('lspsaga.rename').rename()<CR>
 
-" coclist bindings
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-
+" auto-format
+autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " split bindings
 nnoremap <C-J> <C-W><C-J>
@@ -95,39 +106,3 @@ set splitright
 " handle wrapped lines nicely
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-
-" plugins
-
-" coc
-" use tab for trigger completion, completion confirm and snippet expand
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" use tab for snippet jump
-let g:coc_snippet_next = '<tab>'
-
-" K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-lua << EOF
-require('plugins')
-require('settings')
-EOF
-
