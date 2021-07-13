@@ -11,10 +11,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
 
-  Plug 'MaxMEllon/vim-jsx-pretty'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'yuezk/vim-js'
-
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-ragtag'
@@ -32,6 +28,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
     Plug 'glepnir/lspsaga.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   endif
 call plug#end()
 

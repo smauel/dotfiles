@@ -20,6 +20,7 @@ M.setup = function()
   add 'lualine'
   add 'compe'
   add 'lspsaga'
+  add 'treesitter'
 end
 
 return M
