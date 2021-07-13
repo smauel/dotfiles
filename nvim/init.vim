@@ -29,6 +29,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'hrsh7th/nvim-compe'
     Plug 'glepnir/lspsaga.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'rafamadriz/friendly-snippets'
   endif
 call plug#end()
 
@@ -43,6 +45,9 @@ EOF
 
 " bindings
 let mapleader=","
+
+
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 
 " leader bindings
