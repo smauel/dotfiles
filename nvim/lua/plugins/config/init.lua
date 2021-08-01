@@ -16,11 +16,15 @@ M.init = function()
 end
 
 M.setup = function()
+  add 'lsp'
   add 'telescope'
   add 'lualine'
   add 'compe'
   add 'lspsaga'
   add 'treesitter'
+  add 'lspkind'
+  add 'autopairs'
+  add 'gitsigns'
 end
 
 return M

@@ -2,11 +2,8 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
-  Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ruanyl/vim-gh-line'
-
-  Plug 'arcticicestudio/nord-vim'
 
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -23,14 +20,22 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'kabouzeid/nvim-lspinstall'
     Plug 'hrsh7th/nvim-compe'
     Plug 'glepnir/lspsaga.nvim'
+    Plug 'onsails/lspkind-nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/vim-vsnip'
     Plug 'rafamadriz/friendly-snippets'
+    Plug 'shaunsingh/nord.nvim'
+    Plug 'rafamadriz/neon'
+    Plug 'marko-cerovac/material.nvim'
+    Plug 'windwp/nvim-autopairs'
+    Plug 'lewis6991/gitsigns.nvim'
   endif
 call plug#end()
 
@@ -39,7 +44,6 @@ lua << EOF
 require('plugins')
 require('settings')
 require('keymappings')
-require('lsp.tsserver')
 EOF
 
 
@@ -62,12 +66,13 @@ nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
 nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
 nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
-nnoremap <silent> <leader>v :e ~/.vimrc<CR>
+nnoremap <silent> <leader>v <cmd>lua require('plugins.config.telescope').find_config_files()<CR>
+nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorscheme()<CR>
 
 " goto bindings
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+"nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+"nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 " nnoremap <silent> gk <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
@@ -77,8 +82,8 @@ nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_sag
 " nnoremap <silent> gp <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> gn <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 nnoremap <silent> gp <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gr <cmd>lua require('lspsaga.rename').rename()<CR>
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
 
 " codeaction bindings
 nnoremap <silent> ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
@@ -86,7 +91,7 @@ vnoremap <silent> ca :<C-U>lua require('lspsaga.codeaction').range_code_action()
 nnoremap <silent> cr <cmd>lua require('lspsaga.rename').rename()<CR>
 
 " auto-format
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+"autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " split bindings
 nnoremap <C-J> <C-W><C-J>
