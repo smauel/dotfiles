@@ -2,11 +2,8 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
-  Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ruanyl/vim-gh-line'
-
-  Plug 'arcticicestudio/nord-vim'
 
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -32,6 +29,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'hrsh7th/vim-vsnip'
     Plug 'rafamadriz/friendly-snippets'
+    Plug 'shaunsingh/nord.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
   endif
 call plug#end()
 

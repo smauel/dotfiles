@@ -21,6 +21,7 @@ M.setup = function()
   add 'compe'
   add 'lspsaga'
   add 'treesitter'
+  add 'gitsigns'
 end
 
 return M
