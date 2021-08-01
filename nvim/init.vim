@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'neovim/nvim-lspconfig'
@@ -65,6 +66,7 @@ nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_fi
 nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
 nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
+nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorscheme()<CR>
 
 " goto bindings
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>

@@ -1,16 +1,13 @@
 local telescope = require 'telescope'
 local telescope_builtin = require 'telescope.builtin'
 local telescope_actions = require 'telescope.actions'
-local M = {}
 
 telescope.setup {
   defaults = {
-    layout_strategy = 'horizontal',
     layout_config = {
       prompt_position = 'top',
     },
     sorting_strategy = 'ascending',
-    use_less = false,
     vimgrep_arguments = {
       'rg',
       '--hidden',
@@ -21,21 +18,27 @@ telescope.setup {
       '--column',
       '--smart-case'
     },
+
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      }
+    }
   }
 }
 
+telescope.load_extension('fzy_native')
+
+local M = {}
 M.find_files = function()
-  telescope_builtin.find_files {
-    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
-    previewer = false
-  }
+  telescope_builtin.find_files {}
 end
 
 M.find_config_files = function()
   local config_dir = vim.env.HOME .. '/dev/dotfiles'
   telescope_builtin.find_files {
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', config_dir },
-    previewer = false
   }
 end
 
@@ -63,6 +66,10 @@ end
 
 M.quickfix = function()
   telescope_builtin.quickfix {}
+end
+
+M.colorscheme = function()
+  telescope_builtin.colorscheme {}
 end
 
 return M
