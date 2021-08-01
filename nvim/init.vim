@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
-  Plug 'Raimondi/delimitMate'
+  " Plug 'Raimondi/delimitMate'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ruanyl/vim-gh-line'
 
@@ -31,6 +31,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'rafamadriz/friendly-snippets'
     Plug 'shaunsingh/nord.nvim'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'windwp/nvim-autopairs'
   endif
 call plug#end()
 
@@ -64,7 +66,7 @@ nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
 nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
 nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
-nnoremap <silent> <leader>v :e ~/.vimrc<CR>
+nnoremap <silent> <leader>v <cmd>lua require('plugins.config.telescope').find_config_files()<CR>
 nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorscheme()<CR>
 
 " goto bindings

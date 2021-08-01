@@ -22,6 +22,8 @@ M.setup = function()
   add 'lspsaga'
   add 'treesitter'
   add 'gitsigns'
+  add 'lspkind'
+  add 'autopairs'
 end
 
 return M
