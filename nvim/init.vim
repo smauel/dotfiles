@@ -38,7 +38,7 @@ call plug#end()
 lua << EOF
 require('plugins')
 require('settings')
-require('keymappings')
+-- require('keymappings')
 require('lsp.tsserver')
 EOF
 
@@ -57,6 +57,8 @@ nnoremap <silent> <leader>c <cmd>lua require('plugins.config.telescope').commits
 nnoremap <silent> <leader>d :bd<CR>
 nnoremap <silent> <leader>f :NvimTreeFindFile<CR>
 nnoremap <silent> <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
+nnoremap <silent> <leader>j <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <leader>k <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 nnoremap <silent> <leader>l :NvimTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
@@ -65,16 +67,10 @@ nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_gr
 nnoremap <silent> <leader>v :e ~/.vimrc<CR>
 
 " goto bindings
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> gk <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-" nnoremap <silent> gn <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-" nnoremap <silent> gp <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> gn <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 nnoremap <silent> gp <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
