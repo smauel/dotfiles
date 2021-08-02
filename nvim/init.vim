@@ -33,6 +33,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'onsails/lspkind-nvim'
     Plug 'windwp/nvim-autopairs'
+    Plug 'kabouzeid/nvim-lspinstall'
   endif
 call plug#end()
 
@@ -41,7 +42,7 @@ lua << EOF
 require('plugins')
 require('settings')
 -- require('keymappings')
-require('lsp.tsserver')
+require('lsp')
 EOF
 
 
@@ -86,6 +87,7 @@ nnoremap <silent> cr <cmd>lua require('lspsaga.rename').rename()<CR>
 
 " auto-format
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " split bindings
 nnoremap <C-J> <C-W><C-J>
