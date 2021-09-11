@@ -1,7 +1,6 @@
 scriptencoding utf-8
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Raimondi/delimitMate'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ruanyl/vim-gh-line'
@@ -27,6 +26,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'fannheyward/telescope-coc.nvim'
+Plug 'windwp/nvim-autopairs'
 
 " colorschemes
 Plug 'shaunsingh/nord.nvim'

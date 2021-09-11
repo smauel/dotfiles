@@ -20,6 +20,7 @@ M.setup = function()
   add 'gitsigns'
   add 'lualine'
   add 'treesitter'
+  add 'autopairs'
 end
 
 return M
