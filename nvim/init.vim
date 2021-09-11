@@ -3,7 +3,6 @@ scriptencoding utf-8
 call plug#begin('~/.config/nvim/plugged')
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
-Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'leafgarland/typescript-vim'
@@ -26,6 +25,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'shaunsingh/nord.nvim'
 call plug#end()
 
 
@@ -177,42 +178,6 @@ let g:nvim_tree_auto_close = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_gitignore = 1
 
-
-" lualine status line
-lua <<EOF
-local colors = {
-  nord1  = '#3B4252',
-  nord3  = '#4C566A',
-  nord5  = '#E5E9F0',
-  nord6  = '#ECEFF4',
-  nord7  = '#8FBCBB',
-  nord8  = '#88C0D0',
-  nord13 = '#EBCB8B',
-  nord14 = '#bf616a',
-}
-
-local custom_nord = require'lualine.themes.nord'
-custom_nord.normal.a = {bg = colors.nord1, fg = colors.nord13, gui = 'bold'}
-custom_nord.insert.a = {bg = colors.nord1, fg = colors.nord13, gui = 'bold'}
-custom_nord.visual.a = {bg = colors.nord1, fg = colors.nord13, gui = 'bold'}
-custom_nord.replace.a = {bg = colors.nord1, fg = colors.nord13, gui = 'bold'}
-
-require('lualine').setup{
-  options = {
-    theme = 'nord',
-    icons_enabled = false,
-    section_separators = {'', ''}
-  },
-  sections = {
-    lualine_a = {{'mode', lower = false}},
-    lualine_b = {{'branch', color = { bg = colors.nord14, fg = colors.nord5, gui = 'bold' }}},
-    lualine_c = {{'filename', color = { bg = colors.nord3, fg = colors.nord5, gui = 'italic' }}},
-    lualine_x = {'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  }
-}
-EOF
 
 " coc
 let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-eslint', 'coc-git', 'coc-gitignore', 'coc-highlight', 'coc-html', 'coc-java', 'coc-jest', 'coc-json', 'coc-markdownlint', 'coc-metals', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-sh', 'coc-snippets', 'coc-sumneko-lua', 'coc-tsserver', 'coc-yaml' ]

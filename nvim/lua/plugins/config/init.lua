@@ -18,6 +18,8 @@ end
 M.setup = function()
   add 'telescope'
   add 'gitsigns'
+  add 'lualine'
+  add 'treesitter'
 end
 
 return M

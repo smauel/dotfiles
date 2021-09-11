@@ -4,6 +4,7 @@
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "eslint.autoFixOnSave":true,
+  "eslint.format.enable": true,
   "metals.statusBarEnabled": true,
   "coc.preferences.formatOnSaveFiletypes": ["scala"],
   "jest.watch": false
