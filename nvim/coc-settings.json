@@ -7,5 +7,9 @@
   "eslint.format.enable": true,
   "metals.statusBarEnabled": true,
   "coc.preferences.formatOnSaveFiletypes": ["scala"],
-  "jest.watch": false
+  "jest.watch": false,
+  "git.enableGutters": false,
+  "Lua.diagnostics.globals": [
+    "vim"
+  ]
 }

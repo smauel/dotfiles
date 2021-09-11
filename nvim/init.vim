@@ -1,22 +1,22 @@
 scriptencoding utf-8
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'Raimondi/delimitMate'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ruanyl/vim-gh-line'
-Plug 'sainnhe/gruvbox-material'
+
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'yuezk/vim-js'
+
+" nvim/lua plugins
 Plug 'hoob3rt/lualine.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -26,7 +26,12 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'fannheyward/telescope-coc.nvim'
+
+" colorschemes
 Plug 'shaunsingh/nord.nvim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/everforest'
 call plug#end()
 
 
@@ -35,7 +40,8 @@ syntax on
 set guifont=SpaceMonoNerdFontCompleteM-Regular:h15
 set termguicolors
 set background=dark
-colorscheme nord
+let g:everforest_background='hard'
+colorscheme everforest
 
 
 " bindings
@@ -70,11 +76,10 @@ nmap <silent> gr <Plug>(coc-references)
 
 
 " coclist bindings
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>a  :<C-u>Telescope coc file_code_actions<cr>
+nnoremap <silent> <space>c  :<C-u>Telescope coc commands<cr>
+nnoremap <silent> <space>d  :<C-u>Telescope coc definitions<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 
 
 " split bindings
@@ -163,12 +168,7 @@ set novisualbell
 set noerrorbells
 set conceallevel=0
 set guioptions=
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=number
 
 " plugins
 

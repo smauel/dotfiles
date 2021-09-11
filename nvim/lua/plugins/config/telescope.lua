@@ -16,6 +16,7 @@ telescope.setup {
 }
 
 telescope.load_extension('fzy_native')
+telescope.load_extension('coc')
 
 local M = {}
 M.find_files = function()
