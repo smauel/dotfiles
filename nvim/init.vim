@@ -28,6 +28,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'windwp/nvim-autopairs'
 
+Plug 'voldikss/vim-floaterm'
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+
 " colorschemes
 Plug 'shaunsingh/nord.nvim'
 Plug 'sainnhe/gruvbox-material'
@@ -62,9 +66,6 @@ nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfi
 nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
 nnoremap <silent> <leader>v <cmd>lua require('plugins.config.telescope').find_config_files()<CR>
 nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorscheme()<CR>
-nnoremap <silent> <leader>jp :call  CocAction('runCommand', 'jest.projectTest')<CR>
-nnoremap <silent> <leader>jc :call  CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
-nnoremap <silent> <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
 
 
 " goto bindings
@@ -80,6 +81,12 @@ nnoremap <silent> <space>a  :<C-u>Telescope coc file_code_actions<cr>
 nnoremap <silent> <space>c  :<C-u>Telescope coc commands<cr>
 nnoremap <silent> <space>d  :<C-u>Telescope coc definitions<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+
+
+" test mappings
+nmap <silent> tt :UltestNearest<CR>
+nmap <silent> tf :Ultest<CR>
+nmap <silent> ts :TestSuite<CR>
 
 
 " split bindings
@@ -208,6 +215,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" vim-test
+let test#strategy = "floaterm"
 
 " lua plugins
 lua <<EOF
