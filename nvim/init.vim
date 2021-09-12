@@ -4,10 +4,12 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ruanyl/vim-gh-line'
+Plug 'honza/vim-snippets'
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'christoomey/vim-tmux-navigator'
 
+" tpope plugins TODO: which of these do I actually use?
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
@@ -28,6 +30,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'windwp/nvim-autopairs'
 
+" vim-test
 Plug 'voldikss/vim-floaterm'
 Plug 'vim-test/vim-test'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
