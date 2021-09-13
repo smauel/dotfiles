@@ -3,6 +3,7 @@ local m = require'mapx'.setup{ global = true, whichkey = true }
 -- leader bindings
 m.nname('<leader>', 'Leader')
 m.nnoremap('<leader>/', ':noh<cr>', 'silent', 'Clear Highlight')
+m.nnoremap('<leader>a', '<Plug>(coc-codeaction-cursor)', 'silent', 'Coc Fix Current')
 m.nnoremap('<leader>b', function() require('config.telescope').buffers() end, 'silent', 'Telescope Buffers')
 m.nnoremap('<leader>c', function() require('config.telescope').commits() end, 'silent', 'Telescope Commits')
 m.nnoremap('<leader>d', ':bd<cr>', 'silent', 'Close Buffer')

@@ -120,7 +120,7 @@ return require('packer').startup({function(use)
   use 'kdheepak/monochrome.nvim'
   use 'rose-pine/neovim'
   use 'EdenEast/nightfox.nvim'
-  use 'mcchrish/zenbones.nvim'
+  use { 'mcchrish/zenbones.nvim', requires = { 'rktjmp/lush.nvim', opt = true} }
 end,
 config = {
   display = {
