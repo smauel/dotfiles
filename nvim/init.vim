@@ -3,7 +3,6 @@ scriptencoding utf-8
 call plug#begin('~/.config/nvim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ruanyl/vim-gh-line'
 Plug 'honza/vim-snippets'
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -12,6 +11,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " tpope plugins TODO: which of these do I actually use?
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
@@ -73,7 +73,8 @@ nnoremap <silent> <leader>b <cmd>lua require('plugins.config.telescope').buffers
 nnoremap <silent> <leader>c <cmd>lua require('plugins.config.telescope').commits()<CR>
 nnoremap <silent> <leader>d :bd<CR>
 nnoremap <silent> <leader>f :NvimTreeFindFile<CR>
-nnoremap <silent> <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
+nnoremap <silent> <leader>gb :GBrowse<CR>
+nnoremap <silent> <leader>gf <cmd>lua require('plugins.config.telescope').git_files()<CR>
 nnoremap <silent> <leader>l :NvimTreeToggle<CR>
 nnoremap <silent> <leader>m :Git<CR>
 nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
@@ -199,6 +200,7 @@ let g:nvim_tree_auto_open = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_gitignore = 1
+let g:nvim_tree_disable_netrw = 0
 
 
 " coc
