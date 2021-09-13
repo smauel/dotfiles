@@ -1,10 +1,17 @@
 local o = vim.o
+local g = vim.g
+
+-- mapleader
+g.mapleader = ','
 
 -- colors
 o.guifont = 'SpaceMonoNerdFontCompleteM-Regular:h15'
 o.termguicolors = true
 o.background = 'dark'
-vim.cmd [[ silent! colorscheme nord ]]
+vim.cmd [[
+  let g:everforest_background = 'hard'
+  silent! colorscheme everforest
+]]
 
 -- general
 o.hidden = true
@@ -54,3 +61,7 @@ o.visualbell = false
 o.errorbells = false
 o.conceallevel = 0
 o.signcolumn = 'number' -- merge signcolumn and number column into one
+
+-- splits
+o.splitbelow = true
+o.splitright = true

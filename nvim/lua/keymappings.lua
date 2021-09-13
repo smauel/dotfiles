@@ -1,64 +1,67 @@
-vim.g.mapleader = ','
+local m = require'mapx'.setup{ global = true, whichkey = true }
 
-vim.cmd([[
-inoremap <silent> <expr> <CR>      compe#confirm('<CR>')
+-- leader bindings
+m.nname('<leader>', 'Leader')
+m.nnoremap('<leader>/', ':noh<cr>', 'silent', 'Clear Highlight')
+m.nnoremap('<leader>a', '<Plug>(coc-codeaction-cursor)', 'silent', 'Coc Fix Current')
+m.nnoremap('<leader>b', function() require('config.telescope').buffers() end, 'silent', 'Telescope Buffers')
+m.nnoremap('<leader>c', function() require('config.telescope').commits() end, 'silent', 'Telescope Commits')
+m.nnoremap('<leader>d', ':bd<cr>', 'silent', 'Close Buffer')
+m.nnoremap('<leader>f', ':NvimTreeFindFile<cr>', 'silent', 'NvimTree Find File')
+m.nnoremap('<leader>gb', ':GBrowse<cr>', 'silent', 'Open In Github')
+m.nnoremap('<leader>gf', function() require('config.telescope').git_files() end, 'silent', 'Telescope Git Files')
+m.nnoremap('<leader>l', ':NvimTreeToggle<cr>', 'silent', 'NvimTree Toggle')
+m.nnoremap('<leader>m', ':Git<cr>', 'silent', 'Fugitive')
+m.nnoremap('<leader>p', function() require('config.telescope').find_files() end, 'silent', 'Telescope Files')
+m.nnoremap('<leader>q', function() require('config.telescope').quickfix() end, 'silent', 'Telescope Quickfix')
+m.nnoremap('<leader>r', function() require('config.telescope').live_grep() end, 'silent', 'Telescope Grep')
+m.nnoremap('<leader>v', function() require('config.telescope').find_config_files() end, 'silent', 'Telescope Config Files')
+m.nnoremap('<leader>z', function() require('config.telescope').colorscheme() end, 'silent', 'Telescope Colorschemes')
 
-" leader mappings
-nnoremap <silent> <leader>/ :set hlsearch!<cr>
-nnoremap <silent> <leader>b <cmd>lua require('plugins.config.telescope').buffers()<CR>
-nnoremap <silent> <leader>c <cmd>lua require('plugins.config.telescope').commits()<CR>
-nnoremap <silent> <leader>d :bd<CR>
-nnoremap <silent> <leader>f :NvimTreeFindFile<CR>
-nnoremap <silent> <leader>g <cmd>lua require('plugins.config.telescope').git_files()<CR>
-nnoremap <silent> <leader>j <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-nnoremap <silent> <leader>k <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-nnoremap <silent> <leader>l :NvimTreeToggle<CR>
-nnoremap <silent> <leader>m :Git<CR>
-nnoremap <silent> <leader>p <cmd>lua require('plugins.config.telescope').find_files()<CR>
-nnoremap <silent> <leader>q <cmd>lua require('plugins.config.telescope').quickfix()<CR>
-nnoremap <silent> <leader>r <cmd>lua require('plugins.config.telescope').live_grep()<CR>
-nnoremap <silent> <leader>v <cmd>lua require('plugins.config.telescope').find_config_files()<CR>
-nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorscheme()<CR>
+-- goto bindings
+m.nname('g', 'Goto bindings')
+m.nmap('gd', '<Plug>(coc-definition)', 'silent', 'Goto Definition')
+m.nmap('gi', '<Plug>(coc-implementation)', 'silent', 'Goto Implementation')
+m.nmap('gn', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
+m.nmap('gp', '<Plug>(coc-diagnostic-prev)', 'silent', 'Goto Prev Diagnostic')
+m.nmap('gr', '<Plug>(coc-references)', 'silent', 'Goto References')
 
-" goto bindings
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-nnoremap <silent> gn <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-nnoremap <silent> gp <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
+-- coc bindings
+m.nname('<space>', 'Coc')
+m.nnoremap('<space>a', ':<C-u>Telescope coc file_code_actions<cr>', 'silent', 'Coc Code Actions')
+m.nnoremap('<space>c', ':<C-u>Telescope coc commands<cr>', 'silent', 'Coc Commands')
+m.nnoremap('<space>d', ':<C-u>Telescope coc definitions<cr>', 'silent', 'Coc Definitions')
+m.nnoremap('<space>e', ':<C-u>CocList extensions<cr>', 'silent', 'Coc Extensions')
 
-" codeaction bindings
-nnoremap <silent> ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent> ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
-nnoremap <silent> cr <cmd>lua require('lspsaga.rename').rename()<CR>
+-- test bindings
+m.nname('t', 'Test bindings')
+m.nmap('tf', ':Ultest<cr>', 'silent', 'Run Tests In File')
+m.nmap('ts', ':TestSuite<cr>', 'silent', 'Run All Tests')
+m.nmap('tt', ':UltestNearest<cr>', 'silent', 'Run Test')
 
-" split bindings
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-set splitbelow
-set splitright
+-- split bindings
+m.nnoremap('<C-J>', '<C-W><C-J>')
+m.nnoremap('<C-K>', '<C-W><C-K>')
+m.nnoremap('<C-L>', '<C-W><C-L>')
+m.nnoremap('<C-H>', '<C-W><C-H>')
 
-" fat finger bindings
-:command W w
-:command Wq wq
-:command Qa qa
-:command QA qa
-:command WQ wq
+-- handle wrapped lines nicely
+m.nnoremap("j", function(count) return count > 0 and "j" or "gj" end, "silent", "expr")
+m.nnoremap("k", function(count) return count > 0 and "k" or "gk" end, "silent", "expr")
 
-" handle wrapped lines nicely
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+-- move lines up and down
+m.nnoremap('<A-j>', ':m .+1<cr>==')
+m.nnoremap('<A-k>', ':m .-2<cr>==')
+m.inoremap('<A-j>', '<Esc>:m .+1<cr>==gi')
+m.inoremap('<A-k>', '<Esc>:m .-2<cr>==gi')
+m.vnoremap('<A-j>', ":m '>+1<cr>gv=gv")
+m.vnoremap('<A-k>', ":m '<-2<cr>gv=gv")
 
-" move lines up and down
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-]])
+-- fat finger bindings
+vim.cmd[[
+  :command W w
+  :command Wq wq
+  :command Qa qa
+  :command QA qa
+  :command WQ wq
+]]
