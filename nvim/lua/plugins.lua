@@ -40,7 +40,7 @@ return require('packer').startup({function(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function() require('plugins.config.lualine') end
+    config = function() require('config.lualine') end
   }
 
   use {
@@ -50,13 +50,13 @@ return require('packer').startup({function(use)
       { 'nvim-telescope/telescope-fzy-native.nvim' },
       { 'fannheyward/telescope-coc.nvim' }
     },
-    config = function() require('plugins.config.telescope') end
+    config = function() require('config.telescope') end
   }
 
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function() require('plugins.config.nvimtree') end
+    config = function() require('config.nvimtree') end
   }
 
   use {
@@ -68,12 +68,12 @@ return require('packer').startup({function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() require('plugins.config.treesitter') end
+    config = function() require('config.treesitter') end
   }
 
   use {
     'windwp/nvim-autopairs',
-    config = function() require('plugins.config.autopairs') end
+    config = function() require('config.autopairs') end
   }
 
   use {
@@ -83,12 +83,26 @@ return require('packer').startup({function(use)
       { 'vim-test/vim-test' },
       { 'voldikss/vim-floaterm' }
     },
-    config = function() require('plugins.config.ultest') end
+    config = function() require('config.ultest') end
   }
 
   use {
     'b0o/mapx.nvim',
     requires = { 'folke/which-key.nvim' }
+  }
+
+  -- TODO: figure out how to use
+  use {
+    'pwntester/octo.nvim',
+    requires = {{ 'nvim-telescope/telescope.nvim' }, { 'kyazdani42/nvim-web-devicons' }},
+    config = function() require('config.octo') end
+  }
+
+  -- TODO: figure out how to use
+  use {
+    'nvim-neorg/neorg',
+    requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-neorg/neorg-telescope'} },
+    config = function() require('config.neorg') end
   }
 
   -- colorschemes
