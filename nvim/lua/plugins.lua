@@ -32,7 +32,8 @@ return require('packer').startup({function(use)
 
   use {
     'neoclide/coc.nvim', branch = 'release',
-    requires = { 'honza/vim-snippets', opt = true }
+    requires = { 'honza/vim-snippets', opt = true },
+    config = function() require('config.coc') end
   }
 
   use 'nvim-lua/popup.nvim'
