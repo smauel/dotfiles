@@ -44,10 +44,9 @@ zplug install
 source ~/.zshrc
 ```
 
-### Vim
+### Vim (no longer maintained...see Neovim)
 
-Vim configuration can be found in `home/.vimrc`. At link time this is also
-symlinked to `~/.config/nvim/init.vim` for NVim use.
+Vim configuration can be found in `home/.vimrc`.
 
 Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A
 small set of plugins are installed including:
@@ -58,6 +57,20 @@ small set of plugins are installed including:
 * Coc for LSP integrations
 
 For a full list of bindings that are configured see the `home/.vimrc`
+
+### Neovim
+
+Latest and greatest (neo)vim config.
+
+Uses [packer](https://github.com/wbthomason/packer.nvim) for plugin management.
+On first load packer _should_ install itself and then auto install all plugins.
+If for some reason plugins are not installed they can be installed by running
+`:PackerInstall` from within neovim.
+
+All plugins that are installed can be viewed in `nvim/lua/plugins.lua`
+
+All keymappings that are configured can be viewed in `nvim/lua/keymappings.lua`
+(although `which-key` is also installed which will provide a handy prompt)
 
 ### Tmux
 
