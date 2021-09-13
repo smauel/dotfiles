@@ -36,9 +36,21 @@ Plug 'vim-test/vim-test'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 " colorschemes
+Plug 'tjdevries/colorbuddy.vim'
 Plug 'shaunsingh/nord.nvim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'kyazdani42/blue-moon'
+Plug 'rockerBOO/boo-colorscheme-nvim', { 'branch': 'main' }
+Plug 'bkegley/gloombuddy'
+Plug 'fenetikm/falcon'
+Plug 'shaunsingh/moonlight.nvim'
+Plug 'nxvu699134/vn-night.nvim'
+Plug 'kdheepak/monochrome.nvim'
+Plug 'rose-pine/neovim'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'mcchrish/zenbones.nvim'
 call plug#end()
 
 
@@ -72,10 +84,10 @@ nnoremap <silent> <leader>z <cmd>lua require('plugins.config.telescope').colorsc
 
 
 " goto bindings
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gr <Plug>(coc-references)
 
 
@@ -87,9 +99,9 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 
 
 " test mappings
-nmap <silent> tt :UltestNearest<CR>
 nmap <silent> tf :Ultest<CR>
 nmap <silent> ts :TestSuite<CR>
+nmap <silent> tt :UltestNearest<CR>
 
 
 " split bindings
