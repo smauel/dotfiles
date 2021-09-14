@@ -6,6 +6,16 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
+  "codeLens.enable": true,
+  "eslint.autoFixOnSave":true,
+  "eslint.format.enable": true,
+  "tsserver.enableJavascript": true,
+  "metals.statusBarEnabled": true,
+  "coc.preferences.formatOnSaveFiletypes": ["scala"],
+  "jest.watch": false,
+  "git.enableGutters": false,
+  "java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home",
+  "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home",
   "suggest.completionItemKindLabels": {
     "keyword":  "\uf1de", //  sliders
     "variable": "\ue79b", //  isometric box
@@ -34,13 +44,6 @@
     "typeParameter": "\uf728", //  file presentation box
     "default": "\uf29c" //  question mark in circle
   },
-  "eslint.autoFixOnSave":true,
-  "eslint.format.enable": true,
-  "tsserver.enableJavascript": true,
-  "metals.statusBarEnabled": true,
-  "coc.preferences.formatOnSaveFiletypes": ["scala"],
-  "jest.watch": false,
-  "git.enableGutters": false,
   "Lua.diagnostics.globals": [
     "vim"
   ]
