@@ -107,21 +107,25 @@ return require('packer').startup({function(use)
   }
 
   -- colorschemes
-  use 'tjdevries/colorbuddy.vim'
-  use 'shaunsingh/nord.nvim'
-  use 'sainnhe/gruvbox-material'
-  use 'sainnhe/everforest'
-  use 'bluz71/vim-moonfly-colors'
-  use 'kyazdani42/blue-moon'
-  use { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' }
-  use 'bkegley/gloombuddy'
-  use 'fenetikm/falcon'
-  use 'shaunsingh/moonlight.nvim'
-  use 'nxvu699134/vn-night.nvim'
-  use 'kdheepak/monochrome.nvim'
-  use 'rose-pine/neovim'
   use 'EdenEast/nightfox.nvim'
+  use 'Yagua/nebulous.nvim'
+  use 'bkegley/gloombuddy'
+  use 'bluz71/vim-moonfly-colors'
+  use 'fenetikm/falcon'
+  use 'folke/tokyonight.nvim'
+  use 'kdheepak/monochrome.nvim'
+  use 'kyazdani42/blue-moon'
+  use 'nxvu699134/vn-night.nvim'
+  use 'rose-pine/neovim'
+  use 'sainnhe/edge'
+  use 'sainnhe/everforest'
+  use 'sainnhe/gruvbox-material'
+  use 'sainnhe/sonokai'
+  use 'shaunsingh/moonlight.nvim'
+  use 'shaunsingh/nord.nvim'
+  use 'tjdevries/colorbuddy.vim'
   use { 'mcchrish/zenbones.nvim', requires = { 'rktjmp/lush.nvim', opt = true} }
+  use { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' }
 end,
 config = {
   display = {

@@ -8,9 +8,16 @@ g.mapleader = ','
 o.guifont = 'SpaceMonoNerdFontCompleteM-Regular:h15'
 o.termguicolors = true
 o.background = 'dark'
+g.everforest_enable_italic = 1
+g.everforest_background = 'hard'
+g.gruvbox_material_enable_italic = 1
+g.gruvbox_material_background = 'soft'
+g.edge_enable_italic = 1
+g.edge_style = 'aura'
+g.sonokai_enable_italic = 1
+g.sonokai_style = 'andromeda'
 vim.cmd [[
-  let g:everforest_background = 'hard'
-  silent! colorscheme everforest
+  silent! colorscheme nord
 ]]
 
 -- general

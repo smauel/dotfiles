@@ -1,5 +1,5 @@
 require('lualine').setup {
-    options = {theme = 'everforest', icons_enabled = false, section_separators = {'', ''}},
+    options = {theme = 'nord', icons_enabled = false, section_separators = {'', ''}},
     sections = {
         lualine_a = {{'mode', lower = false}},
         lualine_b = {{'branch', color = {gui = 'bold'}}},
