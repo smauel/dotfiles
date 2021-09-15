@@ -29,6 +29,7 @@ return require('packer').startup({function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-sensible'
   use 'tpope/vim-surround'
+  use 'tpope/vim-unimpaired'
 
   use  {
     'lukas-reineke/indent-blankline.nvim',

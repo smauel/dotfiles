@@ -22,8 +22,6 @@ m.nnoremap('<leader>z', function() require('config.telescope').colorscheme() end
 m.nname('g', 'Goto bindings')
 m.nmap('gd', ':<C-u>Telescope coc definitions<cr>', 'silent', 'Goto Definition')
 m.nmap('gi', ':<C-u>Telescope coc implementations<cr>', 'silent', 'Goto Implementation')
-m.nmap('gn', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
-m.nmap('gp', '<Plug>(coc-diagnostic-prev)', 'silent', 'Goto Prev Diagnostic')
 m.nmap('gr', ':<C-u>Telescope coc references<cr>', 'silent', 'Goto References')
 
 -- coc bindings
@@ -33,6 +31,15 @@ m.nnoremap('<space>c', ':<C-u>Telescope coc commands<cr>', 'silent', 'Coc Comman
 m.nnoremap('<space>d', ':<C-u>Telescope coc diagnostics<cr>', 'silent', 'Coc Diagnostics')
 m.nnoremap('<space>e', ':<C-u>CocList extensions<cr>', 'silent', 'Coc Extensions')
 m.nnoremap('<space>o', ':<C-u>Telescope coc document_symbols<cr>', 'silent', 'Coc Outline')
+
+-- unimpaired enhanced bindings
+m.nnoremap(']a', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
+m.nnoremap('[a', '<Plug>(coc-diagnostic-prev)', 'silent', 'Goto Prev Diagnostic')
+m.nnoremap('][a', ':CocList diagnostics<cr>', 'silent', 'Open Diagnostics List')
+m.nnoremap('][q', ':copen<cr>', 'silent', 'Open Quickfix List')
+m.nnoremap('[]q', ':cclose<cr>', 'silent', 'Close Quickfix List')
+m.nnoremap('][l', ':lopen<cr>', 'silent', 'Open Location List')
+m.nnoremap('[]l', ':lclose<cr>', 'silent', 'Close Location List')
 
 -- test bindings
 m.nname('t', 'Test bindings')

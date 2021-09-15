@@ -35,7 +35,7 @@ o.shortmess = o.shortmess .. 'c'
 o.scrolloff = 3
 o.encoding = 'utf-8'
 o.list = true
-o.listchars = {
+vim.opt.listchars = {
   eol = "↴",
 }
 
