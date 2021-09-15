@@ -112,6 +112,11 @@ return require('packer').startup({function(use)
     config = function() require('config.neorg') end
   }
 
+   use {
+    'kdheepak/lazygit.nvim',
+    config = function() require('config.lazygit') end
+  }
+
   -- colorschemes
   use 'EdenEast/nightfox.nvim'
   use 'Yagua/nebulous.nvim'
