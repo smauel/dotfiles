@@ -3,7 +3,7 @@ local m = require'mapx'.setup{ global = true, whichkey = true }
 -- leader bindings
 m.nname('<leader>', 'Leader')
 m.nnoremap('<leader>/', ':noh<cr>', 'silent', 'Clear Highlight')
-m.nnoremap('<leader>a', '<Plug>(coc-codeaction-cursor)', 'silent', 'Coc Fix Current')
+m.nnoremap('<leader>a', ':<C-u>Telescope coc line_code_actions<cr>', 'silent', 'Coc Fix Current')
 m.nnoremap('<leader>b', function() require('config.telescope').buffers() end, 'silent', 'Telescope Buffers')
 m.nnoremap('<leader>c', function() require('config.telescope').commits() end, 'silent', 'Telescope Commits')
 m.nnoremap('<leader>d', ':bd<cr>', 'silent', 'Close Buffer')
@@ -20,18 +20,19 @@ m.nnoremap('<leader>z', function() require('config.telescope').colorscheme() end
 
 -- goto bindings
 m.nname('g', 'Goto bindings')
-m.nmap('gd', '<Plug>(coc-definition)', 'silent', 'Goto Definition')
-m.nmap('gi', '<Plug>(coc-implementation)', 'silent', 'Goto Implementation')
+m.nmap('gd', ':<C-u>Telescope coc definitions<cr>', 'silent', 'Goto Definition')
+m.nmap('gi', ':<C-u>Telescope coc implementations<cr>', 'silent', 'Goto Implementation')
 m.nmap('gn', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
 m.nmap('gp', '<Plug>(coc-diagnostic-prev)', 'silent', 'Goto Prev Diagnostic')
-m.nmap('gr', '<Plug>(coc-references)', 'silent', 'Goto References')
+m.nmap('gr', ':<C-u>Telescope coc references<cr>', 'silent', 'Goto References')
 
 -- coc bindings
 m.nname('<space>', 'Coc')
 m.nnoremap('<space>a', ':<C-u>Telescope coc file_code_actions<cr>', 'silent', 'Coc Code Actions')
 m.nnoremap('<space>c', ':<C-u>Telescope coc commands<cr>', 'silent', 'Coc Commands')
-m.nnoremap('<space>d', ':<C-u>Telescope coc definitions<cr>', 'silent', 'Coc Definitions')
+m.nnoremap('<space>d', ':<C-u>Telescope coc diagnostics<cr>', 'silent', 'Coc Diagnostics')
 m.nnoremap('<space>e', ':<C-u>CocList extensions<cr>', 'silent', 'Coc Extensions')
+m.nnoremap('<space>o', ':<C-u>Telescope coc document_symbols<cr>', 'silent', 'Coc Outline')
 
 -- test bindings
 m.nname('t', 'Test bindings')
