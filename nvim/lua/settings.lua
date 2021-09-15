@@ -34,6 +34,10 @@ o.updatetime = 300
 o.shortmess = o.shortmess .. 'c'
 o.scrolloff = 3
 o.encoding = 'utf-8'
+o.list = true
+o.listchars = {
+  eol = "↴",
+}
 
 -- backup and swap
 o.swapfile = false

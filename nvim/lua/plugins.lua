@@ -30,6 +30,11 @@ return require('packer').startup({function(use)
   use 'tpope/vim-sensible'
   use 'tpope/vim-surround'
 
+  use  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require('config.indent-blankline') end
+  }
+
   use {
     'neoclide/coc.nvim', branch = 'release',
     requires = { 'honza/vim-snippets', opt = true },
