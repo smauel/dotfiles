@@ -8,6 +8,8 @@ g.mapleader = ','
 o.guifont = 'SpaceMonoNerdFontCompleteM-Regular:h15'
 o.termguicolors = true
 o.background = 'dark'
+
+-- colorscheme
 g.everforest_enable_italic = 1
 g.everforest_background = 'hard'
 g.gruvbox_material_enable_italic = 1
@@ -16,9 +18,9 @@ g.edge_enable_italic = 1
 g.edge_style = 'aura'
 g.sonokai_enable_italic = 1
 g.sonokai_style = 'andromeda'
-vim.cmd [[
-  silent! colorscheme nord
-]]
+g.nord_contrast = true
+g.nord_borders = true
+require('nord').set()
 
 -- general
 o.hidden = true
