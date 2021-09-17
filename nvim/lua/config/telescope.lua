@@ -20,7 +20,7 @@ telescope.load_extension('coc')
 
 local M = {}
 M.find_files = function()
-    telescope_builtin.find_files {}
+    telescope_builtin.find_files {hidden = true}
 end
 
 M.find_config_files = function()
