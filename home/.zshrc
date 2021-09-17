@@ -36,18 +36,24 @@ setopt PUSHD_IGNORE_DUPS       # don't push multiple copies of same dir onto sta
 setopt PUSHD_SILENT            # [default] don't print dir stack after pushing/popping
 setopt SHARE_HISTORY           # share history across shells
 
+# fasd
+eval "$(fasd --init auto)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# starship
+eval "$(starship init zsh)"
+
 #
 # Source other configuration
 #
 
-source $HOME/.zsh/aliases
 source $HOME/.zsh/exports
 source $HOME/.zsh/path
-source $HOME/.zsh/prompt
+source $HOME/.zsh/aliases
 source $HOME/.zsh/fzf
-source $HOME/.zsh/fasd
-source $HOME/.zsh/kube
-source $HOME/.zsh/git
-source $HOME/.zsh/nvm
-source $HOME/.zsh/zplug
+source $HOME/.zsh/gitauthor
 source $HOME/.secrets
