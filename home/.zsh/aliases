@@ -34,22 +34,23 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
 alias gb='git branch'
-alias gd='git diff'
+alias gbr='git branches'
+alias gcd='git co develop'
+alias gcm='git co master'
+alias gd='tmux neww bash -c "git diff"'
+alias gdc='tmux neww bash -c "git diff --cached"'
+alias ggo='git go'
 alias gl='git l'
+alias glo='tmux neww bash -c "git log"'
 alias gp='git pull'
+alias gpr='git pr'
 alias gr='git remotes'
 alias gs='git s'
 alias gt='git tags'
 alias gu='git reset --soft HEAD~1'
-alias gbr='git branches'
 # delete all branches other than important ones and the one I'm in
 # CAPS by choice as this is a pretty devastating command
 alias gCB='git branch | egrep -v "(master|develop|main|\*)" | xargs git branch -D'
-alias gcd='git co develop'
-alias gcm='git co master'
-alias gdc='git diff --cached'
-alias ggo='git go'
-alias gpr='git pr'
 # git log browser
 function gli() {
   # param validation
