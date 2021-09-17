@@ -65,6 +65,21 @@ m.inoremap('<A-k>', '<Esc>:m .-2<cr>==gi')
 m.vnoremap('<A-j>', ":m '>+1<cr>gv=gv")
 m.vnoremap('<A-k>', ":m '<-2<cr>gv=gv")
 
+-- make yank behave like delete and change
+m.nnoremap('Y', 'y$')
+
+-- keep cursor centered when jumping around
+m.nnoremap('n', 'nzzzv')
+m.nnoremap('N', 'Nzzzv')
+m.nnoremap('J', 'mzJ`z')
+
+-- undo breakpoints
+m.inoremap(',', ',<c-g>u')
+m.inoremap('.', '.<c-g>u')
+m.inoremap(';', ';<c-g>u')
+m.inoremap('!', '!<c-g>u')
+m.inoremap('?', '?<c-g>u')
+
 -- fat finger bindings
 vim.cmd[[
   :command W w
