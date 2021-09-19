@@ -1,48 +1,27 @@
 [alias]
 
-  # short status
-  s = status -s
-
-  # short log
-  l = log --pretty=oneline -n 5 --graph --abbrev-commit
-
-  # diff with summary
-  d = !"git --no-pager diff --compact-summary"
-
-  # diff between latest commit and current state
-  di = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
-
   # switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
   # normal diff
   patch = !git --no-pager diff --no-color
 
-	# show verbose output about tags, branches or remotes
-	tags = tag -l
-	branches = branch -a
-	remotes = remote -v
-
-  # open a pr from the command line
-	pr = !"git push origin HEAD && open-pr"
+  # show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
 
   # show aliases
   aliases = config --get-regexp alias
 
   # amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
-
-  # whatchanged
-  wc = whatchanged
-
-  # checkout
-  co = checkout
+  amend = commit --amend --reuse-message=HEAD
 
 [core]
 
-	editor = nvim
+  editor = nvim
 
-	excludesfile = /Users/sam.morrison/.gitignore
+  excludesfile = /Users/sam.morrison/.gitignore
 
   pager = diff-so-fancy | less --tabs=4 -RFX
 
@@ -56,7 +35,7 @@
 
 [credential]
 
-	helper = osxkeychain
+  helper = osxkeychain
 
 [help]
 
@@ -65,59 +44,64 @@
 
 [push]
 
-	default = simple
+  default = simple
 
 [color]
 
-	ui = true
+  ui = true
 
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-	func = 146 bold
+  meta = 11
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+  func = 146 bold
 
 [pull]
-	rebase = true
+  rebase = true
 
 [filter "git-crypt-qa"]
-    smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-qa"
-    clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-qa"
+  smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-qa"
+  clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-qa"
 
 [diff "git-crypt-qa"]
-    textconv = "git-crypt" diff "$HOME/.git-keys/curalate-qa"
+  textconv = "git-crypt" diff "$HOME/.git-keys/curalate-qa"
 
 [filter "git-crypt-prod"]
-    smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-prod"
-    clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-prod"
+  smudge = "git-crypt" smudge "$HOME/.git-keys/curalate-prod"
+  clean = "git-crypt"  clean  "$HOME/.git-keys/curalate-prod"
 
 [diff "git-crypt-prod"]
-    textconv = "git-crypt" diff "$HOME/.git-keys/curalate-prod"
+  textconv = "git-crypt" diff "$HOME/.git-keys/curalate-prod"
+
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
 [rebase]
-	autostash = true
+  autostash = true
 
 # force ssh
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+
 [interactive]
-	diffFilter = diff-so-fancy --patch
+  diffFilter = diff-so-fancy --patch
