@@ -3,34 +3,31 @@ alias dotfiles="cd ${HOME}/dev/dotfiles"
 alias vim=nvim
 alias tmux='tmux -2'
 alias fv='vim $(fzf)'
-
-alias ls='exa'
-alias ll='exa -l'
-
 alias cc='clear'
-
 alias x='exit'
-alias :wq='exit'
-alias :bd='exit'
-
-# List only directories
-alias lsd="ls -lhFG | grep --color=never '^d'"
 alias rm='rm -i'
-alias tmux='tmux -2'
+alias grep='grep --color=auto'
 alias ping='prettyping --nolegend'
-alias grep='grep --color=auto '
+
+# exa aliases
+alias ls='exa --group-directories-first --icons --color-scale'
+alias lt='exa --tree --icons --git --git-ignore --all --ignore-glob=.git'
+alias l='ls -a'
+alias ld='ls -D'
+alias ll='ls -lb --git'
+alias la='ll -a'
+alias lC='la --sort=changed'
+alias lM='la --sort=modified'
+alias lS='la --sort=size'
+alias lX='la --sort=extension'
+
+# useful aliases
 alias preview="fzf --border --layout reverse --preview 'bat --style=numbers --color=always {}' --preview-window down:85% --info inline"
 alias vp='vim $(preview)'
 alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
 alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
 alias uuid="uuidgen |tr '[:upper:]' '[:lower:]'"
-
-# OS X has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
-
-# OS X has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # git aliases
 alias g='git'
@@ -71,28 +68,9 @@ alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
 alias dprune='docker system prune && docker volume prune'
 
-# aws aliases
-function start-session() {
-  local selected_profile=$(cat ~/.aws/config| awk '/\[profile.+\]/{ print substr($0, 10, length($0) - 10) }' | fzf --height 30% --reverse -1 -0 --header 'Select Profile')
-  command aws-session --profile $selected_profile
-}
-alias ss='start-session'
-alias assume-role='function(){eval $(command assume-role $@);}'
-ams() {
-  local profile
-
-  profile=$(ls ~/dev/dominium/infrastructure/aws-manage-sg/*.json | fzf)
-  aws-manage-sg -u smorrison -f $profile
-}
-
-# helm aliases
-HELM="${HOME}/.helm"
-HELM_DEV="${HOME}/.helm/dev"
-HELM_DEMO="${HOME}/.helm/demo"
-HELM_PROD="${HOME}/.helm/prod"
-alias hdev="ln -sf ${HELM_DEV}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEV}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEV}/helm.key.pem ${HELM}/key.pem"
-alias hdemo="ln -sf ${HELM_DEMO}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_DEMO}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_DEMO}/helm.key.pem ${HELM}/key.pem"
-alias hprod="ln -sf ${HELM_PROD}/ca.cert.pem ${HELM}/ca.pem; ln -sf ${HELM_PROD}/helm.cert.pem ${HELM}/cert.pem; ln -sf ${HELM_PROD}/helm.key.pem ${HELM}/key.pem"
+# OS X has no `md5sum` or `sha1sum`, so setup fallbacks
+command -v md5sum > /dev/null || alias md5sum="md5"
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # suffix aliases
 alias -s md='vim'
