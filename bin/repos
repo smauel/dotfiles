@@ -12,7 +12,7 @@ cat <<EOS
 
   COMMANDS:
   list              List discovered repos
-  status            Show git status of each repo (get details with 'repos status -l')
+  status            Show git status of each repo
   latest            Show the latest tag for each repo
   update            Pull latest changes for each repo
   unpushed          Show commits that have not yet been pushed for each repo
@@ -21,13 +21,176 @@ cat <<EOS
   clean             Remove all local branches except master or development (this does a force delete so be careful not to lose work)
 
   repos can also run any arbitrary command on each repo. Note there is no validation
-  done on these commands so be careful!
+  done on these commands so be careful! aliases are preloaded in the script and can
+  be passed to the script
 
   examples:
+    - repos # will default to status
     - repos list
     - repos status
     - repos git log -n 3
+    - repos gl # example of passing an alias
 EOS
+}
+
+MODIFIED_ICON='!'
+UNTRACKED_ICON='?'
+STAGED_ICON='+'
+DELETED_ICON='✘'
+RENAMED_ICON='»'
+CONFLICTED_ICON='='
+AHEAD_ICON='⇡'
+BEHIND_ICON='⇣'
+DIVERGED_ICON='⇕'
+STASH_ICON='$'
+
+function git_status() {
+  local cmd=`git -C $repo --no-optional-locks status --porcelain=2 --branch`
+  local status_output=($cmd)
+  local status_result=$(parse_status $status_output)
+  local ahead_behind_result=$(parse_ahead_behind $status_output)
+  local result="$status_result$ahead_behind_result"
+  echo $result
+}
+
+# parses the status output to determine the status of the repo. the following
+# symbols will be used for the various statuses:
+# - `!` - the repo contains modified files
+# - `?` - the repo contains untracked files
+# - `+` - the repo contains staged files
+# - `✘` - the repo contains deleted files
+# - `»` - the repo contains renamed files
+# - `=` - the repo contains conflicted files
+function parse_status() {
+  local status_output="$1"
+  local statuses=`echo $status_output | grep -v '^#'`
+
+  local has_modified=false
+  local has_untracked=false
+  local has_deleted=false
+  local has_staged=false
+  local has_renamed=false
+  local has_conflicted=false
+
+  IFS=$'\n' read -rd '' -A status_lines <<<"$statuses"
+  for line in $status_lines
+  do
+    if [[ $line =~ ^\\?.* ]]; then
+      has_untracked=true
+    elif [[ $line == u* ]]; then
+      has_conflicted=true
+    else
+      if [[ $line == 2* ]]; then
+        has_renamed=true
+      fi
+
+      local short_status=`echo $line | awk '{print $2}'`
+      if [[ $short_status == M* ]] || [[ $short_status == A* ]]; then
+        has_staged=true
+      fi
+      if [[ $short_status == *M ]] || [[ $short_status == *A ]]; then
+        has_modified=true
+      fi
+      if [[ $short_status =~ .*D.* ]]; then
+        has_deleted=true
+      fi
+    fi
+  done
+
+  local status_result=''
+  if [[ "$has_conflicted" == "true" ]]; then
+    status_result+="$CONFLICTED_ICON"
+  fi
+  if [[ "$has_deleted" == "true" ]]; then
+    status_result+="$DELETED_ICON"
+  fi
+  if [[ "$has_renamed" == "true" ]]; then
+    status_result+="$RENAMED_ICON"
+  fi
+  if [[ "$has_modified" == "true" ]]; then
+    status_result+="$MODIFIED_ICON"
+  fi
+  if [[ "$has_staged" == "true" ]]; then
+    status_result+="$STAGED_ICON"
+  fi
+  if [[ "$has_untracked" == "true" ]]; then
+    status_result+="$UNTRACKED_ICON"
+  fi
+
+  echo $status_result
+}
+
+# parses the procelain status output to determine ahead/behind/diverged status
+# of the repo. a project is determined to be divereged if it is both behind and
+# ahead at the same time. the following symbols will be used:
+# - `⇡` - the repo is ahead of the tracking branch (incl. count)
+# - `⇣` - the repo is behind the tracking branch (incl. count)
+# - `⇕` - the repo has divered from the tracking branch
+function parse_ahead_behind() {
+  local status_output="$1"
+  local ahead_behind=`echo $status_output | grep '# branch.ab'`
+
+  # ahead/behind stats may not always be shown (for example in new repos)
+  # therefore skip if `branch.ab` header is not included in the status
+  if [[ "$ahead_behind" != "" ]]; then
+    local ahead=`echo $ahead_behind | awk '{print $3}'`
+    local behind=`echo $ahead_behind | awk '{print $4}'`
+    local ahead_behind_result=''
+    if [[ "${ahead:1}" != "0" ]] && [[ "${behind:1}" != "0" ]]; then
+      ahead_behind_result+="$DIVERGED_ICON"
+    fi
+    if [[ "${ahead:1}" != "0" ]]; then
+      ahead_behind_result+="$AHEAD_ICON${ahead:1}"
+    fi
+    if [[ "${behind:1}" != "0" ]]; then
+      ahead_behind_result+="$BEHIND_ICON${behind:1}"
+    fi
+    echo $ahead_behind_result
+  fi
+}
+
+# displays an icon if the repo contains stashes. the following symbols will be used:
+# - `$` - the repo has stashes
+function git_stash() {
+  # count the number of stashes (pipe through xargs to remove whitespace)
+  local cmd=`git -C $repo --no-optional-locks stash list | wc -l | xargs`
+  local stashes=($cmd)
+  if [[ "$stashes" != "0" ]]; then
+    echo "$STASH_ICON"
+  else
+    echo ""
+  fi
+}
+
+# return the current branch name
+function git_branch() {
+  local cmd=`git -C $repo --no-optional-locks branch | awk '{print $2}'`
+  local branch=($cmd)
+  echo $branch
+}
+
+# return the latest commit message (and relative timestamp)
+function git_latest_commit() {
+  local cmd=`git -C $repo --no-optional-locks show -s --format='%s (%cr)' -1`
+  local msg=($cmd)
+
+  echo $msg
+}
+
+function status() {
+  for repo in `repos list`
+  do
+    local git_branch=$(git_branch $repo)
+    local git_status=$(git_status $repo)
+    local git_stash=$(git_stash $repo)
+    local git_latest_commit=$(git_latest_commit $repo)
+
+    local display_branch="$(tput bold)$(tput setaf 5)$git_branch$(tput sgr0)"
+    local display_status="$(tput bold)$(tput setaf 1)[$git_stash$git_status]$(tput sgr0)"
+    local display_commit="$(tput setaf 244)$git_latest_commit$(tput sgr0)"
+
+    printf "%-35s %-20s %s %s\n" $repo $display_branch $display_status $display_commit
+  done
 }
 
 function iter() {
@@ -43,13 +206,18 @@ function iter() {
   done
 }
 
+if [ -z "$REPOS_DIR" ]; then
+  echo "REPOS_DIR variable not set. You must set REPOS_DIR to the root dir of your repos before executing this script"
+  exit 1
+fi
+pushd $REPOS_DIR
 if [ "$1" != "" ]; then
   case "$1" in
     list )        fd -H -td '^\.git$' -x echo {//}
       ;;
-    update )      iter git pull
+    status )      status
       ;;
-    status )      iter git status -s
+    update )      iter git pull
       ;;
     unpushed )    iter git log --branches --not --remotes --decorate --oneline
       ;;
@@ -62,12 +230,12 @@ if [ "$1" != "" ]; then
     clean )      iter 'git branch | egrep -v "(^\*|master|develop|main|dev|development)" | xargs git branch -D'
       ;;
     help )        usage
-      exit
       ;;
     * )           iter $@
       ;;
   esac
 else
-  usage
-  exit 1
+  status
 fi
+popd
+
