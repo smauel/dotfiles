@@ -105,13 +105,6 @@ return require('packer').startup({function(use)
     config = function() require('config.octo') end
   }
 
-  -- TODO: figure out how to use
-  use {
-    'nvim-neorg/neorg',
-    requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-neorg/neorg-telescope'} },
-    config = function() require('config.neorg') end
-  }
-
    use {
     'kdheepak/lazygit.nvim',
     config = function() require('config.lazygit') end
