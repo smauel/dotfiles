@@ -37,56 +37,35 @@ Some notable features:
 * Uses Nord for dir colors to match theme
 * Configures a number of aliases for common operations (see `home/.zsh/aliases`)
 
-To install `zplug` ZSH plugins:
-
-```bash
-zplug install
-source ~/.zshrc
-```
-
-### Vim (no longer maintained...see Neovim)
-
-Vim configuration can be found in `home/.vimrc`.
-
-Uses [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. A
-small set of plugins are installed including:
-
-* The Nord theme
-* Airline for status line
-* FZF for fuzzy-finding
-* Coc for LSP integrations
-
-For a full list of bindings that are configured see the `home/.vimrc`
-
 ### Neovim
-
-Latest and greatest (neo)vim config.
 
 Uses [packer](https://github.com/wbthomason/packer.nvim) for plugin management.
 On first load packer _should_ install itself and then auto install all plugins.
 If for some reason plugins are not installed they can be installed by running
 `:PackerInstall` from within neovim.
 
-All plugins that are installed can be viewed in `nvim/lua/plugins.lua`
+All plugins that are installed can be viewed in `config/nvim/lua/plugins.lua`
 
-All keymappings that are configured can be viewed in `nvim/lua/keymappings.lua`
+All keymappings that are configured can be viewed in `config/nvim/lua/keymappings.lua`
 (although `which-key` is also installed which will provide a handy prompt)
 
 ### Tmux
 
-Tmux configuration can be found in `home/.tmux.conf`. Uses
-[tpm](https://github.com/tmux-plugins/tpm) for plugin management, and is
-configured so that keybindings play nicely with tmux panes and vim splits
+Tmux configuration can be found in `home/.tmux.conf`. Prefix is set to `<C-a>`
 
-To Install tmux plugins, from within tmux:
+Uses
+[tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) and
+[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) for automatic session
+restore on startup. Current tmux session state can be saved with `<prefix>+<C-s>`
 
-```bash
-prefix+I
-```
+### Kitty
+
+Uses [kitty](https://sw.kovidgoyal.net/kitty/) for terminal emulation. Config
+can be found in `config/kitty`
 
 ### Colors
 
-Uses the excellent `nord` theme for vim, tmux and iTerm.
+Uses the excellent `nord` theme for vim, tmux and kitty.
 
 ### Git Author
 
@@ -112,15 +91,6 @@ To regenerate the `Brewfile` run:
 cd <this repo>
 brew bundle dump
 ```
-
-### iTerm2
-
-All iTerm2 configuration can be found in the `iterm2` folder.
-
-Double-clicking the `nord.itermcolors` file will load the colors.
-
-Then go to `Settings` -> `Profiles` -> `Other actions...` ->
-`Import JSON profiles...` and select `profile.json`
 
 ### VSCode
 
