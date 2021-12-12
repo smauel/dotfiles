@@ -1,19 +1,20 @@
-BREW := /usr/local/bin/brew
-VIM_PLUG := $(HOME)/.config/nvim/autoload/plug.vim
-AUTHORFILE := $(HOME)/.gitauthor
+BIN_DIR := /usr/local/bin
 VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
+CONFIG_DIR := $(HOME)/.config
+AUTHORFILE := $(HOME)/.gitauthor
+BREW := $(BIN_DIR)/brew
 
 DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
-SCRIPTS := $(addprefix /usr/local/bin/,$(shell ls -A bin))
+SCRIPTS := $(addprefix $(BIN_DIR)/,$(shell ls -A bin))
+CONFIG := $(addprefix $(CONFIG_DIR)/,$(shell ls config))
 VSCODES := $(addprefix $(VSCODE_DIR)/,$(shell ls -A vscode))
-NVIMS := $(addprefix $(HOME)/.config/nvim/,$(shell ls -A nvim))
 
 # space safe notdir check
 s? = $(subst $(empty) ,?,$1)
 ?s = $(subst ?, ,$1)
 notdirx = $(call ?s,$(notdir $(call s?,$1)))
 
-.PHONY: all link unlink brew brews brewfile vscode help $(DOTFILES) $(SCRIPTS) $(NVIMS) $(VSCODES)
+.PHONY: all link unlink brew brews brewfile vscode help $(DOTFILES) $(SCRIPTS) $(CONFIG) $(VSCODES)
 
 help:
 	@cat banner
@@ -27,13 +28,13 @@ help:
 
 all: | brews link vscode
 
-link: | $(DOTFILES) $(SCRIPTS) $(NVIMS) $(AUTHORFILE)
+link: | $(DOTFILES) $(SCRIPTS) $(CONFIG) $(AUTHORFILE)
 
 unlink:
 	@echo 'unlinking'
 	@for f in $(DOTFILES); do if [ -h $$f ]; then rm -i $$f; fi; done
 	@for f in $(SCRIPTS); do if [ -h $$f ]; then rm -i $$f; fi; done
-	@for f in $(NVIMS); do if [ -h $$f ]; then rm -i $$f; fi; done
+	@for f in $(CONFIG); do if [ -h $$f ]; then rm -i $$f; fi; done
 	@if [ -f $(AUTHOR_FILE) ]; then rm -i $(AUTHORFILE); fi
 
 brewfile: | brew
@@ -58,12 +59,9 @@ $(SCRIPTS):
 	@echo "- $(notdir $@)"
 	@ln -sfn "$(PWD)/bin/$(notdir $@)" $@
 
-$(NVIMS): | $(VIM_PLUG)
+$(CONFIG):
 	@echo "- $(notdir $@)"
-	@ln -sfn "$(PWD)/nvim/$(notdir $@)" $@
-
-$(VIM_PLUG):
-	curl -fLo $(VIM_PLUG) --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	@ln -sfn "$(PWD)/config/$(notdir $@)" $@
 
 $(AUTHORFILE):
 	@read -p "What is your git author name? " NAME; \
