@@ -1,22 +1,23 @@
+local ts = require('config.telescope')
 local m = require'mapx'.setup{ global = true, whichkey = true }
 
 -- leader bindings
 m.nname('<leader>', 'Leader')
 m.nnoremap('<leader>/', ':noh<cr>', 'silent', 'Clear Highlight')
 m.nnoremap('<leader>a', ':<C-u>Telescope coc line_code_actions<cr>', 'silent', 'Coc Fix Current')
-m.nnoremap('<leader>b', function() require('config.telescope').buffers() end, 'silent', 'Telescope Buffers')
-m.nnoremap('<leader>c', function() require('config.telescope').commits() end, 'silent', 'Telescope Commits')
+m.nnoremap('<leader>b', function() ts.buffers() end, 'silent', 'Telescope Buffers')
+m.nnoremap('<leader>c', function() ts.commits() end, 'silent', 'Telescope Commits')
 m.nnoremap('<leader>d', ':bd<cr>', 'silent', 'Close Buffer')
 m.nnoremap('<leader>f', ':NvimTreeFindFile<cr>', 'silent', 'NvimTree Find File')
 m.nnoremap('<leader>gb', ':GBrowse<cr>', 'silent', 'Open In Github')
-m.nnoremap('<leader>gf', function() require('config.telescope').git_files() end, 'silent', 'Telescope Git Files')
+m.nnoremap('<leader>gf', function() ts.git_files() end, 'silent', 'Telescope Git Files')
 m.nnoremap('<leader>l', ':NvimTreeToggle<cr>', 'silent', 'NvimTree Toggle')
 m.nnoremap('<leader>m', ':LazyGit<cr>', 'silent', 'LazyGit')
-m.nnoremap('<leader>p', function() require('config.telescope').find_files() end, 'silent', 'Telescope Files')
-m.nnoremap('<leader>q', function() require('config.telescope').quickfix() end, 'silent', 'Telescope Quickfix')
-m.nnoremap('<leader>r', function() require('config.telescope').live_grep() end, 'silent', 'Telescope Grep')
-m.nnoremap('<leader>v', function() require('config.telescope').find_config_files() end, 'silent', 'Telescope Config Files')
-m.nnoremap('<leader>z', function() require('config.telescope').colorscheme() end, 'silent', 'Telescope Colorschemes')
+m.nnoremap('<leader>p', function() ts.find_files() end, 'silent', 'Telescope Files')
+m.nnoremap('<leader>q', function() ts.quickfix() end, 'silent', 'Telescope Quickfix')
+m.nnoremap('<leader>r', function() ts.live_grep() end, 'silent', 'Telescope Grep')
+m.nnoremap('<leader>v', function() ts.find_config_files() end, 'silent', 'Telescope Config Files')
+m.nnoremap('<leader>z', function() ts.colorscheme() end, 'silent', 'Telescope Colorschemes')
 
 -- goto bindings
 m.nname('g', 'Goto bindings')
