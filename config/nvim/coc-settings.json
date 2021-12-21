@@ -1,7 +1,8 @@
 {
-  "diagnostic.errorSign": "✘",
-  "diagnostic.warningSign": "",
-  "diagnostic.infoSign": "",
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
   "diagnostic.messageTarget": "echo",
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
