@@ -1,22 +1,24 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": ["scala", "json"],
+  "codeLens.enable": true,
+  "diagnostic.checkCurrentLine": true,
   "diagnostic.errorSign": "",
-  "diagnostic.warningSign": "",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
   "diagnostic.messageTarget": "echo",
-  "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "codeLens.enable": true,
-  "eslint.autoFixOnSave":true,
+  "diagnostic.warningSign": "",
+  "eslint.autoFixOnSave": true,
   "eslint.format.enable": true,
-  "tsserver.enableJavascript": true,
-  "metals.statusBarEnabled": true,
-  "coc.preferences.formatOnSaveFiletypes": ["scala"],
-  "jest.watch": false,
   "git.enableGutters": false,
+  "javascript.autoClosingTags": true,
+  "jest.watch": false,
+  "metals.statusBarEnabled": true,
+  "tsserver.enableJavascript": true,
+  "typescript.autoClosingTags": true,
   "suggest.completionItemKindLabels": {
-    "keyword":  "\uf1de", //  sliders
+    "keyword": "\uf1de", //  sliders
     "variable": "\ue79b", //  isometric box
     "value": "\uf89f", //  digits 123
     "operator": "\u03a8", // Ψ greek letter psi
@@ -43,7 +45,5 @@
     "typeParameter": "\uf728", //  file presentation box
     "default": "\uf29c" //  question mark in circle
   },
-  "Lua.diagnostics.globals": [
-    "vim"
-  ]
+  "Lua.diagnostics.globals": ["vim"]
 }

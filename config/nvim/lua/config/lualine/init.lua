@@ -23,6 +23,7 @@ require('lualine').setup {
     lualine_x = {
       components.diagnostics,
       components.treesitter,
+      components.lsp,
       components.filetype
     },
     lualine_y = {},

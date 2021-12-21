@@ -49,6 +49,8 @@ end
 M.find_config_files = function()
   local config_dir = vim.env.HOME .. '/dev/dotfiles'
   telescope_builtin.find_files {
+    prompt_title = 'Dotfiles',
+    previewer = false,
     find_command = {
       'rg',
       '--files',

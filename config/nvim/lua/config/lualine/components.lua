@@ -35,6 +35,7 @@ return {
   filetype = {
     'filetype',
     color = {},
+    icon = nil,
     cond = nil,
   },
 
@@ -81,5 +82,11 @@ return {
     end,
     color = { fg = colors.green },
     cond = conditions.hide_in_width,
+  },
+
+  lsp = {
+    'g:coc_status',
+    icon = nil,
+    color = { gui = 'bold' }
   },
 }
