@@ -56,3 +56,14 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/fzf
 source $HOME/.zsh/gitauthor
 source $HOME/.secrets
+source /usr/local/bin/awsp_functions.sh
+
+alias awsall="_awsListProfile"
+alias awsp="_awsSetProfile"
+alias awswho="aws configure list"
+complete -W "$(cat $HOME/.aws/credentials | grep -Eo '\[.*\]' | tr -d '[]')" _awsSwitchProfile
+complete -W "$(cat $HOME/.aws/config | grep -Eo '\[.*\]' | tr -d '[]' | cut -d " " -f 2)" _awsSetProfile
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

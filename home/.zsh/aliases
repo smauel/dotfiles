@@ -69,6 +69,10 @@ alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
 alias dprune='docker system prune && docker volume prune'
 
+# kubernetes aliases
+alias k='kubectl'
+alias kp='kubectl get pods'
+
 # OS X has no `md5sum` or `sha1sum`, so setup fallbacks
 command -v md5sum > /dev/null || alias md5sum="md5"
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
@@ -99,14 +103,3 @@ function update-brews() {
   brew cask list > ~/dev/dotfiles/casks
   brew tap > ~/dev/dotfiles/taps
 }
-
-jdk() {
-   version=$1
-   export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-   java -version
- }
-
-# curalate aws workarounds
-alias crl8-qa-aws="export \$(aws sts assume-role --role-arn arn:aws:iam::176853725791:role/Engineer --role-session-name $(whoami) | jq '.Credentials' | jq -r '\"AWS_ACCESS_KEY_ID=\" + .AccessKeyId, \"AWS_SECRET_ACCESS_KEY=\" + .SecretAccessKey, \"AWS_SESSION_TOKEN=\" + .SessionToken')"
-alias crl8-prod-aws="export \$(aws sts assume-role --role-arn arn:aws:iam::492572841545:role/Engineer --role-session-name $(whoami) | jq '.Credentials' | jq -r '\"AWS_ACCESS_KEY_ID=\" + .AccessKeyId, \"AWS_SECRET_ACCESS_KEY=\" + .SecretAccessKey, \"AWS_SESSION_TOKEN=\" + .SessionToken')"
-alias unset-aws="unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN"

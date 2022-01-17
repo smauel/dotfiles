@@ -6,3 +6,4 @@ Brewfile.lock.json
 .metals
 metals.sbt
 .scalafmt.conf
+.vim/

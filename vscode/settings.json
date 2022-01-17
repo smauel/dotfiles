@@ -10,7 +10,8 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "soruce.fixAll.eslint": true
+    "soruce.fixAll.eslint": true,
+    "soruce.fixAll.tslint": true
   },
   "vim.autoindent": true,
   "vim.useSystemClipboard": true,
@@ -25,5 +26,6 @@
   },
   "files.insertFinalNewline": true,
   "editor.matchBrackets": "always",
-  "editor.parameterHints.enabled": false
+  "editor.parameterHints.enabled": false,
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
