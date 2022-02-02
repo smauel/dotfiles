@@ -27,5 +27,6 @@
   "files.insertFinalNewline": true,
   "editor.matchBrackets": "always",
   "editor.parameterHints.enabled": false,
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "bracketPairColorizer.depreciation-notice": false
 }

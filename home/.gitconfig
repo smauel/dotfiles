@@ -4,6 +4,9 @@
   # switch to a branch, creating it if necessary
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
+  # fuzzy add files
+  fa = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff $@ --color=always -- {-1}' | xargs -0 -t -o git add"
+
   # normal diff
   patch = !git --no-pager diff --no-color
 
@@ -98,7 +101,7 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
