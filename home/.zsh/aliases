@@ -28,6 +28,7 @@ alias uuid="uuidgen |tr '[:upper:]' '[:lower:]'"
 # git aliases
 alias g='git'
 alias ga='git add'
+alias gap='git add --patch'
 alias gall='git add .'
 alias gb='git branch'
 alias gbr='git branches'
