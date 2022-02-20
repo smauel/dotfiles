@@ -3,8 +3,8 @@ VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
 CONFIG_DIR := $(HOME)/.config
 AUTHORFILE := $(HOME)/.gitauthor
 BREW := $(BIN_DIR)/brew
-TMUX_RESURRECT := ~/dev/tmux-resurrect
-TMUX_CONTINUUM := ~/dev/tmux-continuum
+TMUX_RESURRECT := ~/src/tmux-resurrect
+TMUX_CONTINUUM := ~/src/tmux-continuum
 
 DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
 SCRIPTS := $(addprefix $(BIN_DIR)/,$(shell ls -A bin))
