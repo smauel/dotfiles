@@ -1,13 +1,11 @@
 # general aliases
-alias dotfiles="cd ${HOME}/dev/dotfiles"
+alias dotfiles="cd ${REPOS_DIR}/dotfiles"
 alias vim=nvim
-alias tmux='tmux -2'
 alias fv='vim $(fzf)'
 alias cc='clear'
 alias x='exit'
 alias rm='rm -i'
 alias grep='grep --color=auto'
-alias ping='prettyping --nolegend'
 
 # exa aliases
 alias ls='exa --group-directories-first --icons --color-scale'
@@ -22,8 +20,6 @@ alias lS='la --sort=size'
 alias lX='la --sort=extension'
 
 # useful aliases
-alias preview="fzf --border --layout reverse --preview 'bat --style=numbers --color=always {}' --preview-window down:85% --info inline"
-alias vp='vim $(preview)'
 alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
 alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
@@ -97,10 +93,3 @@ function extract() {
   esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
-
-# update list of installed brews and casks in dotfiles
-function update-brews() {
-  brew list > ~/dev/dotfiles/brews
-  brew cask list > ~/dev/dotfiles/casks
-  brew tap > ~/dev/dotfiles/taps
-}
