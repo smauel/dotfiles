@@ -98,18 +98,6 @@ return require('packer').startup({function(use)
     requires = { 'folke/which-key.nvim' }
   }
 
-  -- TODO: figure out how to use
-  use {
-    'pwntester/octo.nvim',
-    requires = {{ 'nvim-telescope/telescope.nvim' }, { 'kyazdani42/nvim-web-devicons' }},
-    config = function() require('config.octo') end
-  }
-
-   use {
-    'kdheepak/lazygit.nvim',
-    config = function() require('config.lazygit') end
-  }
-
   -- colorschemes
   use 'EdenEast/nightfox.nvim'
   use 'Yagua/nebulous.nvim'
