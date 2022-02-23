@@ -1,6 +1,6 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["scala", "json"],
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.errorSign": "",
   "diagnostic.hintSign": "",
