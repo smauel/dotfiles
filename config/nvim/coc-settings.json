@@ -45,5 +45,8 @@
     "typeParameter": "\uf728", //  file presentation box
     "default": "\uf29c" //  question mark in circle
   },
-  "Lua.diagnostics.globals": ["vim"]
+  "Lua.diagnostics.globals": [
+    "vim"
+  ],
+  "Lua.telemetry.enable": false
 }
