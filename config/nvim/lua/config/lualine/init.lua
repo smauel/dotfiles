@@ -18,15 +18,14 @@ require('lualine').setup {
       components.filename
     },
     lualine_c = {
-      components.diff
+      components.diagnostics,
     },
     lualine_x = {
-      components.diagnostics,
-      components.treesitter,
-      components.lsp,
+      components.diff
+    },
+    lualine_y = {
       components.filetype
     },
-    lualine_y = {},
     lualine_z = {
       components.progress
     }
