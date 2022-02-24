@@ -29,6 +29,12 @@ null_ls.setup({
 	end,
 })
 
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 local filetype_attach = setmetatable({}, {
 	__index = function()
 		return function() end
