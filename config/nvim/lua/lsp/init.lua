@@ -13,15 +13,20 @@ local status = require("lsp.status")
 status.activate()
 
 local null_ls = require("null-ls")
-local sources = { null_ls.builtins.formatting.stylua }
+local sources = {
+	null_ls.builtins.formatting.stylua,
+	null_ls.builtins.formatting.eslint_d,
+	null_ls.builtins.formatting.prettier,
+}
 null_ls.setup({
 	sources = sources,
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
+			print("in formatting")
 			vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
             augroup END
             ]])
 		end
@@ -98,17 +103,17 @@ local servers = {
 	vimls = true,
 	yamlls = true,
 	eslint = true,
-	-- tsserver = {
-	--   cmd = { "typescript-language-server", "--stdio" },
-	--   filetypes = {
-	--     "javascript",
-	--     "javascriptreact",
-	--     "javascript.jsx",
-	--     "typescript",
-	--     "typescriptreact",
-	--     "typescript.tsx",
-	--   },
-	-- },
+	tsserver = {
+		cmd = { "typescript-language-server", "--stdio" },
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+		},
+	},
 	sumneko_lua = {
 		settings = {
 			Lua = {
