@@ -18,7 +18,6 @@ null_ls.setup({
 	sources = sources,
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
-			print("formatting enabled")
 			vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
@@ -56,6 +55,8 @@ local custom_attach = function(client)
 	m.nnoremap("gD", vim.lsp.buf.declaration, "silent", "Go to declaration")
 	m.nnoremap("gi", ts.lsp_implementations, "silent", "Go to implementation")
 	m.nnoremap("gI", handlers.implementation, "silent", "Go to implementation")
+	m.nnoremap("gn", ":lua vim.diagnostic.goto_next()<CR>", "silent", "Go to next diagnostic")
+	m.nnoremap("gp", ":lua vim.diagnostic.goto_prev()<CR>", "silent", "Go to previous diagnostic")
 	m.nnoremap("gr", ts.lsp_references, "silent", "References")
 	m.nnoremap("gs", vim.lsp.buf.signature_help, "silent", "Signature help")
 	m.nnoremap("<space>a", ts.lsp_code_actions, "silent", "References")
