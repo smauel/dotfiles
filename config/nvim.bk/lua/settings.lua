@@ -2,29 +2,29 @@ local o = vim.o
 local g = vim.g
 
 -- mapleader
-g.mapleader = ","
+g.mapleader = ','
 
 -- colors
-o.guifont = "SpaceMonoNerdFontCompleteM-Regular:h15"
+o.guifont = 'SpaceMonoNerdFontCompleteM-Regular:h15'
 o.termguicolors = true
-o.background = "dark"
+o.background = 'dark'
 
 -- colorscheme
 g.everforest_enable_italic = 1
-g.everforest_background = "hard"
+g.everforest_background = 'hard'
 g.gruvbox_material_enable_italic = 1
-g.gruvbox_material_background = "soft"
+g.gruvbox_material_background = 'soft'
 g.edge_enable_italic = 1
-g.edge_style = "aura"
+g.edge_style = 'aura'
 g.sonokai_enable_italic = 1
-g.sonokai_style = "andromeda"
+g.sonokai_style = 'andromeda'
 g.nord_contrast = true
 g.nord_borders = true
-vim.cmd("colorscheme gruvbox")
+require('nord').set()
 
 -- general
 o.hidden = true
-o.clipboard = "unnamed"
+o.clipboard = 'unnamed'
 o.binary = true
 o.eol = false
 o.modeline = true
@@ -33,10 +33,13 @@ o.cmdheight = 1
 o.lazyredraw = true
 o.showmode = false
 o.updatetime = 300
-o.shortmess = o.shortmess .. "c"
+o.shortmess = o.shortmess .. 'c'
 o.scrolloff = 3
-o.encoding = "utf-8"
-o.list = false
+o.encoding = 'utf-8'
+o.list = true
+vim.opt.listchars = {
+  eol = "↴",
+}
 
 -- backup and swap
 o.swapfile = false
@@ -52,7 +55,7 @@ o.smartindent = true
 o.smarttab = true
 o.joinspaces = false
 o.autoindent = true
-o.formatoptions = o.formatoptions .. "j"
+o.formatoptions= o.formatoptions .. 'j'
 
 -- search
 o.showmatch = true
@@ -70,7 +73,7 @@ o.cursorline = true
 o.visualbell = false
 o.errorbells = false
 o.conceallevel = 0
-o.signcolumn = "number" -- merge signcolumn and number column into one
+o.signcolumn = 'number' -- merge signcolumn and number column into one
 
 -- splits
 o.splitbelow = true
