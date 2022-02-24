@@ -1,5 +1,6 @@
 local conditions = require("config.lualine.conditions")
 local colors = require("config.lualine.colors")
+local nvim_status = require("lsp-status")
 
 local function diff_source()
 	local gitsigns = vim.b.gitsigns_status_dict
@@ -60,7 +61,7 @@ return {
 
 	diagnostics = {
 		"diagnostics",
-		sources = { "coc" },
+		sources = { "nvim_lsp", "nvim_diagnostic" },
 		sections = { "error", "warn", "info", "hint" },
 		symbols = { error = " ", warn = " ", info = " ", hint = " " },
 		diagnostics_color = {
@@ -85,7 +86,10 @@ return {
 	},
 
 	lsp = {
-		"g:coc_status",
+		function()
+			local b = nvim_status.status()
+			return b
+		end,
 		icon = nil,
 		color = { gui = "bold" },
 	},
