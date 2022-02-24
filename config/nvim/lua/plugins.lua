@@ -18,6 +18,7 @@ return require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
 		use("editorconfig/editorconfig-vim")
+		use("tpope/vim-surround")
 
 		use({
 			"kyazdani42/nvim-tree.lua",
@@ -97,6 +98,17 @@ return require("packer").startup({
 		use({
 			"L3MON4D3/LuaSnip",
 		})
+
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("config.autopairs")
+			end,
+		})
+
+		use("alvan/vim-closetag")
+
+		use("mattn/emmet-vim")
 
 		-- colorschemes
 		use("ellisonleao/gruvbox.nvim")
