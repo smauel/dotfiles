@@ -4,6 +4,7 @@ if not has_lsp then
 end
 
 local nvim_status = require("lsp-status")
+local null_ls = require("null-ls")
 local m = require("mapx").setup({ global = "force", whichkey = true })
 
 local ts = require("config.telescope")
@@ -12,38 +13,11 @@ local handlers = require("lsp.handlers")
 local status = require("lsp.status")
 status.activate()
 
-local null_ls = require("null-ls")
-local sources = {
-	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.eslint_d,
-	null_ls.builtins.formatting.prettier,
-}
-null_ls.setup({
-	sources = sources,
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			print("in formatting")
-			vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
-            augroup END
-            ]])
-		end
-	end,
-})
-
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
-local filetype_attach = setmetatable({}, {
-	__index = function()
-		return function() end
-	end,
-})
 
 local custom_init = function(client)
 	client.config.flags = client.config.flags or {}
@@ -51,8 +25,9 @@ local custom_init = function(client)
 end
 
 local custom_attach = function(client)
-	local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-
+	if client.name == "tsserver" then
+		client.resolved_capabilities.document_formatting = false
+	end
 	nvim_status.on_attach(client)
 
 	m.nnoremap("K", vim.lsp.buf.hover, "silent", "Docs")
@@ -89,9 +64,23 @@ local custom_attach = function(client)
     ]])
 	end
 
-	-- Attach any filetype specific options to the client
-	filetype_attach[filetype](client)
+	if client.resolved_capabilities.document_formatting then
+		vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])
+	end
 end
+
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.eslint_d,
+	},
+	on_attach = custom_attach,
+})
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
