@@ -117,4 +117,8 @@ M.lsp_code_actions = function()
 	telescope_builtin.lsp_code_actions(opts)
 end
 
+M.git_status = function()
+	telescope_builtin.git_status()
+end
+
 return M
