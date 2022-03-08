@@ -1,9 +1,9 @@
 local conditions = require("config.lualine.conditions")
 local colors = require("config.lualine.colors")
-local nvim_status = require("lsp-status")
+
 
 local function diff_source()
-	local gitsigns = vim.b.gitsigns_status_dict
+  local gitsigns = vim.b.gitsigns_status_dict
 	if gitsigns then
 		return {
 			added = gitsigns.added,
@@ -35,7 +35,6 @@ return {
 
 	filetype = {
 		"filetype",
-		color = {},
 		icon = nil,
 		cond = nil,
 	},
@@ -55,23 +54,22 @@ return {
 			modified = { fg = colors.yellow },
 			removed = { fg = colors.red },
 		},
-		color = {},
 		cond = nil,
 	},
 
-	diagnostics = {
-		"diagnostics",
-		sources = { "nvim_lsp", "nvim_diagnostic" },
-		sections = { "error", "warn", "info", "hint" },
-		symbols = { error = " ", warn = " ", info = " ", hint = " " },
-		diagnostics_color = {
-			error = { fg = colors.red },
-			warn = { fg = colors.orange },
-			info = { fg = colors.yellow },
-			hint = { fg = colors.blue },
-		},
-		colored = true,
-	},
+  diagnostics = {
+    'diagnostics',
+    sources = {'coc'},
+    sections = {'error', 'warn', 'info', 'hint'},
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '},
+    diagnostics_color = {
+      error = { fg = colors.red },
+      warn = { fg = colors.orange },
+      info = { fg = colors.yellow },
+      hint = { fg = colors.blue },
+    },
+    colored = true,
+  },
 
 	treesitter = {
 		function()
@@ -86,10 +84,7 @@ return {
 	},
 
 	lsp = {
-		function()
-			local b = nvim_status.status()
-			return b
-		end,
+    'g:coc_status',
 		icon = nil,
 		color = { gui = "bold" },
 	},

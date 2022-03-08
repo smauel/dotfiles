@@ -19,7 +19,7 @@ require("lualine").setup({
 			components.filename,
 		},
 		lualine_c = {
-			components.lsp,
+			components.diagnostics,
 		},
 		lualine_x = {
 			components.diff,

@@ -46,6 +46,7 @@ return require("packer").startup({
 			requires = {
 				{ "nvim-lua/plenary.nvim" },
 				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        { 'fannheyward/telescope-coc.nvim' },
 			},
 			config = function()
 				require("config.telescope")
@@ -69,34 +70,12 @@ return require("packer").startup({
 		})
 
 		use({
-			"neovim/nvim-lspconfig",
-			requires = {
-				{ "nvim-lua/lsp-status.nvim" },
-				{ "jose-elias-alvarez/null-ls.nvim" },
-			},
+			"neoclide/coc.nvim",
+			branch = "release",
+			requires = { "honza/vim-snippets", opt = true },
 			config = function()
-				require("lsp")
+				require("config.coc")
 			end,
-		})
-
-		use({
-			"hrsh7th/nvim-cmp",
-			requires = {
-				{ "hrsh7th/cmp-buffer" },
-				{ "hrsh7th/cmp-path" },
-				{ "hrsh7th/cmp-nvim-lua" },
-				{ "hrsh7th/cmp-nvim-lsp" },
-				{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
-				{ "onsails/lspkind-nvim" },
-				{ "saadparwaiz1/cmp_luasnip" },
-			},
-			config = function()
-				require("config.cmp")
-			end,
-		})
-
-		use({
-			"L3MON4D3/LuaSnip",
 		})
 
 		use({

@@ -16,6 +16,29 @@ m.nnoremap("<leader>r", ts.live_grep, "silent", "Telescope Grep")
 m.nnoremap("<leader>v", ts.find_config_files, "silent", "Telescope Config Files")
 m.nnoremap("<leader>z", ts.colorscheme, "silent", "Telescope Colorschemes")
 
+-- goto bindings
+m.nname('g', 'Goto bindings')
+m.nmap('gd', ':<C-u>Telescope coc definitions<cr>', 'silent', 'Goto Definition')
+m.nmap('gi', ':<C-u>Telescope coc implementations<cr>', 'silent', 'Goto Implementation')
+m.nmap('gr', ':<C-u>Telescope coc references<cr>', 'silent', 'Goto References')
+
+-- coc bindings
+m.nname('<space>', 'Coc')
+m.nnoremap('<space>a', ':<C-u>Telescope coc file_code_actions<cr>', 'silent', 'Coc Code Actions')
+m.nnoremap('<space>c', ':<C-u>Telescope coc commands<cr>', 'silent', 'Coc Commands')
+m.nnoremap('<space>d', ':<C-u>Telescope coc diagnostics<cr>', 'silent', 'Coc Diagnostics')
+m.nnoremap('<space>e', ':<C-u>CocList extensions<cr>', 'silent', 'Coc Extensions')
+m.nnoremap('<space>o', ':<C-u>Telescope coc document_symbols<cr>', 'silent', 'Coc Outline')
+
+-- unimpaired enhanced bindings
+m.nnoremap(']a', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
+m.nnoremap('[a', '<Plug>(coc-diagnostic-prev)', 'silent', 'Goto Prev Diagnostic')
+m.nnoremap('][a', ':CocList diagnostics<cr>', 'silent', 'Open Diagnostics List')
+m.nnoremap('][q', ':copen<cr>', 'silent', 'Open Quickfix List')
+m.nnoremap('[]q', ':cclose<cr>', 'silent', 'Close Quickfix List')
+m.nnoremap('][l', ':lopen<cr>', 'silent', 'Open Location List')
+m.nnoremap('[]l', ':lclose<cr>', 'silent', 'Close Location List')
+
 -- split bindings
 m.nnoremap("<C-J>", "<C-W><C-J>")
 m.nnoremap("<C-K>", "<C-W><C-K>")
