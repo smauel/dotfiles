@@ -25,7 +25,7 @@
 
   editor = nvim
 
-  excludesfile = /Users/sam.morrison/.gitignore
+	excludesfile = /Users/smauel/.gitignore
 
   pager = diff-so-fancy | less --tabs=4 -RFX
 
@@ -35,7 +35,7 @@
 
 [commit]
 
-  template = ~/.gitcommit
+	template = ~/.gitcommit
 
 [credential]
 
@@ -109,5 +109,10 @@
 
 [interactive]
   diffFilter = diff-so-fancy --patch
+
 [init]
 	defaultBranch = main
+
+[user]
+	name = Sam Morrison
+	email = sam.morrison@ef.com
