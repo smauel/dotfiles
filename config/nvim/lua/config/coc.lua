@@ -8,11 +8,14 @@ end
 -- coc extensions
 g.coc_global_extensions = {
 	"coc-actions",
+  "coc-angular",
 	"coc-css",
 	"coc-docker",
 	"coc-eslint",
 	"coc-git",
 	"coc-gitignore",
+  "coc-go",
+  "coc-graphql",
 	"coc-highlight",
 	"coc-html",
 	"coc-java",
@@ -27,7 +30,10 @@ g.coc_global_extensions = {
 	"coc-sh",
 	"coc-snippets",
 	"coc-sumneko-lua",
+  "coc-sql",
+  "coc-swagger",
 	"coc-tsserver",
+  "coc-vetur",
 	"coc-yaml",
 }
 
