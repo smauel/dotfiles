@@ -1,0 +1,18 @@
+format = """$all"""
+right_format="""$nodejs $golang"""
+add_newline = true
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+[golang]
+symbol = " "
+format = "[$symbol($version)](bold blue)"
+
+[nodejs]
+symbol = " "
+format = "[$symbol($version)](bold green)"
+
+
+
