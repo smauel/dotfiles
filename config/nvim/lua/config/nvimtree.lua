@@ -1,6 +1,5 @@
 require("nvim-tree").setup({
 	disable_netrw = false,
-	auto_close = true,
 	git = {
 		ignore = true,
 	},
@@ -10,3 +9,8 @@ require("nvim-tree").setup({
 		},
 	},
 })
+
+-- autoclose tab/vim when nvimtree is the last window in the tab
+vim.api.nvim_command([[
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
