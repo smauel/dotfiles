@@ -57,6 +57,7 @@ alias gCB='git branch | egrep -v "(master|develop|main|\*)" | xargs git branch -
 # docker aliases
 alias d='docker'
 alias dc='docker-compose'
+alias dcl='docker-compose -f docker-compose.local.yml'
 alias dupapi='docker-compose up -d api'
 alias dlogs='docker-compose logs -f'
 alias dps='docker ps'

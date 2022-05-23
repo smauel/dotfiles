@@ -47,6 +47,7 @@ return require("packer").startup({
 				{ "nvim-lua/plenary.nvim" },
 				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { 'fannheyward/telescope-coc.nvim' },
+        { 'LinArcX/telescope-env.nvim'}
 			},
 			config = function()
 				require("config.telescope")
