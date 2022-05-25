@@ -16,21 +16,18 @@ setopt AUTO_PARAM_SLASH        # tab completing directory appends a slash
 setopt SHARE_HISTORY           # share history across shells
 
 #
-# fzf
-#
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#
 # fasd
 #
 eval "$(fasd --init auto)"
 
 #
-# nvm
+# asdf
 #
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# TODO: write script to init asdf on clean install
+#   - install plugins if not installed
+#   - install versions specified in .tool-versions
+source /usr/local/opt/asdf/libexec/asdf.sh
+source ~/.asdf/plugins/java/set-java-home.zsh
 
 #
 # starship

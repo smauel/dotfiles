@@ -1,0 +1,13 @@
+kubectl 1.23.6
+nodejs 16.15.0
+golang 1.18.1
+awscli 2.7.2
+java adoptopenjdk-11.0.15+10
+neovim 0.7.0
+starship 1.6.3
+tmux 3.2a
+ripgrep 13.0.0
+fzf 0.30.0
+fd 8.3.2
+exa 0.10.1
+jq 1.6
