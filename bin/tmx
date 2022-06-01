@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# tmx - a tmux session manager
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  echo "Select repo:"
+  selected=$(find ~/src -mindepth 1 -maxdepth 1 -type d | fzf --height 40%)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0;
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# if we have selected ef-studio - decide which git worktree to use
+if [[ "$selected_name" == "ef-studio" ]]; then
+  echo "Select branch:"
+  branch_name=$(find ~/src/ef-studio -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | tr . _ | fzf --height 40%)
+  selected="$selected/$branch_name"
+fi
+
+if [[ -z $branch_name ]]; then
+  session_name=$selected_name
+else
+  session_name="$selected_name($branch_name)"
+fi
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s $session_name -c $selected
+  exit 0
+fi
+
+if ! tmux has-session -t $session_name 2> /dev/null; then
+  tmux new-session -ds $session_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+  tmux attach-session -t $session_name
+else
+  tmux switch-client -t $session_name
+fi
