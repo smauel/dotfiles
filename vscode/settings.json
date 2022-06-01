@@ -28,5 +28,6 @@
   "editor.matchBrackets": "always",
   "editor.parameterHints.enabled": false,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "bracketPairColorizer.depreciation-notice": false
+  "bracketPairColorizer.depreciation-notice": false,
+  "redhat.telemetry.enabled": false
 }
