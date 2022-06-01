@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# tmx-editor - utility script to start the editor backend in tmux windows in the current session
+
+# TODO: warn if there is something already running on port 8080
+# TODO: warn if there are editor docker containers are already running
+# TODO: if there is something running...restarts would be cool
+
+# first build the shared lib as a dependency and block until this has finished
+tmux neww -c $(pwd)/shared/typescript/catalyst "npm install; tmux wait-for -S build-finished"
+tmux wait-for build-finished
+
+# start the backend in a new window
+tmux new-window -d -n editor-be -c $(pwd)/backend/node/catalyst
+tmux send-keys -t editor-be.top "yarn && yarn dev" Enter
+
+# start the frontend in a new window
+tmux new-window -d -n editor-fe -c $(pwd)/frontend/vue/catalyst/editor-frontend
+tmux send-keys -t editor-fe.top "npm install && npm run schemagen && npm run serve" Enter
