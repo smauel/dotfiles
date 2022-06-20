@@ -30,6 +30,7 @@ m.nnoremap('<space>c', ':<C-u>Telescope coc commands<cr>', 'silent', 'Coc Comman
 m.nnoremap('<space>d', ':<C-u>Telescope coc diagnostics<cr>', 'silent', 'Coc Diagnostics')
 m.nnoremap('<space>e', ':<C-u>CocList extensions<cr>', 'silent', 'Coc Extensions')
 m.nnoremap('<space>o', ':<C-u>Telescope coc document_symbols<cr>', 'silent', 'Coc Outline')
+m.nnoremap('<space>r', '<Plug>(coc-rename)', 'silent', 'Coc Rename')
 
 -- unimpaired enhanced bindings
 m.nnoremap(']a', '<Plug>(coc-diagnostic-next)', 'silent', 'Goto Next Diagnostic')
