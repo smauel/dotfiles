@@ -1,10 +1,10 @@
 {
-  "workbench.colorTheme": "Dracula",
+  "workbench.colorTheme": "Community Material Theme Palenight",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
-  "editor.fontSize": 22,
-  "editor.fontFamily": "'RobotoMono Nerd Font'",
-  "debug.console.fontFamily": "'RobotoMono Nerd Font'",
+  "editor.fontSize": 16,
+  "editor.fontFamily": "'JetBrainsMono Nerd Font'",
+  "debug.console.fontFamily": "'JetBrainsMono Nerd Font'",
   "debug.console.fontSize": 16,
   "terminal.integrated.fontSize": 16,
   "editor.formatOnSave": true,
@@ -29,5 +29,7 @@
   "editor.parameterHints.enabled": false,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "bracketPairColorizer.depreciation-notice": false,
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "explorer.confirmDelete": false,
+  "window.zoomLevel": 2
 }

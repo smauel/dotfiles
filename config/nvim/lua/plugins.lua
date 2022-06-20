@@ -92,6 +92,7 @@ return require("packer").startup({
 
 		-- colorschemes
 		use("ellisonleao/gruvbox.nvim")
+    use("marko-cerovac/material.nvim")
 	end,
 	config = {
 		display = {

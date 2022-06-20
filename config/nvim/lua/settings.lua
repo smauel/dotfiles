@@ -20,7 +20,8 @@ g.sonokai_enable_italic = 1
 g.sonokai_style = "andromeda"
 g.nord_contrast = true
 g.nord_borders = true
-vim.cmd("colorscheme gruvbox")
+g.material_style = "palenight"
+vim.cmd("colorscheme material")
 
 -- general
 o.hidden = true
