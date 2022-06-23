@@ -5,7 +5,7 @@ local g = vim.g
 g.mapleader = ","
 
 -- colors
-o.guifont = "SpaceMonoNerdFontCompleteM-Regular:h15"
+o.guifont = "JetbrainsMonoNerdFontCompleteM-Regular:h15"
 o.termguicolors = true
 o.background = "dark"
 

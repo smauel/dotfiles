@@ -3,8 +3,6 @@ VSCODE_DIR := $(HOME)/Library/Application\ Support/Code/User
 CONFIG_DIR := $(HOME)/.config
 AUTHORFILE := $(HOME)/.gitauthor
 BREW := $(BIN_DIR)/brew
-TMUX_RESURRECT := ~/src/tmux-resurrect
-TMUX_CONTINUUM := ~/src/tmux-continuum
 
 DOTFILES := $(addprefix $(HOME)/,$(shell ls -A home))
 SCRIPTS := $(addprefix $(BIN_DIR)/,$(shell ls -A bin))
@@ -53,17 +51,9 @@ vscode: | $(VSCODES)
 	  code --install-extension $${EXTENSION} --force; \
 	done < $(PWD)/vscode/extensions.txt;
 
-$(DOTFILES): $(TMUX_CONTINUUM) $(TMUX_RESURRECT)
+$(DOTFILES):
 	@echo "- $(notdir $@)"
 	@ln -sfn "$(PWD)/home/$(notdir $@)" $@
-
-$(TMUX_CONTINUUM):
-	@echo "cloning tmux-continuum"
-	git clone https://github.com/tmux-plugins/tmux-continuum.git $(TMUX_CONTINUUM)
-
-$(TMUX_RESURRECT):
-	@echo "cloning tmux-resurrect"
-	git clone https://github.com/tmux-plugins/tmux-resurrect.git $(TMUX_RESURRECT)
 
 $(SCRIPTS):
 	@echo "- $(notdir $@)"
