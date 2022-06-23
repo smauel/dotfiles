@@ -21,15 +21,6 @@ setopt SHARE_HISTORY           # share history across shells
 eval "$(fasd --init auto)"
 
 #
-# asdf
-#
-# TODO: write script to init asdf on clean install
-#   - install plugins if not installed
-#   - install versions specified in .tool-versions
-source /usr/local/opt/asdf/libexec/asdf.sh
-source ~/.asdf/plugins/java/set-java-home.zsh
-
-#
 # starship
 #
 eval "$(starship init zsh)"
@@ -43,3 +34,14 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/fzf
 source $HOME/.zsh/gitauthor
 source $HOME/.secrets
+
+#
+# asdf
+#
+# MUST come after $PATH has been set
+#
+# TODO: write script to init asdf on clean install
+#   - install plugins if not installed
+#   - install versions specified in .tool-versions
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
+
