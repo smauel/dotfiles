@@ -1,25 +1,5 @@
 export PAGER=less
 
-if which nvim &> /dev/null; then
-  export EDITOR=$(which nvim)
-else
-  export EDITOR=vim
-fi
-
-case "$(uname)" in
-  Darwin*)
-    if [ -x /usr/libexec/java_home ]; then
-      if /usr/libexec/java_home &> /dev/null; then
-        if /usr/libexec/java_home -v1.8.0 &> /dev/null; then
-          export JAVA_HOME=$(/usr/libexec/java_home -v1.8.0)
-        else
-          export JAVA_HOME=$(/usr/libexec/java_home)
-        fi
-      fi
-    fi
-    ;;
-esac
-
 # filename (if known), line number if known, falling back to percent if known,
 # falling back to byte offset, falling back to dash
 export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
@@ -40,6 +20,8 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;38;5;111m'
 
-# repos
-export REPOS_DIR=~/src
-
+if which nvim &> /dev/null; then
+  export EDITOR=$(which nvim)
+else
+  export EDITOR=vim
+fi

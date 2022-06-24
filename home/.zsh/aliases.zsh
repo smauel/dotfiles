@@ -26,43 +26,13 @@ alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a
 alias uuid="uuidgen |tr '[:upper:]' '[:lower:]'"
 
 # git aliases
-alias g='git'
-alias ga='git add'
 alias gap='git add --patch'
-alias gall='git add .'
-alias gb='git branch'
-alias gbr='git branches'
-alias gc='git commit -v'
-alias gcd='git co develop'
-alias gcm='git co master'
-alias gco='git checkout'
-alias gd='tmux neww -n diff bash -c "git diff"'
-alias gfa='git fa'
-alias gdc='tmux neww -n "diff --cached" bash -c "git diff --cached"'
-alias ggo='git go'
-alias gl='git log --pretty=oneline -n 5 --graph --abbrev-commit'
-alias glo='tmux neww -n "git log" bash -c "git log"'
-alias gp='git pull'
-alias gpo='git push origin'
-alias gpr='git push origin && open-pr'
-alias gr='git remotes'
 alias gs='git status -s'
-alias gt='git tags'
-alias gu='git reset --soft HEAD~1'
-alias gw='git whatchanged'
-# delete all branches other than important ones and the one I'm in
-# CAPS by choice as this is a pretty devastating command
-alias gCB='git branch | egrep -v "(master|develop|main|\*)" | xargs git branch -D'
+alias gd='git diff'
 
 # docker aliases
-alias d='docker'
 alias dc='docker-compose'
 alias dcl='docker-compose -f docker-compose.local.yml'
-alias dupapi='docker-compose up -d api'
-alias dlogs='docker-compose logs -f'
-alias dps='docker ps'
-alias dpa='docker ps --all'
-alias di='docker images'
 alias drm='docker rm $(docker ps -aq)'
 alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
@@ -70,7 +40,6 @@ alias dprune='docker system prune && docker volume prune'
 
 # kubernetes aliases
 alias k='kubectl'
-alias kp='kubectl get pods'
 
 # OS X has no `md5sum` or `sha1sum`, so setup fallbacks
 command -v md5sum > /dev/null || alias md5sum="md5"

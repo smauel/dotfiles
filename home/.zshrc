@@ -28,12 +28,12 @@ eval "$(starship init zsh)"
 #
 # Source other configuration
 #
-source $HOME/.zsh/exports
-source $HOME/.zsh/path
-source $HOME/.zsh/aliases
-source $HOME/.zsh/fzf
-source $HOME/.zsh/gitauthor
-source $HOME/.secrets
+source $HOME/.zsh/exports.zsh
+source $HOME/.zsh/path.zsh
+source $HOME/.zsh/aliases.zsh
+source $HOME/.zsh/fzf.zsh
+source $HOME/.zsh/gitauthor.zsh
+source $HOME/.secrets.zsh
 
 #
 # asdf
