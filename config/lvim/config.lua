@@ -13,6 +13,8 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "kanagawa"
 vim.o.guifont = "JetBrainsMono Nerd Font:h16"
+vim.g.ultest_summary_width = 30
+vim.g.ultest_deprecation_notice = 0
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
