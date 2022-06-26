@@ -28,3 +28,4 @@ tags
 # nvim packer
 config/nvim/plugin/packer_compiled.lua
 .luarc.json
+packer_compiled.lua

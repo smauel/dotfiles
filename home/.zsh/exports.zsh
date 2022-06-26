@@ -25,3 +25,5 @@ if which nvim &> /dev/null; then
 else
   export EDITOR=vim
 fi
+
+export REPOS_DIR=${HOME}/src
