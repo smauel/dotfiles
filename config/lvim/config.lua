@@ -162,6 +162,30 @@ lvim.plugins = {
     end,
   },
   {
+    "kristijanhusak/vim-dadbod-completion",
+  },
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    cmd = {
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUI",
+      "DBUIFindBuffer",
+      "DBUIRenameBuffer",
+    },
+    setup = function()
+      vim.g.db_ui_use_nerd_fonts = 1
+      vim.g.db_ui_show_database_icon = 1
+    end,
+    requires = {
+      {
+        "tpope/vim-dadbod",
+        opt = true,
+      },
+    },
+    opt = true,
+  },
+  {
     "rcarriga/vim-ultest",
     cmd = { "Ultest", "UltestSummary", "UltestNearest" },
     wants = "vim-test",
