@@ -45,14 +45,20 @@ lvim.builtin.telescope.defaults.mappings = {
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
+lvim.builtin.which_key.mappings["x"] = {
   name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  x = { "<cmd>TroubleToggle<cr>", "trouble" },
   w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
   d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Tests",
+  t = { "<cmd>Ultest<cr>", "run all in file" },
+  n = { "<cmd>UltestNearest<cr>", "run nearest" },
+  s = { "<cmd>UltestSummary<cr>", "summary" },
 }
 lvim.builtin.which_key.mappings["l"]["s"] = { "<cmd>SymbolsOutline<cr>", "Document symbols" }
 
@@ -154,6 +160,15 @@ lvim.plugins = {
         }
       })
     end,
+  },
+  {
+    "rcarriga/vim-ultest",
+    cmd = { "Ultest", "UltestSummary", "UltestNearest" },
+    wants = "vim-test",
+    requires = { "vim-test/vim-test" },
+    run = ":UpdateRemotePlugins",
+    opt = true,
+    event = { "BufEnter *_test.*,*_spec.*,*est_*.*" },
   },
 }
 
