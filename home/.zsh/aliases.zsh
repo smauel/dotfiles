@@ -1,6 +1,7 @@
 # general aliases
 alias dotfiles="cd ${REPOS_DIR}/dotfiles"
 alias vim=lvim
+alias gvim='nvim-gui'
 alias fv='vim $(fzf)'
 alias cc='clear'
 alias x='exit'
