@@ -179,6 +179,12 @@ lvim.builtin.which_key.mappings = {
     },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },
+  t = {
+    name = " 🧪 Tests",
+    t = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run all in file" },
+    n = { function() require("neotest").run.run() end, "Run nearest" },
+    s = { function() require("neotest").summary.toggle() end, "Summary" },
+  },
   u = {
     name = " 🚀 Update",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -370,6 +376,26 @@ lvim.plugins = {
     "JoosepAlviste/nvim-ts-context-commentstring",
     event = "BufRead",
   },
+  {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-go"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-go"),
+          require("neotest-jest"),
+          require("neotest-plenary"),
+        },
+      })
+    end
+  }
 }
 
 -- autocmds
