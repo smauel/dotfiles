@@ -24,6 +24,17 @@ local function telescope_live_grep(_)
   require("lvim.core.nvimtree").start_telescope "live_grep"
 end
 
+local function telescope_quick_open()
+  local opts = require("telescope.themes").get_dropdown({
+    prompt_title = "Open...",
+    winblend = 10,
+    width = 0.5,
+    previewer = false,
+    results_height = 15,
+  })
+  require("telescope.builtin").fd(opts)
+end
+
 lvim.builtin.nvimtree.setup.view.mappings.list = {
   { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
   { key = "h", action = "close_node" },
@@ -90,7 +101,8 @@ lvim.builtin.which_key.mappings = {
   ["h"] = { "<cmd>nohlsearch<CR>", "🔦 Toggle Highlight" },
   ["k"] = { "<cmd>NvimTreeFocus<CR>", "🎯 Find in Explorer" },
   ["l"] = { "<cmd>NvimTreeToggle<CR>", "📁 Explorer" },
-  ["p"] = { "<cmd>Telescope find_files<cr>", "Find File" },
+  -- ["p"] = { "<cmd>Telescope find_files previewer=false results_height=15<cr>", "Find File" },
+  ["p"] = { telescope_quick_open, "⏩ Quick Open" },
   ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "😿 Quit" },
   ["w"] = { "<cmd>w!<CR>", "💾 Save" },
   b = {
@@ -116,47 +128,6 @@ lvim.builtin.which_key.mappings = {
       "<cmd>BufferLineSortByExtension<cr>",
       "Sort by language",
     },
-  },
-  c = {
-    name = "🪛 Code",
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
-    e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
-    f = { require("lvim.lsp.utils").format, "Format" },
-    i = { "<cmd>LspInfo<cr>", "Info" },
-    j = {
-      vim.diagnostic.goto_next,
-      "Next Diagnostic",
-    },
-    k = {
-      vim.diagnostic.goto_prev,
-      "Prev Diagnostic",
-    },
-    l = { vim.lsp.codelens.run, "CodeLens Action" },
-    p = {
-      name = "Peek",
-      d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", "Definition" },
-      t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
-      i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
-    },
-    q = { vim.diagnostic.setloclist, "Quickfix" },
-    r = { vim.lsp.buf.rename, "Rename" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-      "Workspace Symbols",
-    },
-  },
-  d = {
-    name = "🔬 Diagnostics",
-    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    r = { "<cmd>Trouble lsp_references<cr>", "References" },
-    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
   },
   f = {
     name = "🔍 Find",
@@ -189,10 +160,7 @@ lvim.builtin.which_key.mappings = {
     name = "😺 Git",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Git Diff",
-    },
+    d = { "<cmd>DiffviewOpen<cr>", "Open Diff" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -204,6 +172,7 @@ lvim.builtin.which_key.mappings = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
     },
+    x = { "<cmd>DiffviewClose<cr>", "Close Diff" },
     C = {
       "<cmd>Telescope git_bcommits<cr>",
       "Checkout commit(for current file)",
@@ -211,13 +180,33 @@ lvim.builtin.which_key.mappings = {
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },
   u = {
-    name = " 🚀Update",
+    name = " 🚀 Update",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
     i = { "<cmd>PackerInstall<cr>", "Install" },
     r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
     s = { "<cmd>PackerSync<cr>", "Sync" },
     u = { "<cmd>PackerUpdate<cr>", "Update Packer" },
     S = { "<cmd>PackerStatus<cr>", "Status" },
+  },
+  x = {
+    name = " 🪛 Code",
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    i = { "<cmd>LspInfo<cr>", "Info" },
+    j = { vim.diagnostic.goto_next, "Next Diagnostic" },
+    k = { vim.diagnostic.goto_prev, "Prev Diagnostic" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    p = {
+      name = "Peek",
+      d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", "Definition" },
+      t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
+      i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
+    },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
   },
 }
 
@@ -354,6 +343,32 @@ lvim.plugins = {
         }
       })
     end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+    config = function()
+      require("diffview").setup({
+        file_panel = {
+          listing_style = "list",
+          win_config = {
+            type = "split",
+            position = "bottom",
+            height = 10,
+          },
+        }
+      })
+    end
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "BufRead",
   },
 }
 
