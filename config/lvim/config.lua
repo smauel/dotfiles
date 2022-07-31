@@ -44,8 +44,125 @@ lvim.builtin.nvimtree.setup.view.mappings.list = {
 }
 
 lvim.builtin.which_key.mappings = {
+  ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "💬 Toggle Comment" },
+  ["h"] = { "<cmd>nohlsearch<CR>", "🔦 Toggle Highlight" },
+  ["k"] = { "<cmd>NvimTreeFocus<CR>", "🎯 Find in Explorer" },
+  ["l"] = { "<cmd>NvimTreeToggle<CR>", "📁 Explorer" },
+  -- ["p"] = { "<cmd>Telescope find_files previewer=false results_height=15<cr>", "Find File" },
+  ["p"] = { telescope_quick_open, "⏩ Quick Open" },
+  ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "😿 Quit" },
+  ["w"] = { "<cmd>w!<CR>", "💾 Save" },
+  b = {
+    name = " 📚 Buffers",
+    b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+    d = { "<cmd>BufferKill<CR>", "Close Buffer" },
+    e = {
+      "<cmd>BufferLinePickClose<cr>",
+      "Pick which buffer to close",
+    },
+    f = { "<cmd>Telescope buffers<cr>", "Find" },
+    j = { "<cmd>BufferLinePick<cr>", "Jump" },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
+    l = {
+      "<cmd>BufferLineCloseRight<cr>",
+      "Close all to the right",
+    },
+    D = {
+      "<cmd>BufferLineSortByDirectory<cr>",
+      "Sort by directory",
+    },
+    L = {
+      "<cmd>BufferLineSortByExtension<cr>",
+      "Sort by language",
+    },
+  },
+  c = {
+    name = " 🪛 Code",
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    i = { "<cmd>LspInfo<cr>", "Info" },
+    j = { vim.diagnostic.goto_next, "Next Diagnostic" },
+    k = { vim.diagnostic.goto_prev, "Prev Diagnostic" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    p = {
+      name = "Peek",
+      d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", "Definition" },
+      t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
+      i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
+    },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+  },
+  f = {
+    name = " 🔍 Find",
+    a = { "<cmd>Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find All" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    p = {
+      "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+      "Colorscheme with Preview",
+    },
+    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    t = { "<cmd>Telescope live_grep<cr>", "Text" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    R = { "<cmd>Telescope registers<cr>", "Registers" },
+  },
+
+  -- " Available Debug Adapters:
+  -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
+  -- " Adapter configuration and installation instructions:
+  -- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+  -- " Debug Adapter protocol:
+  -- "   https://microsoft.github.io/debug-adapter-protocol/
+  -- " Debugging
+  g = {
+    name = " 😺 Git",
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    d = { "<cmd>DiffviewOpen<cr>", "Open Diff" },
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    x = { "<cmd>DiffviewClose<cr>", "Close Diff" },
+    C = {
+      "<cmd>Telescope git_bcommits<cr>",
+      "Checkout commit(for current file)",
+    },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+  },
+  t = {
+    name = " 🧪 Tests",
+    t = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run all in file" },
+    n = { function() require("neotest").run.run() end, "Run nearest" },
+    s = { function() require("neotest").summary.toggle() end, "Summary" },
+  },
+  u = {
+    name = " 🚀 Update",
+    c = { "<cmd>PackerCompile<cr>", "Compile" },
+    i = { "<cmd>PackerInstall<cr>", "Install" },
+    r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
+    s = { "<cmd>PackerSync<cr>", "Sync" },
+    u = { "<cmd>PackerUpdate<cr>", "Update Packer" },
+    S = { "<cmd>PackerStatus<cr>", "Status" },
+  },
   [";"] = {
-    name = "📊 Settings",
+    name = " 📊 Settings",
     c = {
       "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
       "Edit config.lua",
@@ -96,123 +213,6 @@ lvim.builtin.which_key.mappings = {
       "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
       "View LunarVim's changelog",
     },
-  },
-  ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "💬 Toggle Comment" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "🔦 Toggle Highlight" },
-  ["k"] = { "<cmd>NvimTreeFocus<CR>", "🎯 Find in Explorer" },
-  ["l"] = { "<cmd>NvimTreeToggle<CR>", "📁 Explorer" },
-  -- ["p"] = { "<cmd>Telescope find_files previewer=false results_height=15<cr>", "Find File" },
-  ["p"] = { telescope_quick_open, "⏩ Quick Open" },
-  ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "😿 Quit" },
-  ["w"] = { "<cmd>w!<CR>", "💾 Save" },
-  b = {
-    name = "📚 Buffers",
-    b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-    d = { "<cmd>BufferKill<CR>", "Close Buffer" },
-    e = {
-      "<cmd>BufferLinePickClose<cr>",
-      "Pick which buffer to close",
-    },
-    f = { "<cmd>Telescope buffers<cr>", "Find" },
-    j = { "<cmd>BufferLinePick<cr>", "Jump" },
-    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-    l = {
-      "<cmd>BufferLineCloseRight<cr>",
-      "Close all to the right",
-    },
-    D = {
-      "<cmd>BufferLineSortByDirectory<cr>",
-      "Sort by directory",
-    },
-    L = {
-      "<cmd>BufferLineSortByExtension<cr>",
-      "Sort by language",
-    },
-  },
-  f = {
-    name = "🔍 Find",
-    a = { "<cmd>Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find All" },
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    f = { "<cmd>Telescope find_files<cr>", "Find File" },
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-    p = {
-      "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
-      "Colorscheme with Preview",
-    },
-    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-    t = { "<cmd>Telescope live_grep<cr>", "Text" },
-    C = { "<cmd>Telescope commands<cr>", "Commands" },
-    H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
-    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-    R = { "<cmd>Telescope registers<cr>", "Registers" },
-  },
-
-  -- " Available Debug Adapters:
-  -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
-  -- " Adapter configuration and installation instructions:
-  -- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-  -- " Debug Adapter protocol:
-  -- "   https://microsoft.github.io/debug-adapter-protocol/
-  -- " Debugging
-  g = {
-    name = "😺 Git",
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    d = { "<cmd>DiffviewOpen<cr>", "Open Diff" },
-    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "Undo Stage Hunk",
-    },
-    x = { "<cmd>DiffviewClose<cr>", "Close Diff" },
-    C = {
-      "<cmd>Telescope git_bcommits<cr>",
-      "Checkout commit(for current file)",
-    },
-    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-  },
-  t = {
-    name = " 🧪 Tests",
-    t = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run all in file" },
-    n = { function() require("neotest").run.run() end, "Run nearest" },
-    s = { function() require("neotest").summary.toggle() end, "Summary" },
-  },
-  u = {
-    name = " 🚀 Update",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    u = { "<cmd>PackerUpdate<cr>", "Update Packer" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-  },
-  x = {
-    name = " 🪛 Code",
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    i = { "<cmd>LspInfo<cr>", "Info" },
-    j = { vim.diagnostic.goto_next, "Next Diagnostic" },
-    k = { vim.diagnostic.goto_prev, "Prev Diagnostic" },
-    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    p = {
-      name = "Peek",
-      d = { "<cmd>lua require('lvim.lsp.peek').Peek('definition')<cr>", "Definition" },
-      t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
-      i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
-    },
-    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    r = { "<cmd>Trouble lsp_references<cr>", "References" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
   },
 }
 
