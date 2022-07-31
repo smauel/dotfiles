@@ -268,14 +268,23 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 -- treesitter
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
+  "comment",
+  "css",
+  "dockerfile",
+  "go",
+  "graphql",
+  "hcl",
+  "html",
+  "http",
   "javascript",
   "json",
   "lua",
-  "typescript",
+  "make",
+  "markdown",
   "tsx",
-  "css",
+  "typescript",
+  "vue",
   "yaml",
-  "go",
 }
 lvim.builtin.treesitter.highlight.enabled = true
 
