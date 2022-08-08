@@ -310,15 +310,15 @@ linters.setup {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "codespell" },
-  { name = "eslint_d" },
+  -- { name = "eslint_d" },
   { name = "fixjson" },
   { name = "gofmt" },
   { name = "goimports" },
   { name = "markdownlint" },
   { name = "prettierd" },
   { name = "terraform_fmt" },
-  { name = "trim_newlines" },
-  { name = "trim_whitespace" },
+  -- { name = "trim_newlines" },
+  -- { name = "trim_whitespace" },
   { command = "sqlfluff", extra_args = { "--dialect", "postgres" } },
 }
 
