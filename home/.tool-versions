@@ -1,8 +1,8 @@
-kubectl 1.19.16
+kubectl 1.24.3
 nodejs 16.15.0
 golang 1.18.1
 awscli 2.7.2
-java adoptopenjdk-11.0.15+10
+java adoptopenjdk-jre-18.0.1+10
 neovim 0.7.0
 starship 1.6.3
 tmux 3.2a

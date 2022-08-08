@@ -34,6 +34,7 @@ alias gd='git diff'
 # docker aliases
 alias dc='docker-compose'
 alias dcl='docker-compose -f docker-compose.local.yml'
+alias dps='docker ps'
 alias drm='docker rm $(docker ps -aq)'
 alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
