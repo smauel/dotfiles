@@ -1,7 +1,7 @@
 # general aliases
 alias dotfiles="cd ${REPOS_DIR}/dotfiles"
 alias ef="cd ${REPOS_DIR}/ef-studio/master"
-alias vim=lvim
+alias vim=nvim
 alias gvim='nvim-gui'
 alias fv='vim $(fzf)'
 alias cc='clear'
