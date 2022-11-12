@@ -45,3 +45,8 @@ source $HOME/.secrets.zsh
 #   - install versions specified in .tool-versions
 source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
+
+# pnpm
+export PNPM_HOME="/Users/smauel/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm endexport HOMEBREW_GITHUB_API_TOKEN=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

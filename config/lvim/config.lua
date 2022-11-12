@@ -255,7 +255,6 @@ end
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "startify"
 lvim.builtin.alpha.startify.section = startify_sections()
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
@@ -293,7 +292,7 @@ code_actions.setup {
 }
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { name = "codespell" },
+  -- { name = "codespell" },
   { name = "actionlint" },
   { name = "checkmake" },
   { name = "eslint_d" },
@@ -304,12 +303,12 @@ linters.setup {
   { name = "luacheck" },
   { name = "markdownlint" },
   { name = "shellcheck" },
-  { name = "yamllint" },
+  -- { name = "yamllint" },
   { command = "sqlfluff", extra_args = { "--dialect", "postgres" } },
 }
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { name = "codespell" },
+  -- { name = "codespell" },
   -- { name = "eslint_d" },
   { name = "fixjson" },
   { name = "gofmt" },

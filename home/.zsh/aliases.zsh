@@ -1,5 +1,6 @@
 # general aliases
 alias dotfiles="cd ${REPOS_DIR}/dotfiles"
+alias ef="cd ${REPOS_DIR}/ef-studio/master"
 alias vim=lvim
 alias gvim='nvim-gui'
 alias fv='vim $(fzf)'
@@ -38,7 +39,7 @@ alias dps='docker ps'
 alias drm='docker rm $(docker ps -aq)'
 alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
-alias dprune='docker system prune && docker volume prune'
+alias dprune='dstop && drm && docker volume rm pgdata localstackdata'
 
 # kubernetes aliases
 alias k='kubectl'

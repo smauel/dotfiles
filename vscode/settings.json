@@ -26,5 +26,8 @@
   "vim.surround": true,
   "vim.smartcase": true,
   "vim.mouseSelectionGoesIntoVisualMode": true,
-  "vim.incsearch": true
+  "vim.incsearch": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
