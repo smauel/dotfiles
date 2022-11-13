@@ -19,6 +19,7 @@ return require("packer").startup({
     -- General
     use "wbthomason/packer.nvim"
     use "tpope/vim-surround"
+    use "tpope/vim-commentary"
 
     -- Colorscheme
     use { "catppuccin/nvim", as = "catppuccin" }
@@ -79,19 +80,11 @@ return require("packer").startup({
       "glepnir/lspsaga.nvim",
       branch = "main",
       config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga({
+        require("lspsaga").init_lsp_saga({
           diagnostic_header = { " ", " ", " ", "ﴞ " },
-          code_action_lightbulb = {
-            enable = false
-          },
-          code_action_keys = {
-            quit = '<ESC>',
-          },
-          definition_action_keys = {
-            quit = '<ESC>',
-          },
+          code_action_lightbulb = { enable = false },
+          code_action_keys = { quit = '<ESC>', },
+          definition_action_keys = { quit = '<ESC>', },
           rename_action_quit = '<ESC>',
         })
       end,
@@ -113,7 +106,8 @@ return require("packer").startup({
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-vsnip",
-        "hrsh7th/vim-vsnip"
+        "hrsh7th/vim-vsnip",
+        "rafamadriz/friendly-snippets"
       },
       config = function()
         require("config.cmp")
@@ -137,11 +131,12 @@ return require("packer").startup({
       end,
     })
 
+    -- Diagnostics
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require("trouble").setup {}
+        require("trouble").setup { mode = "document_diagnostics" }
       end
     }
   end,
