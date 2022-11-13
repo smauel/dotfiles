@@ -76,19 +76,6 @@ return require("packer").startup({
         "jose-elias-alvarez/typescript.nvim",
       }
     }
-    use({
-      "glepnir/lspsaga.nvim",
-      branch = "main",
-      config = function()
-        require("lspsaga").init_lsp_saga({
-          diagnostic_header = { " ", " ", " ", "ﴞ " },
-          code_action_lightbulb = { enable = false },
-          code_action_keys = { quit = '<ESC>', },
-          definition_action_keys = { quit = '<ESC>', },
-          rename_action_quit = '<ESC>',
-        })
-      end,
-    })
 
     -- Keymappings
     use {
@@ -130,15 +117,6 @@ return require("packer").startup({
         require("config.lualine")
       end,
     })
-
-    -- Diagnostics
-    use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("trouble").setup { mode = "document_diagnostics" }
-      end
-    }
   end,
 
   config = {
