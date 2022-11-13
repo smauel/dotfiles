@@ -18,6 +18,7 @@ return require("packer").startup({
   function(use)
     -- General
     use "wbthomason/packer.nvim"
+    use "tpope/vim-surround"
 
     -- Colorscheme
     use { "catppuccin/nvim", as = "catppuccin" }
@@ -70,8 +71,31 @@ return require("packer").startup({
         "jose-elias-alvarez/null-ls.nvim",
         "jayp0521/mason-null-ls.nvim",
         "lukas-reineke/lsp-format.nvim",
+        "onsails/lspkind.nvim",
+        "jose-elias-alvarez/typescript.nvim",
       }
     }
+    use({
+      "glepnir/lspsaga.nvim",
+      branch = "main",
+      config = function()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga({
+          diagnostic_header = { " ", " ", " ", "ﴞ " },
+          code_action_lightbulb = {
+            enable = false
+          },
+          code_action_keys = {
+            quit = '<ESC>',
+          },
+          definition_action_keys = {
+            quit = '<ESC>',
+          },
+          rename_action_quit = '<ESC>',
+        })
+      end,
+    })
 
     -- Keymappings
     use {
@@ -112,6 +136,14 @@ return require("packer").startup({
         require("config.lualine")
       end,
     })
+
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {}
+      end
+    }
   end,
 
   config = {

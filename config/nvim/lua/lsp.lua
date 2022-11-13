@@ -3,13 +3,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local mason = require("mason")
 mason.setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
     }
+  }
 })
 
 require("mason-lspconfig").setup({
@@ -34,45 +34,45 @@ local on_attach = function(client, bufnr)
   require("lsp-format").on_attach(client)
 
   -- Keymappings
-	m.nmap("<leader>D", "<cmd>Telescope lsp_type_definitions<CR>", "silent", "Type Definition")
+  m.nmap("<leader>D", "<cmd>Telescope lsp_type_definitions<CR>", "silent", "Type Definition")
 
   m.nmap("gd", ":<C-u>Telescope lsp_definitions<CR>", "silent", "Goto Definition")
   m.nmap("gi", ":<C-u>Telescope lsp_implementations<CR>", "silent", "Goto Implementation")
   m.nmap("gr", ":<C-u>Telescope lsp_references<CR>", "silent", "Goto References")
   m.nmap("gj", ":<C-u>Telescope lsp_document_symbols<CR>", "silent", "Document Symbols")
-	m.nmap("K", "<cmd>lua vim.lsp.buf.hover()<CR>", "silent", "Hover")
-	m.nmap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "silent", "Signature Help")
+  m.nmap("K", "<cmd>Lspsaga hover_doc<CR>", "silent", "Hover")
+  m.nmap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "silent", "Signature Help")
 
-	m.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", "silent", "Code Action")
-  m.nnoremap('<leader>cr', "<cmd>lua vim.lsp.buf.rename()<CR>", 'silent', 'Rename')
-	m.nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "silent", "Next Diagnostic...")
-	m.nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "silent", "Prev Diagnostic...")
-	m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
+  m.nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "silent", "Code Action")
+  m.nnoremap('<leader>cr', "<cmd>Lspsaga rename<CR>", 'silent', 'Rename')
+  m.nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "silent", "Next Diagnostic...")
+  m.nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "silent", "Prev Diagnostic...")
+  m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
 
-	if client.server_capabilities.document_formatting then
-		vim.cmd([[
+  if client.server_capabilities.document_formatting then
+    vim.cmd([[
 			augroup formatting
 				autocmd! * <buffer>
 				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
 			augroup END
-		]])
-	end
+		]] )
+  end
 
-	-- Set autocommands conditional on server_capabilities
-	if client.server_capabilities.document_highlight then
-		vim.cmd([[
+  -- Set autocommands conditional on server_capabilities
+  if client.server_capabilities.document_highlight then
+    vim.cmd([[
 			augroup lsp_document_highlight
 				autocmd! * <buffer>
 				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 			augroup END
-		]])
-	end
+		]] )
+  end
 end
 
 require("mason-lspconfig").setup_handlers {
   -- default handler.
-  function (server_name)
+  function(server_name)
     require("lspconfig")[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach
@@ -80,7 +80,21 @@ require("mason-lspconfig").setup_handlers {
   end,
 
   -- specific servers.
-  ["sumneko_lua"] = function ()
+  ["tsserver"] = function()
+    require("typescript").setup({
+      disable_commands = false,
+      debug = false,
+      go_to_source_definition = {
+        fallback = true,
+      },
+      server = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+    })
+  end,
+
+  ["sumneko_lua"] = function()
     require("lspconfig").sumneko_lua.setup {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -95,6 +109,27 @@ require("mason-lspconfig").setup_handlers {
   end
 }
 
-require("null-ls").setup()
 require("mason-null-ls").setup({ automatic_setup = true })
 require 'mason-null-ls'.setup_handlers()
+require("null-ls").setup({
+  sources = {
+    require("typescript.extensions.null-ls.code-actions"),
+  }
+})
+
+vim.fn.sign_define(
+  "DiagnosticSignError",
+  { texthl = "DiagnosticSignError", text = " ", numhl = "DiagnosticSignError" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignWarning",
+  { texthl = "DiagnosticSignWarning", text = " ", numhl = "DiagnosticSignWarning" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignHint",
+  { texthl = "DiagnosticSignHint", text = "ﴞ ", numhl = "DiagnosticSignHint" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignInformation",
+  { texthl = "DiagnosticSignInformation", text = " ", numhl = "DiagnosticSignInformation" }
+)
