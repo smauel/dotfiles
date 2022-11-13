@@ -5,7 +5,7 @@ local default_options = {
   component_separators = { left = "", right = "" },
   section_separators = { left = "", right = "" },
   disabled_filetypes = { "NvimTree" },
-  --   theme = "gruvbox",
+  theme = "catppuccin",
 }
 
 require("lualine").setup({

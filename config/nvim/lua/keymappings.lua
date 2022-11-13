@@ -17,10 +17,24 @@ m.nnoremap("<leader>r", ts.live_grep, "silent", "Telescope Grep")
 m.nnoremap("<leader>v", ts.find_config_files, "silent", "Telescope Config Files")
 m.nnoremap("<leader>z", ts.colorscheme, "silent", "Telescope Colorschemes")
 
+-- quickfix
 m.nnoremap('][q', ':copen<cr>', 'silent', 'Open Quickfix List')
 m.nnoremap('[]q', ':cclose<cr>', 'silent', 'Close Quickfix List')
 m.nnoremap('][l', ':lopen<cr>', 'silent', 'Open Location List')
 m.nnoremap('[]l', ':lclose<cr>', 'silent', 'Close Location List')
+
+-- test bindings
+m.nnoremap("<leader>ta", "<cmd>lua require('neotest').run.attach()<cr>", "silent", "Attach")
+m.nnoremap("<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "silent", "Run File")
+m.nnoremap("<leader>tF", "<cmd>lua require('neotest').run.run({vim.fn.expand('%') strategy = 'dap'})<cr>", "silent",
+  "Debug File")
+m.nnoremap("<leader>tl", "<cmd>lua require('neotest').run.run_last()<cr>", "silent", "Run Last")
+m.nnoremap("<leader>tL", "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", "silent", "Debug Last")
+m.nnoremap("<leader>tn", "<cmd>lua require('neotest').run.run()<cr>", "silent", "Run Nearest")
+m.nnoremap("<leader>tN", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "silent", "Debug Nearest")
+m.nnoremap("<leader>to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "silent", "Output")
+m.nnoremap("<leader>tS", "<cmd>lua require('neotest').run.stop()<cr>", "silent", "Stop")
+m.nnoremap("<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "silent", "Summary")
 
 -- split bindings
 m.nnoremap("<C-J>", "<C-W><C-J>")
