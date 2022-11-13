@@ -16,9 +16,13 @@ vim.cmd([[
 
 return require("packer").startup({
   function(use)
+    -- General
     use "wbthomason/packer.nvim"
-    use 'marko-cerovac/material.nvim'
 
+    -- Colorscheme
+    use { "catppuccin/nvim", as = "catppuccin" }
+
+    -- TreeSitter
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -27,6 +31,16 @@ return require("packer").startup({
       end,
     }
 
+    -- NvimTree
+    use({
+      "kyazdani42/nvim-tree.lua",
+      requires = { "kyazdani42/nvim-web-devicons", opt = true },
+      config = function()
+        require("config.nvimtree")
+      end,
+    })
+
+    -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
       requires = {
@@ -38,6 +52,7 @@ return require("packer").startup({
       end,
     }
 
+    -- Git
     use {
       "lewis6991/gitsigns.nvim",
       requires = { "nvim-lua/plenary.nvim" },
@@ -80,6 +95,23 @@ return require("packer").startup({
         require("config.cmp")
       end
     }
+
+    -- AutoPairs
+    use({
+      "windwp/nvim-autopairs",
+      config = function()
+        require("config.autopairs")
+      end,
+    })
+
+    -- StatusLine
+    use({
+      "hoob3rt/lualine.nvim",
+      requires = { "kyazdani42/nvim-web-devicons", opt = true },
+      config = function()
+        require("config.lualine")
+      end,
+    })
   end,
 
   config = {
