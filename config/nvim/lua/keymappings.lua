@@ -3,10 +3,10 @@ local m = require("mapx").setup({ whichkey = true })
 
 -- leader bindings
 m.nname("<leader>", "Leader")
+m.nnoremap("<leader>,", ":Telescope commands<cr>", "silent", "Telescope Commands")
 m.nnoremap("<leader>/", ":noh<cr>", "silent", "Clear Highlight")
 m.nnoremap("<leader>b", ts.buffers, "silent", "Telescope Buffers")
 m.nnoremap("<leader>c", ts.commits, "silent", "Telescope Commits")
-m.nnoremap("<leader>d", ":TroubleToggle<CR>", "silent", "Trouble")
 m.nnoremap("<leader>f", ":NvimTreeFindFile<cr>", "silent", "NvimTree Find File")
 m.nnoremap("<leader>gd", ts.git_status, "silent", "Telescope Git Diff")
 m.nnoremap("<leader>gf", ts.git_files, "silent", "Telescope Git Files")
