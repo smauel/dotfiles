@@ -20,6 +20,7 @@ return require("packer").startup({
     use "wbthomason/packer.nvim"
     use "tpope/vim-surround"
     use "tpope/vim-commentary"
+    use 'nvim-tree/nvim-web-devicons'
 
     -- Colorscheme
     use { "catppuccin/nvim", as = "catppuccin" }
@@ -157,9 +158,13 @@ return require("packer").startup({
       end
     }
 
+    -- TODO: is any better than neotest
     use {
       "David-Kunz/jester"
     }
+
+    -- DiffView
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   end,
 
   config = {
