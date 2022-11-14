@@ -105,7 +105,15 @@ return require("packer").startup({
     use({
       "windwp/nvim-autopairs",
       config = function()
-        require("config.autopairs")
+        require("nvim-autopairs").setup({
+          disable_filetype = { "TelescopePrompt" },
+        })
+      end,
+    })
+    use({
+      "windwp/nvim-ts-autotag",
+      config = function()
+        require("nvim-ts-autotag").setup()
       end,
     })
 
@@ -147,6 +155,10 @@ return require("packer").startup({
           }
         })
       end
+    }
+
+    use {
+      "David-Kunz/jester"
     }
   end,
 
