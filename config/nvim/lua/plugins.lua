@@ -106,9 +106,7 @@ return require("packer").startup({
     use({
       "windwp/nvim-autopairs",
       config = function()
-        require("nvim-autopairs").setup({
-          disable_filetype = { "TelescopePrompt" },
-        })
+        require("config.autopairs")
       end,
     })
     use({
@@ -137,24 +135,7 @@ return require("packer").startup({
         'haydenmeade/neotest-jest'
       },
       config = function()
-        require("neotest").setup({
-          adapters = {
-            require("neotest-jest")({
-              jestCommand = "yarn test --",
-              jestConfigFile = "jest.config.ts",
-              cwd = function(path)
-                return vim.fn.getcwd()
-              end
-            })
-          },
-          icons = {
-            passed = "👍",
-            running = "🏃",
-            failed = "👎",
-            skipped = "--",
-            unknown = "~",
-          }
-        })
+        require("config.neotest")
       end
     }
 
@@ -164,7 +145,13 @@ return require("packer").startup({
     }
 
     -- DiffView
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require("config.diffview")
+      end
+    }
   end,
 
   config = {

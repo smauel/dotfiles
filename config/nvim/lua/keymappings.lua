@@ -3,7 +3,7 @@ local m = require("mapx").setup({ whichkey = true })
 
 -- leader bindings
 m.nname("<leader>", "Leader")
-m.nnoremap("<leader>,", ":Telescope commands<cr>", "silent", "Telescope Commands")
+m.nnoremap("<leader>,", ":DiffviewToggle<cr>", "silent", "Telescope Commands")
 m.nnoremap("<leader>/", ":noh<cr>", "silent", "Clear Highlight")
 m.nnoremap("<leader>b", ts.buffers, "silent", "Telescope Buffers")
 m.nnoremap("<leader>c", ts.commits, "silent", "Telescope Commits")
