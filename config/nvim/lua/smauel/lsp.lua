@@ -1,6 +1,16 @@
 local m = require("mapx").setup({ whichkey = true })
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Gutter icons
+vim.fn.sign_define("DiagnosticSignError",
+  { texthl = "DiagnosticSignError", text = " ", numhl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarning",
+  { texthl = "DiagnosticSignWarning", text = " ", numhl = "DiagnosticSignWarning" })
+vim.fn.sign_define("DiagnosticSignHint",
+  { texthl = "DiagnosticSignHint", text = "ﴞ ", numhl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignInformation",
+  { texthl = "DiagnosticSignInformation", text = " ", numhl = "DiagnosticSignInformation" })
+
 local mason = require("mason")
 mason.setup({
   ui = {
@@ -109,6 +119,7 @@ require("mason-lspconfig").setup_handlers {
   end
 }
 
+-- external linters/formatters
 require("mason-null-ls").setup({ automatic_setup = true })
 require 'mason-null-ls'.setup_handlers()
 require("null-ls").setup({
@@ -117,19 +128,5 @@ require("null-ls").setup({
   }
 })
 
-vim.fn.sign_define(
-  "DiagnosticSignError",
-  { texthl = "DiagnosticSignError", text = " ", numhl = "DiagnosticSignError" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignWarning",
-  { texthl = "DiagnosticSignWarning", text = " ", numhl = "DiagnosticSignWarning" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignHint",
-  { texthl = "DiagnosticSignHint", text = "ﴞ ", numhl = "DiagnosticSignHint" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignInformation",
-  { texthl = "DiagnosticSignInformation", text = " ", numhl = "DiagnosticSignInformation" }
-)
+-- debug adapters
+require("mason-nvim-dap").setup({ automatic_setup = true })

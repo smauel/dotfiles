@@ -1,4 +1,4 @@
-local components = require("config.lualine.components")
+local components = require("smauel.config.lualine.components")
 
 local default_options = {
   icons_enabled = true,

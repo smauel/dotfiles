@@ -30,7 +30,7 @@ return require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
-        require("config.treesitter")
+        require("smauel.config.treesitter")
       end,
     }
 
@@ -39,7 +39,7 @@ return require("packer").startup({
       "kyazdani42/nvim-tree.lua",
       requires = { "kyazdani42/nvim-web-devicons", opt = true },
       config = function()
-        require("config.nvimtree")
+        require("smauel.config.nvimtree")
       end,
     })
 
@@ -51,7 +51,7 @@ return require("packer").startup({
         { "nvim-telescope/telescope-ui-select.nvim" },
       },
       config = function()
-        require("config.telescope")
+        require("smauel.config.telescope")
       end,
     }
 
@@ -66,15 +66,18 @@ return require("packer").startup({
 
     -- LSP
     use {
-      "williamboman/mason.nvim",
-      requires = {
-        "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
-        "jose-elias-alvarez/null-ls.nvim",
-        "jayp0521/mason-null-ls.nvim",
-        "lukas-reineke/lsp-format.nvim",
-        "onsails/lspkind.nvim",
-        "jose-elias-alvarez/typescript.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+      "neovim/nvim-lspconfig",
+      "lukas-reineke/lsp-format.nvim",
+      "onsails/lspkind.nvim",
+      "jose-elias-alvarez/typescript.nvim",
+      {
+        "williamboman/mason.nvim",
+        requires = {
+          "williamboman/mason-lspconfig.nvim",
+          "jayp0521/mason-null-ls.nvim",
+          "jayp0521/mason-nvim-dap.nvim",
+        }
       }
     }
 
@@ -98,7 +101,7 @@ return require("packer").startup({
         "rafamadriz/friendly-snippets"
       },
       config = function()
-        require("config.cmp")
+        require("smauel.config.cmp")
       end
     }
 
@@ -106,7 +109,7 @@ return require("packer").startup({
     use({
       "windwp/nvim-autopairs",
       config = function()
-        require("config.autopairs")
+        require("smauel.config.autopairs")
       end,
     })
     use({
@@ -121,36 +124,49 @@ return require("packer").startup({
       "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons", opt = true },
       config = function()
-        require("config.lualine")
+        require("smauel.config.lualine")
       end,
     })
 
-    -- Tests
-    use {
-      "nvim-neotest/neotest",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-        'haydenmeade/neotest-jest'
-      },
-      config = function()
-        require("config.neotest")
-      end
-    }
-
-    -- TODO: is any better than neotest
-    use {
-      "David-Kunz/jester"
-    }
-
     -- DiffView
     use {
-      'sindrets/diffview.nvim',
-      requires = 'nvim-lua/plenary.nvim',
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("config.diffview")
+        require("smauel.config.diffview")
       end
+    }
+
+    -- Tests
+    use {
+      {
+        "nvim-neotest/neotest",
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "nvim-treesitter/nvim-treesitter",
+          "antoinemadec/FixCursorHold.nvim",
+          "haydenmeade/neotest-jest",
+          "nvim-neotest/neotest-plenary",
+        },
+        config = function()
+          require("smauel.config.neotest")
+        end
+      },
+      "David-Kunz/jester" -- TODO: is any better than neotest
+    }
+
+    -- Debugging
+    use {
+      "rcarriga/nvim-dap-ui",
+      "mfussenegger/nvim-dap",
+      { "williamboman/nvim-dap-vscode-js", branch = "feat/debug-cmd" },
+      "mxsdev/nvim-dap-vscode-js",
+      {
+        "microsoft/vscode-js-debug",
+        opt = true,
+        run = "npm install --legacy-peer-deps && npm run compile"
+
+      }
     }
   end,
 

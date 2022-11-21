@@ -1,4 +1,4 @@
-local ts = require("config.telescope")
+local ts = require("smauel.config.telescope")
 local m = require("mapx").setup({ whichkey = true })
 
 -- leader bindings
@@ -33,8 +33,8 @@ m.nnoremap("<leader>tL", "<cmd>lua require('neotest').run.run_last({ strategy = 
 m.nnoremap("<leader>tn", "<cmd>lua require('neotest').run.run()<cr>", "silent", "Run Nearest")
 m.nnoremap("<leader>tN", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "silent", "Debug Nearest")
 m.nnoremap("<leader>to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "silent", "Output")
-m.nnoremap("<leader>tS", "<cmd>lua require('neotest').run.stop()<cr>", "silent", "Stop")
 m.nnoremap("<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "silent", "Summary")
+m.nnoremap("<leader>tx", "<cmd>lua require('neotest').run.stop()<cr>", "silent", "Stop")
 
 -- split bindings
 m.nnoremap("<C-J>", "<C-W><C-J>")
