@@ -26,6 +26,6 @@ map ctrl+t new_tab_with_cwd !neighbor
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Frappe
+# Catppuccin-Latte
 include current-theme.conf
 # END_KITTY_THEME
