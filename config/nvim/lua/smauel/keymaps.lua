@@ -1,13 +1,26 @@
-local ts = require("smauel.config.telescope")
+-- Keymaps
+local ts = require('smauel.config.telescope')
 local m = require("mapx").setup({ whichkey = true })
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>!', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- leader bindings
 m.nname("<leader>", "Leader")
 m.nnoremap("<leader>,", ":DiffviewToggle<cr>", "silent", "Telescope Commands")
 m.nnoremap("<leader>/", ":noh<cr>", "silent", "Clear Highlight")
+m.nnoremap("<leader>?", ts.oldfiles, "silent", "Telescope Recent Files")
 m.nnoremap("<leader>b", ts.buffers, "silent", "Telescope Buffers")
 m.nnoremap("<leader>c", ts.commits, "silent", "Telescope Commits")
+m.nnoremap("<leader>e", vim.diagnostic.open_float, "silent", "Open Float Diagnostics")
 m.nnoremap("<leader>f", ":NvimTreeFindFile<cr>", "silent", "NvimTree Find File")
+m.nnoremap("<leader>h", ts.help_tags, "silent", "Telescope Help")
 m.nnoremap("<leader>gd", ts.git_status, "silent", "Telescope Git Diff")
 m.nnoremap("<leader>gf", ts.git_files, "silent", "Telescope Git Files")
 m.nnoremap("<leader>l", ":NvimTreeToggle<cr>", "silent", "NvimTree Toggle")
@@ -16,25 +29,6 @@ m.nnoremap("<leader>q", ts.quickfix, "silent", "Telescope Quickfix")
 m.nnoremap("<leader>r", ts.live_grep, "silent", "Telescope Grep")
 m.nnoremap("<leader>v", ts.find_config_files, "silent", "Telescope Config Files")
 m.nnoremap("<leader>z", ts.colorscheme, "silent", "Telescope Colorschemes")
-
--- quickfix
-m.nnoremap('][q', ':copen<cr>', 'silent', 'Open Quickfix List')
-m.nnoremap('[]q', ':cclose<cr>', 'silent', 'Close Quickfix List')
-m.nnoremap('][l', ':lopen<cr>', 'silent', 'Open Location List')
-m.nnoremap('[]l', ':lclose<cr>', 'silent', 'Close Location List')
-
--- test bindings
-m.nnoremap("<leader>ta", "<cmd>lua require('neotest').run.attach()<cr>", "silent", "Attach")
-m.nnoremap("<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "silent", "Run File")
-m.nnoremap("<leader>tF", "<cmd>lua require('neotest').run.run({vim.fn.expand('%') strategy = 'dap'})<cr>", "silent",
-  "Debug File")
-m.nnoremap("<leader>tl", "<cmd>lua require('neotest').run.run_last()<cr>", "silent", "Run Last")
-m.nnoremap("<leader>tL", "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", "silent", "Debug Last")
-m.nnoremap("<leader>tn", "<cmd>lua require('neotest').run.run()<cr>", "silent", "Run Nearest")
-m.nnoremap("<leader>tN", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "silent", "Debug Nearest")
-m.nnoremap("<leader>to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "silent", "Output")
-m.nnoremap("<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", "silent", "Summary")
-m.nnoremap("<leader>tx", "<cmd>lua require('neotest').run.stop()<cr>", "silent", "Stop")
 
 -- split bindings
 m.nnoremap("<C-J>", "<C-W><C-J>")

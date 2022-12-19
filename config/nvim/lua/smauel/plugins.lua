@@ -1,9 +1,10 @@
 -- ensure packer is installed
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-  vim.cmd("packadd packer.nvim")
+local is_bootstrap = false
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  is_bootstrap = true
+  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.cmd [[packadd packer.nvim]]
 end
 
 -- auto compile when plugins.lua changes
@@ -14,167 +15,136 @@ vim.cmd([[
   augroup end
 ]])
 
-return require("packer").startup({
+require('packer').startup({
   function(use)
-    -- General
-    use "wbthomason/packer.nvim"
-    use "tpope/vim-surround"
-    use "tpope/vim-commentary"
-    use 'nvim-tree/nvim-web-devicons'
+    use 'wbthomason/packer.nvim'
+    use 'tpope/vim-fugitive'
+    use 'tpope/vim-rhubarb'
+    use 'navarasu/onedark.nvim'
 
-    -- Colorscheme
-    use { "catppuccin/nvim", as = "catppuccin" }
 
-    -- TreeSitter
     use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-      config = function()
-        require("smauel.config.treesitter")
-      end,
-    }
-
-    -- NvimTree
-    use({
-      "kyazdani42/nvim-tree.lua",
-      requires = { "kyazdani42/nvim-web-devicons", opt = true },
-      config = function()
-        require("smauel.config.nvimtree")
-      end,
-    })
-
-    -- Telescope
-    use {
-      "nvim-telescope/telescope.nvim",
+      'neovim/nvim-lspconfig',
       requires = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-telescope/telescope-ui-select.nvim" },
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'jayp0521/mason-null-ls.nvim',
+        'j-hui/fidget.nvim',
+        'lukas-reineke/lsp-format.nvim',
+        'jose-elias-alvarez/null-ls.nvim',
+        'jose-elias-alvarez/typescript.nvim',
       },
+    }
+
+    use {
+      'hrsh7th/nvim-cmp',
+      requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
       config = function()
-        require("smauel.config.telescope")
+        pcall(require('smauel.config.cmp'))
+      end
+    }
+
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+        pcall(require('nvim-treesitter.install').update { with_sync = true })
+      end,
+      config = function()
+        pcall(require('smauel.config.treesitter'))
+      end
+    }
+
+    use {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      after = 'nvim-treesitter',
+    }
+
+    use {
+      'b0o/mapx.nvim',
+      requires = { 'folke/which-key.nvim' },
+    }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      config = function()
+        pcall(require('smauel.config.nvimtree'))
       end,
     }
 
-    -- Git
     use {
-      "lewis6991/gitsigns.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
+      'nvim-lualine/lualine.nvim',
       config = function()
-        require("gitsigns").setup()
-      end,
+        pcall(require('smauel.config.lualine'))
+      end
     }
 
-    -- LSP
     use {
-      "jose-elias-alvarez/null-ls.nvim",
-      "neovim/nvim-lspconfig",
-      "lukas-reineke/lsp-format.nvim",
-      "onsails/lspkind.nvim",
-      "jose-elias-alvarez/typescript.nvim",
-      {
-        "williamboman/mason.nvim",
-        requires = {
-          "williamboman/mason-lspconfig.nvim",
-          "jayp0521/mason-null-ls.nvim",
-          "jayp0521/mason-nvim-dap.nvim",
+      'numToStr/Comment.nvim',
+      config = function()
+        require('Comment').setup()
+      end
+    }
+
+    use {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        pcall(require('smauel.config.gitsigns'))
+      end
+    }
+
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      config = function()
+        pcall(require('smauel.config.indent_blankline'))
+      end
+    }
+
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          run = 'make',
+          cond = vim.fn.executable 'make' == 1
         }
       }
     }
 
-    -- Keymappings
     use {
-      "b0o/mapx.nvim",
-      requires = { "folke/which-key.nvim" },
-    }
-
-    -- Autocomplete
-    use {
-      "hrsh7th/nvim-cmp",
-      requires = {
-        "neovim/nvim-lspconfig",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-vsnip",
-        "hrsh7th/vim-vsnip",
-        "rafamadriz/friendly-snippets"
-      },
+      'windwp/nvim-autopairs',
       config = function()
-        require("smauel.config.cmp")
+        pcall(require('smauel.config.autopairs'))
       end
     }
 
-    -- AutoPairs
-    use({
-      "windwp/nvim-autopairs",
-      config = function()
-        require("smauel.config.autopairs")
-      end,
-    })
-    use({
+    use {
       "windwp/nvim-ts-autotag",
       config = function()
         require("nvim-ts-autotag").setup()
       end,
-    })
-
-    -- StatusLine
-    use({
-      "hoob3rt/lualine.nvim",
-      requires = { "kyazdani42/nvim-web-devicons", opt = true },
-      config = function()
-        require("smauel.config.lualine")
-      end,
-    })
-
-    -- DiffView
-    use {
-      "sindrets/diffview.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("smauel.config.diffview")
-      end
     }
 
-    -- Tests
-    use {
-      {
-        "nvim-neotest/neotest",
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "nvim-treesitter/nvim-treesitter",
-          "antoinemadec/FixCursorHold.nvim",
-          "haydenmeade/neotest-jest",
-          "nvim-neotest/neotest-plenary",
-        },
-        config = function()
-          require("smauel.config.neotest")
-        end
-      },
-      "David-Kunz/jester" -- TODO: is any better than neotest
-    }
-
-    -- Debugging
-    use {
-      "rcarriga/nvim-dap-ui",
-      "mfussenegger/nvim-dap",
-      { "williamboman/nvim-dap-vscode-js", branch = "feat/debug-cmd" },
-      "mxsdev/nvim-dap-vscode-js",
-      {
-        "microsoft/vscode-js-debug",
-        opt = true,
-        run = "npm install --legacy-peer-deps && npm run compile"
-
-      }
-    }
+    if is_bootstrap then
+      require('packer').sync()
+    end
   end,
 
   config = {
     display = {
       open_fn = function()
-        return require("packer.util").float({ border = "single" })
-      end,
-    },
-  },
+        return require('packer.util').float({ border = 'single' })
+      end
+    }
+  }
 })
+
+if is_bootstrap then
+  print '=================================='
+  print '    Plugins are being installed'
+  print '    Wait until Packer completes,'
+  print '       then restart nvim'
+  print '=================================='
+  return
+end

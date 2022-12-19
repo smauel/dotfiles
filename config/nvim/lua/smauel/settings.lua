@@ -1,66 +1,66 @@
-local o = vim.o
-local g = vim.g
+-- Settings
+-- See `:help vim.o`
 
--- mapleader
-g.mapleader = ","
+-- leader
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 -- colors
-o.termguicolors = true
-o.background = "dark"
-
--- colorscheme
-vim.cmd("colorscheme catppuccin-mocha")
+vim.o.termguicolors = true
+vim.o.background = 'dark'
+vim.cmd [[colorscheme onedark]]
 
 -- general
-o.hidden = true
-o.clipboard = "unnamedplus"
-o.binary = true
-o.eol = false
-o.modeline = true
-o.modelines = 4
-o.cmdheight = 1
-o.lazyredraw = true
-o.showmode = false
-o.updatetime = 300
-o.shortmess = o.shortmess .. "c"
-o.scrolloff = 3
-o.encoding = "utf-8"
-o.list = false
+vim.o.hidden = true
+vim.o.clipboard = 'unnamedplus'
+vim.o.binary = true
+vim.o.eol = false
+vim.o.modeline = true
+vim.o.modelines = 4
+vim.o.cmdheight = 1
+vim.o.lazyredraw = true
+vim.o.showmode = false
+vim.o.updatetime = 250
+vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.scrolloff = 3
+vim.o.encoding = 'utf-8'
+vim.o.list = false
+vim.o.completeopt = 'menuone,noselect'
 
 -- backup and swap
-o.swapfile = false
-o.backup = false
-o.writebackup = false
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.writebackup = false
 
 -- formatting
-o.tabstop = 2
-o.softtabstop = 2
-o.shiftwidth = 2
-o.expandtab = true
-o.smartindent = true
-o.smarttab = true
-o.joinspaces = false
-o.autoindent = true
-o.formatoptions = o.formatoptions .. "j"
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.smarttab = true
+vim.o.joinspaces = false
+vim.o.autoindent = true
+vim.o.formatoptions = vim.o.formatoptions .. "j"
 
 -- search
-o.showmatch = true
-o.matchtime = 5
-o.hlsearch = true
-o.ignorecase = true -- ignore case when searching...
-o.smartcase = true -- ...except when you're explicit with caps
+vim.o.showmatch = true
+vim.o.matchtime = 5
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- visual
-o.number = true
-o.relativenumber = true
-o.showtabline = 2
-o.showcmd = true
-o.cursorline = true
-o.visualbell = false
-o.errorbells = false
-o.conceallevel = 0
-o.signcolumn = "number" -- merge signcolumn and number column into one
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.showtabline = 2
+vim.o.showcmd = true
+vim.o.cursorline = true
+vim.o.visualbell = false
+vim.o.errorbells = false
+vim.o.conceallevel = 0
+vim.o.signcolumn = 'number'
 
 -- splits
-o.splitbelow = true
-o.splitright = true
+vim.o.splitbelow = true
+vim.o.splitright = true

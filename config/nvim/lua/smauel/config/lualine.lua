@@ -1,5 +1,9 @@
-local conditions = require("smauel.config.lualine.conditions")
-local colors = require("smauel.config.lualine.colors")
+local colors = { green = "#98be65", red = "#ec5f67", }
+
+local function hide_in_width()
+  local window_width_limit = 70
+  return vim.fn.winwidth(0) > window_width_limit
+end
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -25,7 +29,7 @@ local function list_registered_sources(filetype)
   return registered
 end
 
-return {
+local components = {
   mode = {
     "mode",
     color = {},
@@ -36,7 +40,7 @@ return {
     "b:gitsigns_head",
     icon = " ",
     color = { gui = "bold" },
-    cond = conditions.hide_in_width,
+    cond = hide_in_width,
   },
 
   filename = {
@@ -60,7 +64,6 @@ return {
   diff = {
     "diff",
     source = diff_source,
-    symbols = { added = "  ", modified = "~", removed = " " },
     padding = { left = 2, right = 1 },
     cond = nil,
   },
@@ -69,7 +72,6 @@ return {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     sections = { 'error', 'warn', 'info', 'hint' },
-    symbols = { error = " ", warn = " ", info = " ", hint = "ﴞ " },
     colored = true,
   },
 
@@ -82,7 +84,7 @@ return {
       local ts = vim.treesitter.highlighter.active[buf]
       return { fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red }
     end,
-    cond = conditions.hide_in_width,
+    cond = hide_in_width,
   },
 
   lsp = {
@@ -120,6 +122,39 @@ return {
       return language_servers
     end,
     color = { gui = "bold" },
-    cond = conditions.hide_in_width,
+    cond = hide_in_width,
+  },
+}
+
+require('lualine').setup {
+  options = {
+    icons_enabled = false,
+    theme = 'onedark',
+    component_separators = '|',
+    section_separators = '',
+    disabled_filetypes = { 'NvimTree' }
+  },
+  sections = {
+    lualine_a = {
+      components.mode,
+    },
+    lualine_b = {
+      components.branch,
+      components.filename,
+    },
+    lualine_c = {
+      components.diagnostics,
+    },
+    lualine_x = {
+      components.diff,
+      components.lsp,
+    },
+    lualine_y = {
+      components.treesitter,
+      components.filetype,
+    },
+    lualine_z = {
+      components.progress,
+    },
   },
 }

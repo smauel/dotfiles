@@ -5,16 +5,11 @@ local actions = require("telescope.actions")
 
 telescope.setup({
 	defaults = {
-		layout_config = {
-			prompt_position = "top",
-		},
-		sorting_strategy = "ascending",
-		prompt_prefix = "🔍 ",
-		color_devicons = true,
-
 		mappings = {
 			i = {
 				["<esc>"] = actions.close,
+				['<C-u>'] = false,
+				['<C-d>'] = false,
 			},
 		},
 
@@ -30,15 +25,16 @@ telescope.setup({
 		},
 	},
 
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-      }
-    }
-  }
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {
+			}
+		}
+	}
 })
 
 require("telescope").load_extension("ui-select")
+-- require("telescope").load_extension("fzf")
 
 local M = {}
 M.find_files = function()
@@ -124,6 +120,10 @@ end
 
 M.git_status = function()
 	telescope_builtin.git_status()
+end
+
+M.oldfiles = function()
+	telescope_builtin.oldfiles()
 end
 
 return M

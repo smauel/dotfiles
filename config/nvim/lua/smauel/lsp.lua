@@ -1,55 +1,24 @@
-local m = require("mapx").setup({ whichkey = true })
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local m = require('mapx').setup({ whichkey = true })
 
--- Gutter icons
-vim.fn.sign_define("DiagnosticSignError",
-  { texthl = "DiagnosticSignError", text = " ", numhl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarning",
-  { texthl = "DiagnosticSignWarning", text = " ", numhl = "DiagnosticSignWarning" })
-vim.fn.sign_define("DiagnosticSignHint",
-  { texthl = "DiagnosticSignHint", text = "ﴞ ", numhl = "DiagnosticSignHint" })
-vim.fn.sign_define("DiagnosticSignInformation",
-  { texthl = "DiagnosticSignInformation", text = " ", numhl = "DiagnosticSignInformation" })
+-- autoformat on save
+require('lsp-format').setup {}
 
-local mason = require("mason")
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
-    }
-  }
-})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "tsserver",
-    "yamlls",
-    "volar",
-    "terraformls",
-    "sqlls",
-    "sumneko_lua",
-    "marksman",
-    "jsonls",
-    "html",
-    "golangci_lint_ls",
-    "gopls",
-    "bashls",
-    "angularls",
-  }
-})
+local lua_runtime_path = vim.split(package.path, ';')
+table.insert(lua_runtime_path, 'lua/?.lua')
+table.insert(lua_runtime_path, 'lua/?/init.lua')
 
-local on_attach = function(client, bufnr)
-  require("lsp-format").on_attach(client)
 
-  -- Keymappings
-  m.nmap("<leader>D", "<cmd>Telescope lsp_type_definitions<CR>", "silent", "Type Definition")
+local on_attach = function(client)
+  require('lsp-format').on_attach(client)
 
   m.nmap("gd", ":<C-u>Telescope lsp_definitions<CR>", "silent", "Goto Definition")
   m.nmap("gi", ":<C-u>Telescope lsp_implementations<CR>", "silent", "Goto Implementation")
   m.nmap("gr", ":<C-u>Telescope lsp_references<CR>", "silent", "Goto References")
   m.nmap("gj", ":<C-u>Telescope lsp_document_symbols<CR>", "silent", "Document Symbols")
+
   m.nmap("K", "<cmd>lua vim.lsp.buf.hover()<CR>", "silent", "Hover")
   m.nmap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "silent", "Signature Help")
 
@@ -59,39 +28,48 @@ local on_attach = function(client, bufnr)
   m.nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "silent", "Prev Diagnostic...")
   m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
 
-  if client.server_capabilities.document_formatting then
-    vim.cmd([[
-			augroup formatting
-				autocmd! * <buffer>
-				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
-			augroup END
-		]] )
-  end
-
-  -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.document_highlight then
     vim.cmd([[
-			augroup lsp_document_highlight
-				autocmd! * <buffer>
-				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-			augroup END
-		]] )
+      augroup lsp_document_highlight
+      autocmd! * <buffer>
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+      ]])
   end
 end
 
-require("mason-lspconfig").setup_handlers {
-  -- default handler.
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'tsserver',
+    'yamlls',
+    'volar',
+    'terraformls',
+    'sqlls',
+    'sumneko_lua',
+    'marksman',
+    'jsonls',
+    'html',
+    'golangci_lint_ls',
+    'gopls',
+    'bashls',
+    'angularls',
+  }
+})
+
+require('mason-lspconfig').setup_handlers {
+  -- default handler
   function(server_name)
-    require("lspconfig")[server_name].setup {
+    require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach
     }
   end,
 
   -- specific servers.
-  ["tsserver"] = function()
-    require("typescript").setup({
+  ['tsserver'] = function(_)
+    require('typescript').setup({
       disable_commands = false,
       debug = false,
       go_to_source_definition = {
@@ -104,15 +82,24 @@ require("mason-lspconfig").setup_handlers {
     })
   end,
 
-  ["sumneko_lua"] = function()
-    require("lspconfig").sumneko_lua.setup {
+  ['sumneko_lua'] = function(_)
+    require('lspconfig').sumneko_lua.setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT',
+            path = lua_runtime_path,
+          },
           diagnostics = {
-            globals = { "vim" }
-          }
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file('', true),
+            checkThirdParty = false,
+          },
+          telemetry = { enable = false },
         }
       }
     }
@@ -120,13 +107,13 @@ require("mason-lspconfig").setup_handlers {
 }
 
 -- external linters/formatters
-require("mason-null-ls").setup({ automatic_setup = true })
-require 'mason-null-ls'.setup_handlers()
-require("null-ls").setup({
+require('mason-null-ls').setup({ automatic_setup = true })
+require 'mason-null-ls'.setup_handlers {}
+require('null-ls').setup({
   sources = {
-    require("typescript.extensions.null-ls.code-actions"),
+    require('typescript.extensions.null-ls.code-actions'),
   }
 })
 
--- debug adapters
-require("mason-nvim-dap").setup({ automatic_setup = true })
+-- lsp status information
+require('fidget').setup()

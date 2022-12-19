@@ -14,3 +14,4 @@ require("nvim-tree").setup({
 vim.api.nvim_command([[
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 ]])
+
