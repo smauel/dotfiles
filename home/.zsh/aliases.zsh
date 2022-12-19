@@ -26,6 +26,7 @@ alias b64='function(){echo $1 | base64}'
 alias ub64='function(){echo $1 | base64 -D}'
 alias password="head -c 62 /dev/urandom | /usr/bin/base64 -i - -o - | sed 's/[^a-zA-Z0-9]//g'"
 alias uuid="uuidgen |tr '[:upper:]' '[:lower:]'"
+alias prer='echo "PRer is: $(echo Sam\\\nIan\\\nZiemek\\\nHenry | shuf -n1)"'
 
 # git aliases
 alias gap='git add --patch'
@@ -36,7 +37,7 @@ alias gd='git diff'
 alias dc='docker-compose'
 alias dcl='docker-compose -f docker-compose.local.yml'
 alias dps='docker ps'
-alias drm='docker rm $(docker ps -aq)'
+alias drm='docker rm $(docker ps -q -f "status=exited")'
 alias dri='docker rmi $(docker images -q)'
 alias dstop='docker stop $(docker ps -aq)'
 alias dprune='dstop && drm && docker volume rm pgdata localstackdata'
