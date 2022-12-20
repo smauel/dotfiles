@@ -20,6 +20,7 @@ require('packer').startup({
     use 'wbthomason/packer.nvim'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
+    use 'tpope/vim-surround'
     use 'navarasu/onedark.nvim'
 
 
