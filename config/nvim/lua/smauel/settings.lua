@@ -8,7 +8,7 @@ vim.g.maplocalleader = ','
 -- colors
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme tokyonight]]
 
 -- general
 vim.o.hidden = true

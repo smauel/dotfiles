@@ -18,11 +18,14 @@ vim.cmd([[
 require('packer').startup({
   function(use)
     use 'wbthomason/packer.nvim'
+    use 'lewis6991/impatient.nvim'
+
+    use 'folke/tokyonight.nvim'
+    use 'navarasu/onedark.nvim'
+
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
     use 'tpope/vim-surround'
-    use 'navarasu/onedark.nvim'
-    use 'lewis6991/impatient.nvim'
 
     use {
       'neovim/nvim-lspconfig',
@@ -35,6 +38,13 @@ require('packer').startup({
         'jose-elias-alvarez/null-ls.nvim',
         'jose-elias-alvarez/typescript.nvim',
       },
+    }
+
+    use {
+      "folke/trouble.nvim",
+      config = function()
+        pcall(require("smauel.config.trouble"))
+      end
     }
 
     use {
@@ -57,7 +67,9 @@ require('packer').startup({
 
     use {
       'stevearc/aerial.nvim',
-      config = function() require('aerial').setup() end
+      config = function()
+        pcall(require('smauel.config.aerial'))
+      end
     }
 
     use {
