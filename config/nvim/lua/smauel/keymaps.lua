@@ -3,7 +3,7 @@ local ts = require('smauel.config.telescope')
 local m = require("mapx").setup({ whichkey = true })
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>!', function()
+vim.keymap.set('n', '<leader>,', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
@@ -13,17 +13,21 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- leader bindings
 m.nname("<leader>", "Leader")
-m.nnoremap("<leader>,", ":DiffviewToggle<cr>", "silent", "Telescope Commands")
 m.nnoremap("<leader>/", ":noh<cr>", "silent", "Clear Highlight")
-m.nnoremap("<leader>?", ts.oldfiles, "silent", "Telescope Recent Files")
+m.nnoremap("<leader>?", ts.file_browser, "silent", "Telescope Recent Files")
 m.nnoremap("<leader>b", ts.buffers, "silent", "Telescope Buffers")
-m.nnoremap("<leader>c", ts.commits, "silent", "Telescope Commits")
+m.nnoremap("<leader>c", ts.command_history, "silent", "Telescope Command History")
+m.nnoremap("<leader>d", ts.diagnostics, "silent", "Telescope Diagnostics")
 m.nnoremap("<leader>e", vim.diagnostic.open_float, "silent", "Open Float Diagnostics")
 m.nnoremap("<leader>f", ":NvimTreeFindFile<cr>", "silent", "NvimTree Find File")
-m.nnoremap("<leader>h", ts.help_tags, "silent", "Telescope Help")
-m.nnoremap("<leader>gd", ts.git_status, "silent", "Telescope Git Diff")
+m.nnoremap("<leader>gb", ts.git_branches, "silent", "Telescope Git Branches")
+m.nnoremap("<leader>gc", ts.git_commits, "silent", "Telescope Git Commits")
 m.nnoremap("<leader>gf", ts.git_files, "silent", "Telescope Git Files")
+m.nnoremap("<leader>gs", ts.git_status, "silent", "Telescope Git Status")
+m.nnoremap("<leader>h", ts.help_tags, "silent", "Telescope Help")
+m.nnoremap("<leader>k", ts.keymaps, "silent", "Telescope Keymaps")
 m.nnoremap("<leader>l", ":NvimTreeToggle<cr>", "silent", "NvimTree Toggle")
+m.nnoremap("<leader>o", ":AerialToggle<cr>", "silent", "Aerial Outline")
 m.nnoremap("<leader>p", ts.find_files, "silent", "Telescope Files")
 m.nnoremap("<leader>q", ts.quickfix, "silent", "Telescope Quickfix")
 m.nnoremap("<leader>r", ts.live_grep, "silent", "Telescope Grep")

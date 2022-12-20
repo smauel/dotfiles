@@ -22,7 +22,7 @@ require('packer').startup({
     use 'tpope/vim-rhubarb'
     use 'tpope/vim-surround'
     use 'navarasu/onedark.nvim'
-
+    use 'lewis6991/impatient.nvim'
 
     use {
       'neovim/nvim-lspconfig',
@@ -53,6 +53,11 @@ require('packer').startup({
       config = function()
         pcall(require('smauel.config.treesitter'))
       end
+    }
+
+    use {
+      'stevearc/aerial.nvim',
+      config = function() require('aerial').setup() end
     }
 
     use {
