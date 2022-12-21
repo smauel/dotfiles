@@ -22,6 +22,7 @@ require('packer').startup({
 
     use 'folke/tokyonight.nvim'
     use 'navarasu/onedark.nvim'
+    use 'nvim-tree/nvim-web-devicons'
 
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
@@ -30,13 +31,13 @@ require('packer').startup({
     use {
       'neovim/nvim-lspconfig',
       requires = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-        'jayp0521/mason-null-ls.nvim',
         'j-hui/fidget.nvim',
-        'lukas-reineke/lsp-format.nvim',
+        'jayp0521/mason-null-ls.nvim',
         'jose-elias-alvarez/null-ls.nvim',
         'jose-elias-alvarez/typescript.nvim',
+        'lukas-reineke/lsp-format.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'williamboman/mason.nvim',
       },
     }
 
@@ -49,7 +50,16 @@ require('packer').startup({
 
     use {
       'hrsh7th/nvim-cmp',
-      requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+      requires = {
+        'L3MON4D3/LuaSnip',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lua',
+        'hrsh7th/cmp-path',
+        'onsails/lspkind.nvim',
+        'rafamadriz/friendly-snippets',
+        'saadparwaiz1/cmp_luasnip',
+      },
       config = function()
         pcall(require('smauel.config.cmp'))
       end

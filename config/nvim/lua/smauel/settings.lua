@@ -12,7 +12,7 @@ vim.cmd [[colorscheme tokyonight]]
 
 -- general
 vim.o.hidden = true
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamed'
 vim.o.binary = true
 vim.o.eol = false
 vim.o.modeline = true

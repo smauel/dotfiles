@@ -23,7 +23,7 @@ local on_attach = function(client)
   m.nmap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "silent", "Signature Help")
 
   m.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", "silent", "Code Action")
-  m.nnoremap('<leader>cr', "<cmd>lua vim.lsp.buf.rename(<CR>", 'silent', 'Rename')
+  m.nnoremap('<leader>cr', "<cmd>lua vim.lsp.buf.rename()<CR>", 'silent', 'Rename')
   m.nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "silent", "Next Diagnostic...")
   m.nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "silent", "Prev Diagnostic...")
   m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
@@ -105,6 +105,18 @@ require('mason-lspconfig').setup_handlers {
     }
   end
 }
+
+local signs = {
+  Error = " ",
+  Warn = " ",
+  Hint = " ",
+  Info = " "
+}
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 -- external linters/formatters
 require('mason-null-ls').setup({ automatic_setup = true })
