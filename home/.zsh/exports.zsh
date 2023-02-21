@@ -27,3 +27,4 @@ else
 fi
 
 export REPOS_DIR=${HOME}/src
+export GOBIN=${HOME}/go/bin

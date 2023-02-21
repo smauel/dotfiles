@@ -8,3 +8,4 @@ metals.sbt
 .scalafmt.conf
 .vim/
 .run/
+.tool-versions
