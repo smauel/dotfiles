@@ -1,6 +1,6 @@
 {
   // editor settings
-  "editor.fontFamily": "'IBM Plex Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'JetBrains Mono'",
   "editor.fontSize": 16,
   // autofix and autoformat
   "editor.codeActionsOnSave": {
@@ -23,6 +23,14 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "Tokyo Night Storm",
+  "vim.useSystemClipboard": true,
+  "files.autoSave": "onFocusChange",
+  "explorer.confirmDelete": false,
+  "terminal.integrated.fontFamily": "monospace",
+  "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
