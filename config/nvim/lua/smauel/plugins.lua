@@ -36,6 +36,7 @@ require('packer').startup({
         'jose-elias-alvarez/null-ls.nvim',
         'jose-elias-alvarez/typescript.nvim',
         'lukas-reineke/lsp-format.nvim',
+        'ray-x/go.nvim',
         'williamboman/mason-lspconfig.nvim',
         'williamboman/mason.nvim',
       },

@@ -40,6 +40,12 @@ m.nnoremap("<C-K>", "<C-W><C-K>")
 m.nnoremap("<C-L>", "<C-W><C-L>")
 m.nnoremap("<C-H>", "<C-W><C-H>")
 
+-- resize bindings
+m.nnoremap("<C-Up>", "<cmd>resize +2<cr>")
+m.nnoremap("<C-Down>", "<cmd>resize -2<cr>")
+m.nnoremap("<C-Left>", "<cmd>vertical resize -2<cr>")
+m.nnoremap("<C-Right>", "<cmd>vertical resize +2<cr>")
+
 -- handle wrapped lines nicely
 m.nnoremap("j", function(count)
   return count > 0 and "j" or "gj"

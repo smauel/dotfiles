@@ -1,66 +1,68 @@
 -- Settings
 -- See `:help vim.o`
+local opt = vim.o
 
 -- leader
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- colors
-vim.o.termguicolors = true
-vim.o.background = 'dark'
+opt.termguicolors = true
+opt.background = 'dark'
 vim.cmd [[colorscheme tokyonight]]
 
 -- general
-vim.o.hidden = true
-vim.o.clipboard = 'unnamed'
-vim.o.binary = true
-vim.o.eol = false
-vim.o.modeline = true
-vim.o.modelines = 4
-vim.o.cmdheight = 1
-vim.o.lazyredraw = true
-vim.o.showmode = false
-vim.o.updatetime = 250
-vim.o.shortmess = vim.o.shortmess .. 'c'
-vim.o.scrolloff = 3
-vim.o.encoding = 'utf-8'
-vim.o.list = false
-vim.o.completeopt = 'menuone,noselect'
+opt.hidden = true
+opt.clipboard = 'unnamedplus'
+opt.binary = true
+opt.eol = false
+opt.modeline = true
+opt.modelines = 4
+opt.cmdheight = 1
+opt.lazyredraw = true
+opt.showmode = false
+opt.updatetime = 250
+opt.shortmess = opt.shortmess .. 'c'
+opt.scrolloff = 3
+opt.encoding = 'utf-8'
+opt.list = false
+opt.completeopt = 'menu,menuone,noselect'
 
 -- backup and swap
-vim.o.swapfile = false
-vim.o.backup = false
-vim.o.writebackup = false
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = false
 
 -- formatting
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
-vim.o.expandtab = true
-vim.o.smartindent = true
-vim.o.smarttab = true
-vim.o.joinspaces = false
-vim.o.autoindent = true
-vim.o.formatoptions = vim.o.formatoptions .. "j"
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.smartindent = true
+opt.smarttab = true
+opt.joinspaces = false
+opt.autoindent = true
+opt.copyindent = true
+opt.formatoptions = opt.formatoptions .. "j"
 
 -- search
-vim.o.showmatch = true
-vim.o.matchtime = 5
-vim.o.hlsearch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
+opt.showmatch = true
+opt.matchtime = 5
+opt.hlsearch = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- visual
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.showtabline = 2
-vim.o.showcmd = true
-vim.o.cursorline = true
-vim.o.visualbell = false
-vim.o.errorbells = false
-vim.o.conceallevel = 0
-vim.o.signcolumn = 'number'
+opt.number = true
+opt.relativenumber = true
+opt.showtabline = 2
+opt.showcmd = true
+opt.cursorline = true
+opt.visualbell = false
+opt.errorbells = false
+opt.conceallevel = 0
+opt.signcolumn = 'number'
 
 -- splits
-vim.o.splitbelow = true
-vim.o.splitright = true
+opt.splitbelow = true
+opt.splitright = true

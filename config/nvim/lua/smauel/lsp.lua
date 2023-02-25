@@ -10,6 +10,13 @@ local lua_runtime_path = vim.split(package.path, ';')
 table.insert(lua_runtime_path, 'lua/?.lua')
 table.insert(lua_runtime_path, 'lua/?/init.lua')
 
+local function diagnostic_goto(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
 
 local on_attach = function(client)
   require('lsp-format').on_attach(client)
@@ -24,8 +31,13 @@ local on_attach = function(client)
 
   m.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", "silent", "Code Action")
   m.nnoremap('<leader>cr', "<cmd>lua vim.lsp.buf.rename()<CR>", 'silent', 'Rename')
-  m.nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "silent", "Next Diagnostic...")
-  m.nmap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "silent", "Prev Diagnostic...")
+
+  m.nmap("]d", diagnostic_goto(true), "silent", "Next Diagnostic...")
+  m.nmap("[d", diagnostic_goto(false), "silent", "Prev Diagnostic...")
+  m.nmap("]e", diagnostic_goto(true, "ERROR"), "silent", "Next Error...")
+  m.nmap("[e", diagnostic_goto(false, "ERROR"), "silent", "Prev Error...")
+  m.nmap("]w", diagnostic_goto(true, "WARN"), "silent", "Next Warning...")
+  m.nmap("[w", diagnostic_goto(false, "WARN"), "silent", "Prev Warning...")
   m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
 
   if client.server_capabilities.document_highlight then
@@ -47,7 +59,7 @@ require('mason-lspconfig').setup({
     'volar',
     'terraformls',
     'sqlls',
-    'sumneko_lua',
+    'lua_ls',
     'marksman',
     'jsonls',
     'html',
@@ -82,8 +94,8 @@ require('mason-lspconfig').setup_handlers {
     })
   end,
 
-  ['sumneko_lua'] = function(_)
-    require('lspconfig').sumneko_lua.setup {
+  ['lua_ls'] = function(_)
+    require('lspconfig').lua_ls.setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
