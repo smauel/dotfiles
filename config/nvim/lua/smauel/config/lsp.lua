@@ -1,5 +1,3 @@
-local m = require('mapx').setup({ whichkey = true })
-
 -- autoformat on save
 require('lsp-format').setup {}
 
@@ -18,27 +16,31 @@ local function diagnostic_goto(next, severity)
   end
 end
 
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
   require('lsp-format').on_attach(client)
 
-  m.nmap("gd", ":<C-u>Telescope lsp_definitions<CR>", "silent", "Goto Definition")
-  m.nmap("gi", ":<C-u>Telescope lsp_implementations<CR>", "silent", "Goto Implementation")
-  m.nmap("gr", ":<C-u>Telescope lsp_references<CR>", "silent", "Goto References")
-  m.nmap("gj", ":<C-u>Telescope lsp_document_symbols<CR>", "silent", "Document Symbols")
+  local function nmap(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, { silent = true, buffer = bufnr, desc = desc })
+  end
 
-  m.nmap("K", "<cmd>lua vim.lsp.buf.hover()<CR>", "silent", "Hover")
-  m.nmap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "silent", "Signature Help")
+  nmap("gd", ":<C-u>Telescope lsp_definitions<CR>", "Goto Definition")
+  nmap("gi", ":<C-u>Telescope lsp_implementations<CR>", "Goto Implementation")
+  nmap("gr", ":<C-u>Telescope lsp_references<CR>", "Goto References")
+  nmap("gj", ":<C-u>Telescope lsp_document_symbols<CR>", "Document Symbols")
 
-  m.nmap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", "silent", "Code Action")
-  m.nnoremap('<leader>cr', "<cmd>lua vim.lsp.buf.rename()<CR>", 'silent', 'Rename')
+  nmap("K", vim.lsp.buf.hover, "Hover")
+  nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
-  m.nmap("]d", diagnostic_goto(true), "silent", "Next Diagnostic...")
-  m.nmap("[d", diagnostic_goto(false), "silent", "Prev Diagnostic...")
-  m.nmap("]e", diagnostic_goto(true, "ERROR"), "silent", "Next Error...")
-  m.nmap("[e", diagnostic_goto(false, "ERROR"), "silent", "Prev Error...")
-  m.nmap("]w", diagnostic_goto(true, "WARN"), "silent", "Next Warning...")
-  m.nmap("[w", diagnostic_goto(false, "WARN"), "silent", "Prev Warning...")
-  m.nmap("][d", "<cmd>Telescope diagnostics<cr>", "silent", "Diagnostics")
+  nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+  nmap('<leader>cr', vim.lsp.buf.rename, 'Code Rename')
+
+  nmap("]d", diagnostic_goto(true), "Next Diagnostic...")
+  nmap("[d", diagnostic_goto(false), "Prev Diagnostic...")
+  nmap("]e", diagnostic_goto(true, "ERROR"), "Next Error...")
+  nmap("[e", diagnostic_goto(false, "ERROR"), "Prev Error...")
+  nmap("]w", diagnostic_goto(true, "WARN"), "Next Warning...")
+  nmap("[w", diagnostic_goto(false, "WARN"), "Prev Warning...")
+  nmap("][d", "<cmd>Telescope diagnostics<cr>", "Diagnostics")
 
   if client.server_capabilities.document_highlight then
     vim.cmd([[
@@ -66,7 +68,6 @@ require('mason-lspconfig').setup({
     'golangci_lint_ls',
     'gopls',
     'bashls',
-    'angularls',
   }
 })
 
@@ -80,7 +81,7 @@ require('mason-lspconfig').setup_handlers {
   end,
 
   -- specific servers.
-  ['tsserver'] = function(_)
+      ['tsserver'] = function(_)
     require('typescript').setup({
       disable_commands = false,
       debug = false,
@@ -94,7 +95,7 @@ require('mason-lspconfig').setup_handlers {
     })
   end,
 
-  ['lua_ls'] = function(_)
+      ['lua_ls'] = function(_)
     require('lspconfig').lua_ls.setup {
       capabilities = capabilities,
       on_attach = on_attach,

@@ -2,14 +2,9 @@
 -- See `:help vim.o`
 local opt = vim.o
 
--- leader
-vim.g.mapleader = ','
-vim.g.maplocalleader = ','
-
 -- colors
 opt.termguicolors = true
 opt.background = 'dark'
-vim.cmd [[colorscheme tokyonight]]
 
 -- general
 opt.hidden = true
