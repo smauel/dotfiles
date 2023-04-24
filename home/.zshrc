@@ -34,3 +34,5 @@ source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/fzf.zsh
 source $HOME/.zsh/gitauthor.zsh
 source $HOME/.secrets.zsh
+
+. /usr/local/opt/asdf/libexec/asdf.sh
