@@ -34,19 +34,3 @@ source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/fzf.zsh
 source $HOME/.zsh/gitauthor.zsh
 source $HOME/.secrets.zsh
-
-#
-# asdf
-#
-# MUST come after $PATH has been set
-#
-# TODO: write script to init asdf on clean install
-#   - install plugins if not installed
-#   - install versions specified in .tool-versions
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-
-# pnpm
-export PNPM_HOME="/Users/smauel/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm endexport HOMEBREW_GITHUB_API_TOKEN=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

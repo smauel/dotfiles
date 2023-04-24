@@ -1,13 +1,3 @@
-#
-# Auto-completion
-#
-[[ $- == *i* ]] && source "/Users/smauel/.asdf/installs/fzf/0.30.0/shell/completion.zsh" 2> /dev/null
-
-#
-# Key bindings
-#
-source "/Users/smauel/.asdf/installs/fzf/0.30.0/shell/key-bindings.zsh"
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # respect .gitignore
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--reverse"
