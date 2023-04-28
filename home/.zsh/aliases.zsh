@@ -1,8 +1,6 @@
 # general aliases
 alias dotfiles="cd ${REPOS_DIR}/dotfiles"
 alias ef="cd ${REPOS_DIR}/ef-studio/master"
-alias vim=nvim
-alias gvim='nvim-gui'
 alias fv='vim $(fzf)'
 alias cc='clear'
 alias x='exit'
@@ -69,8 +67,10 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
+# vim aliases
+alias vim="NVIM_APPNAME=lazyvim nvim"
 alias nvim-lazy="NVIM_APPNAME=lazyvim nvim"
-# alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=nvchad nvim"
 alias nvim-astro="NVIM_APPNAME=astrovim nvim"
 
