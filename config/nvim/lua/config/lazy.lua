@@ -16,10 +16,9 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.core" },
 
     -- language support
-    -- { import = "langs.go" },
-    -- { import = "langs.java" },
     { import = "plugins.extras.lang.json" },
     { import = "plugins.extras.lang.typescript" },
+    { import = "plugins.extras.lang.go" },
 
     -- import/override with your plugins
     { import = "plugins" },

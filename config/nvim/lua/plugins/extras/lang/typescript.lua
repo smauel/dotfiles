@@ -47,6 +47,7 @@ return {
             },
           },
         },
+        ---@type lspconfig.options.eslint
         eslint = {
           settings = {
             workingDirectory = { mode = "auto" },
