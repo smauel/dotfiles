@@ -22,6 +22,7 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.diagnostics.buf,
         null_ls.builtins.code_actions.refactoring,
+        null_ls.builtins.code_actions.gitsigns,
       }
       return opts
     end,

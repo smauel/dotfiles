@@ -18,8 +18,8 @@ require("lazy").setup({
     -- language support
     -- { import = "langs.go" },
     -- { import = "langs.java" },
-    { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "plugins.extras.lang.json" },
+    { import = "plugins.extras.lang.typescript" },
 
     -- import/override with your plugins
     { import = "plugins" },
