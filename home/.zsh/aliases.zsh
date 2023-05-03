@@ -6,6 +6,7 @@ alias cc='clear'
 alias x='exit'
 alias rm='rm -i'
 alias grep='grep --color=auto'
+alias vim="nvim"
 
 # exa aliases
 alias ls='exa --group-directories-first --icons --color-scale'
@@ -66,22 +67,3 @@ function extract() {
   esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
-
-# vim aliases
-alias vim="NVIM_APPNAME=lazyvim nvim"
-alias nvim-lazy="NVIM_APPNAME=lazyvim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-chad="NVIM_APPNAME=nvchad nvim"
-alias nvim-astro="NVIM_APPNAME=astrovim nvim"
-
-function nvims() {
-  items=("default" "lazyvim" "astrovim" "nvchad" "kickstart")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
