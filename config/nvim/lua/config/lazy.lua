@@ -19,6 +19,7 @@ require("lazy").setup({
     { import = "plugins.extras.lang.json" },
     { import = "plugins.extras.lang.typescript" },
     { import = "plugins.extras.lang.go" },
+    { import = "plugins.extras.lang.java" },
 
     -- import/override with your plugins
     { import = "plugins" },
