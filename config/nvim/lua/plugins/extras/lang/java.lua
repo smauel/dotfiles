@@ -96,13 +96,6 @@ return {
                   require("jdtls.dap").setup_dap_main_class_configs()
                   require("jdtls.setup").add_commands()
                 end,
-                -- cmd = {
-                --   jdtls_bin,
-                --   "-data",
-                --   workspace_folder,
-                --   "-javaagent:" .. lombok_path,
-                --   "--jvm-arg=-Xms2G",
-                -- },
                 cmd = {
                   "java",
                   "-Declipse.application=org.eclipse.jdt.ls.core.id1",
