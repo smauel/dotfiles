@@ -1,6 +1,0 @@
-dbaeumer.vscode-eslint
-Equinusocio.vsc-community-material-theme
-esbenp.prettier-vscode
-Orta.vscode-jest
-PKief.material-icon-theme
-vscodevim.vim
