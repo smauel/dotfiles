@@ -1,0 +1,12 @@
+--max-columns=150
+
+--type-add
+web:*.{html,css,js}*
+
+--glob
+!git/*
+!node_modules/*
+
+--smart-case
+
+--hidden
