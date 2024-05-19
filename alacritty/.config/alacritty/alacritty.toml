@@ -20,3 +20,6 @@ style = "Italic"
 [font.glyph_offset]
 x = 0
 y = 0
+
+[window]
+opacity = 0.94

@@ -56,7 +56,7 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 # aliases
-alias ll="ls -la"
+alias ll="ls -la --color"
 alias x="exit"
 alias cc="clear"
 alias gs="git status"
