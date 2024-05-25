@@ -1,3 +1,5 @@
+autoload -U compinit && compinit
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -13,6 +15,8 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # zsh plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -21,10 +25,14 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-autoload -U compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# set path
+path+=("$HOME/bin")
+path+=("$HOME/go/bin")
+export PATH
 
 # keybindings
 bindkey -e
@@ -52,9 +60,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # shell integration
-# eval "$(fzf --zsh)" # for newer versions of fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+eval "$(fzf --zsh)" # for newer versions of fzf
 # eval "$(zoxide init --cmd cd zsh)"
 
 # aliases
@@ -66,6 +72,3 @@ alias gd="git diff"
 alias gap="git add -p"
 alias vim="nvim"
 alias vi="nvim"
-
-# exports
-export PATH="$PATH:~/bin"
