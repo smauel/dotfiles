@@ -30,9 +30,15 @@ zinit light Aloxaf/fzf-tab
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # set path
-path+=("$HOME/bin")
-path+=("$HOME/go/bin")
-export PATH
+if [[ ! "$PATH" == */home/smauel/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/smauel/.fzf/bin"
+fi
+if [[ ! "$PATH" == */home/smauel/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/smauel/bin"
+fi
+if [[ ! "$PATH" == */home/smauel/go/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/smauel/go/bin"
+fi
 
 # keybindings
 bindkey -e
@@ -60,7 +66,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # shell integration
-eval "$(fzf --zsh)" # for newer versions of fzf
+source <(fzf --zsh)
 # eval "$(zoxide init --cmd cd zsh)"
 
 # aliases
