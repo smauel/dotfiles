@@ -27,7 +27,7 @@ return {
     keys = {
       {
         "<leader>p",
-        Util.telescope("files"),
+        Util.pick("files"),
         desc = "Find Files (root dir)",
       },
       {
