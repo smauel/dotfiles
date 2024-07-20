@@ -30,6 +30,9 @@ zinit light Aloxaf/fzf-tab
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # set path
+if [[ ! "$PATH" == */home/smauel/.local/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/smauel/.local/bin"
+fi
 if [[ ! "$PATH" == */home/smauel/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/smauel/.fzf/bin"
 fi
@@ -38,6 +41,9 @@ if [[ ! "$PATH" == */home/smauel/bin* ]]; then
 fi
 if [[ ! "$PATH" == */home/smauel/go/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/smauel/go/bin"
+fi
+if [[ ! "$PATH" == */usr/local/go/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/usr/local/go/bin"
 fi
 
 # keybindings
@@ -73,8 +79,17 @@ source <(fzf --zsh)
 alias ll="ls -la --color"
 alias x="exit"
 alias cc="clear"
-alias gs="git status"
+alias gs="git status -s"
 alias gd="git diff"
+alias gdc="git diff --cached"
 alias gap="git add -p"
 alias vim="nvim"
 alias vi="nvim"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
