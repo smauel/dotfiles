@@ -1,0 +1,15 @@
+{
+  "profiles": {},
+  "baseDir": "/home/smauel/src",
+  "trunkBranch": "",
+  "default": {
+    "mainBranch": "main"
+  },
+  "skipRepos": [],
+  "ui": {
+    "color": true
+  },
+  "dotfiles": {
+    "mainBranch": "master"
+  }
+}
