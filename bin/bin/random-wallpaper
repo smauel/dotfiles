@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+wallpapers="$HOME/Pictures/Wallpapers"
+selection=$(fd . $wallpapers | shuf -n1)
+
+gsettings set org.gnome.desktop.background picture-uri "file://$selection"
