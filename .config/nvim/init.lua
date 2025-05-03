@@ -80,8 +80,8 @@ require("lualine").setup({})
 -- Mappings
 -----------------------------------------------------
 vim.keymap.set("n", "<leader>l", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>r", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", ":<C-U>TmuxNavigateDown<CR>", { noremap = true, silent = true })
