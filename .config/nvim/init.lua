@@ -34,14 +34,39 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -----------------------------------------------------
 require("lazy").setup({
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
 	{ "nvim-tree/nvim-tree.lua", config = true },
-	{ "nvim-lualine/lualine.nvim", config = true },
+	{ "nvim-lualine/lualine.nvim", opts = { options = { theme = "tokyonight" } } },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.4", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim", config = true },
-	{ "williamboman/mason-lspconfig.nvim" },
-	{ "stevearc/conform.nvim" },
-	{ "zapling/mason-conform.nvim" },
+	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			ensure_installed = { "lua_ls", "pyright", "ts_ls" },
+			automatic_installation = true,
+		},
+	},
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				javascript = { "prettierd", "prettier" },
+			},
+			format_on_save = {
+				lsp_fallback = true,
+				timeout_ms = 500,
+			},
+		},
+	},
+	{ "zapling/mason-conform.nvim", config = true },
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -64,6 +89,38 @@ require("lazy").setup({
 		},
 	},
 	{ "christoomey/vim-tmux-navigator", lazy = false },
+	{ "echasnovski/mini.pairs", config = true },
+	{ "lewis6991/gitsigns.nvim", config = true },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			highlight = { enable = true },
+			indent = { enable = true },
+			ensure_installed = {
+				"bash",
+				"diff",
+				"html",
+				"javascript",
+				"jsdoc",
+				"json",
+				"jsonc",
+				"lua",
+				"luadoc",
+				"luap",
+				"markdown",
+				"markdown_inline",
+				"printf",
+				"query",
+				"regex",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"xml",
+				"yaml",
+			},
+		},
+	},
 })
 
 -----------------------------------------------------
@@ -80,7 +137,7 @@ require("lualine").setup({})
 -- Mappings
 -----------------------------------------------------
 vim.keymap.set("n", "<leader>l", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files hidden=true<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>r", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { noremap = true, silent = true })
@@ -99,12 +156,6 @@ vim.cmd([[
 -----------------------------------------------------
 -- LSP
 -----------------------------------------------------
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "pyright", "ts_ls" },
-	automatic_installation = true,
-})
-
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
 	function(server_name)
@@ -113,17 +164,6 @@ require("mason-lspconfig").setup_handlers({
 })
 
 -----------------------------------------------------
--- Formatters
+-- Colorscheme
 -----------------------------------------------------
-require("conform").setup({
-	formatters_by_ft = {
-		lua = { "stylua" },
-		python = { "isort", "black" },
-		javascript = { "prettierd", "prettier" },
-	},
-	format_on_save = {
-		lsp_fallback = true,
-		timeout_ms = 500,
-	},
-})
-require("mason-conform").setup()
+vim.cmd([[colorscheme tokyonight]])
