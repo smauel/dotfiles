@@ -91,9 +91,55 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {},
 	},
-	{ "nvim-tree/nvim-tree.lua", config = true },
+	{
+		"nvim-tree/nvim-tree.lua",
+		config = true,
+		keys = {
+			{ "<leader>l", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
+		},
+	},
 	{ "nvim-lualine/lualine.nvim", opts = { options = { theme = "tokyonight" } } },
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.4", dependencies = { "nvim-lua/plenary.nvim" } },
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+		},
+		keys = {
+			{ "<leader>p", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+			{ "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "Ripgrep" },
+		},
+		config = function()
+			local telescope = require("telescope")
+			telescope.setup({
+				pickers = {
+					live_grep = {
+						file_ignore_patterns = { "node_modules", ".git", ".venv" },
+						additional_args = function(_)
+							return { "--hidden" }
+						end,
+					},
+					find_files = {
+						file_ignore_patterns = { "node_modules", ".git", ".venv" },
+						hidden = true,
+					},
+				},
+				extensions = {
+					fzf = {
+						fuzzy = true,
+						override_generic_sorter = true,
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+				},
+			})
+			telescope.load_extension("fzf")
+		end,
+	},
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim", config = true },
 	{
@@ -139,7 +185,17 @@ require("lazy").setup({
 			},
 		},
 	},
-	{ "christoomey/vim-tmux-navigator", lazy = false },
+	{
+		"christoomey/vim-tmux-navigator",
+		lazy = false,
+		keys = {
+			{ "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", desc = "Move Left" },
+			{ "<C-l>", ":<C-U>TmuxNavigateRight<CR>", desc = "Move Right" },
+			{ "<C-j>", ":<C-U>TmuxNavigateDown<CR>", desc = "Move Down" },
+			{ "<C-k>", ":<C-U>TmuxNavigateUp<CR>", desc = "Move Up" },
+			{ "<C-\\>", ":<C-U>TmuxNavigatePrevious<CR>", desc = "Move Previous" },
+		},
+	},
 	{ "echasnovski/mini.pairs", config = true },
 	{ "lewis6991/gitsigns.nvim", config = true },
 	{
@@ -175,26 +231,8 @@ require("lazy").setup({
 })
 
 -----------------------------------------------------
--- NvimTree
------------------------------------------------------
-require("nvim-tree").setup()
-
------------------------------------------------------
--- LuaLine
------------------------------------------------------
-require("lualine").setup({})
-
------------------------------------------------------
 -- Mappings
 -----------------------------------------------------
-vim.keymap.set("n", "<leader>l", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>p", "<cmd>Telescope find_files hidden=true<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>r", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-h>", ":<C-U>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-l>", ":<C-U>TmuxNavigateRight<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-j>", ":<C-U>TmuxNavigateDown<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-k>", ":<C-U>TmuxNavigateUp<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-\\>", ":<C-U>TmuxNavigatePrevious<CR>", { noremap = true, silent = true })
 
 vim.cmd([[
   :command W w
