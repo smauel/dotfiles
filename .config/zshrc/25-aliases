@@ -19,6 +19,7 @@ alias ts='~/.config/ml4w/scripts/snapshot.sh'
 alias wifi='nmtui'
 alias cleanup='~/.config/ml4w/scripts/cleanup.sh'
 alias x='exit'
+alias f='vim "$(fzf)"'
 
 # -----------------------------------------------------
 # Git
@@ -26,7 +27,7 @@ alias x='exit'
 alias gs='git status -s'
 alias gd='git diff'
 alias gap='git add -p'
-alias dev-commit='git commit -am "Update on $(date \'+%Y-%m-%d %H:%M:%S\')"'
+alias dev-commit='git commit -am "Update on $(date \"+%Y-%m-%d %H:%M:%S\")"'
 
 # -----------------------------------------------------
 # ML4W Apps
