@@ -26,6 +26,7 @@ alias x='exit'
 alias gs='git status -s'
 alias gd='git diff'
 alias gap='git add -p'
+alias dev-commit='git commit -am "dev commit"'
 
 # -----------------------------------------------------
 # ML4W Apps
