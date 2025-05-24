@@ -22,6 +22,7 @@ plugins=(
     copyfile
     copybuffer
     dirhistory
+    asdf
 )
 
 # Set-up oh-my-zsh
