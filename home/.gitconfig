@@ -43,6 +43,9 @@
 [pull]
   rebase = true             # Use rebase by default on pull (avoids messy merges)
 
+[rebase]
+  autostash = true          # Automatically stash WIP when rebasing, and pop when finished
+
 [diff]
   tool = vimdiff            # Your diff tool of choice
 

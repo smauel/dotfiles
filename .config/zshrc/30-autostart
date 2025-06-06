@@ -13,3 +13,16 @@ else
         echo "Start Hyprland with command Hyprland"
     fi
 fi
+
+# -----------------------------------------------------
+# Tmux
+# -----------------------------------------------------
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  if ! tmux has-session -t git 2>/dev/null; then
+    cd ~/git || cd ~
+    tmux new-session -s git
+  else
+    tmux attach-session -t git
+  fi
+  exit  # Prevent the shell from continuing after tmux exits
+fi
