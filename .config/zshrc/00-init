@@ -1,11 +1,11 @@
 # -----------------------------------------------------
 # INIT
 # -----------------------------------------------------
+eval "$(/home/sam/.local/bin/mise activate zsh)"
 
 # -----------------------------------------------------
 # Exports
 # -----------------------------------------------------
 export EDITOR=nvim
-
+export ZSH="$HOME/.oh-my-zsh"
 export PATH=$PATH:~/.cargo/bin/
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
