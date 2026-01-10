@@ -6,3 +6,8 @@ alias gs='git status'
 alias gd='git diff'
 alias gap='git add -p'
 
+# kubectl aliases
+alias k='kubectl'
+alias klp='kubectl get pods -o wide'
+alias klpa='kubectl get pods -o wide --all-namespaces'
+alias kln='kubectl get nodes -o wide'
