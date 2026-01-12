@@ -4,10 +4,18 @@ alias ll='ls -la'
 alias vim='nvim'
 alias gs='git status'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias gap='git add -p'
 
 # kubectl aliases
 alias k='kubectl'
+
+alias kls='kubectl get svc -o wide'
 alias klp='kubectl get pods -o wide'
-alias klpa='kubectl get pods -o wide --all-namespaces'
+alias kld='kubectl get deploy -o wide'
 alias kln='kubectl get nodes -o wide'
+
+alias kds='kubectl describe service'
+alias kdp='kubectl describe pod'
+alias kdd='kubectl describe deploy'
+alias kdn='kubectl describe node'
