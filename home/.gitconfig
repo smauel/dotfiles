@@ -1,3 +1,9 @@
 [user]
 	email = samuelmorrison87@gmail.com
 	name = Sam Morrison
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
