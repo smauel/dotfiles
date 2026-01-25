@@ -1,1 +1,0 @@
-/home/smauel/.config/omarchy/current/theme/neovim.lua

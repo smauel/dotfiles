@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-tmux new-session -d -s src -c ~/src
-tmux new-session -d -s dotfiles -c ~/src/dotfiles
-tmux attach -t src

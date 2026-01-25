@@ -1,6 +1,0 @@
-[tools]
-go = "latest"
-java = "latest"
-node = "latest"
-maven = "latest"
-talos = "1.12.0"

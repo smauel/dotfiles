@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+tmux new-session -d -s git -c ~/git
+tmux new-session -d -s dotfiles -c ~/git/dotfiles
+tmux attach -t git
