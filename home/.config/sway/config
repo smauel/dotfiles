@@ -2,14 +2,16 @@
 
 set $mod Mod4
 
+set $wallpapers $HOME/Pictures/Wallpapers
 set $left h
 set $down j
 set $up k
 set $right l
 
 exec autotiling-rs
+exec swaync
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg `fd -t file . $wallpapers | shuf -n 1` fill
 
 input type:keyboard {
     xkb_layout "gb"
@@ -23,6 +25,7 @@ bindsym $mod+w kill
 bindsym $mod+space exec wmenu-run
 bindsym $mod+Shift+Slash exec 1password
 bindsym $mod+Shift+b exec chromium
+bindsym $mod+Shift+n exec swaync-client -t
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
