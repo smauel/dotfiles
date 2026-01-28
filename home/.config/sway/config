@@ -26,6 +26,7 @@ bindsym $mod+space exec wmenu-run
 bindsym $mod+Shift+Slash exec 1password
 bindsym $mod+Shift+b exec chromium
 bindsym $mod+Shift+n exec swaync-client -t
+bindsym $mod+Shift+m exec foot jellyfin-tui
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
