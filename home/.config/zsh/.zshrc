@@ -19,8 +19,6 @@ setopt correctall
 unsetopt beep notify
 bindkey -e
 
-zstyle :compinstall filename '/home/sam/.config/zsh/.zshrc'
-
 autoload -Uz compinit
 compinit
 
