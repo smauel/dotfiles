@@ -16,7 +16,7 @@ output * bg `fd -t file . $wallpapers | shuf -n 1` fill
 input type:keyboard {
     xkb_layout "gb"
     xkb_variant "mac"
-    xkb_options "ctrl:swapcaps"
+    xkb_options "ctrl:nocaps"
 }
 
 ### Key bindings
