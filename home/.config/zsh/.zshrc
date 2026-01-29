@@ -41,4 +41,6 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gap='git add -p'
 
+alias k='kubectl'
+
 source <(fzf --zsh)
