@@ -28,7 +28,7 @@ eval "$(starship init zsh)"
 export EDITOR='nvim'
 export PAGER='less'
 export BROWSER='chromium'
-export PATH=$PATH:$HOME/.local/bin
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 
 alias x='exit'
 alias cc='clear'
@@ -44,3 +44,4 @@ alias gap='git add -p'
 alias k='kubectl'
 
 source <(fzf --zsh)
+eval "$(/usr/bin/mise activate zsh)"
