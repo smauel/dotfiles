@@ -1,5 +1,3 @@
-### Variables
-
 set $mod Mod4
 
 set $wallpapers $HOME/Pictures/Wallpapers
@@ -22,7 +20,7 @@ input type:keyboard {
 ### Key bindings
 bindsym $mod+Return exec foot
 bindsym $mod+w kill
-bindsym $mod+space exec wmenu-run
+bindsym $mod+space exec wmenu-run -l 10
 bindsym $mod+Shift+Slash exec 1password
 bindsym $mod+Shift+b exec chromium
 bindsym $mod+Shift+n exec swaync-client -t
@@ -166,20 +164,12 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
+    status_command i3blocks
     colors {
         statusline #ffffff
-        background #323232
+        background #1a1b26
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
