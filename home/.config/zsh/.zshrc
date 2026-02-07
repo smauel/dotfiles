@@ -34,7 +34,7 @@ alias x='exit'
 alias cc='clear'
 alias ll='ls -la'
 alias rm='rm -i'
-alias vim='nvim'
+alias vim='nvim $(fzf)'
 
 alias gs='git status'
 alias gd='git diff'
@@ -42,6 +42,7 @@ alias gdc='git diff --cached'
 alias gap='git add -p'
 
 alias k='kubectl'
+alias tm='tmux-start'
 
 source <(fzf --zsh)
 eval "$(/usr/bin/mise activate zsh)"
