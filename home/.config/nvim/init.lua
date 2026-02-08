@@ -16,6 +16,7 @@ vim.pack.add({
   { src = "https://github.com/folke/snacks.nvim" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
   { src = "https://github.com/mcauley-penney/techbase.nvim" },
+  { src = "https://github.com/OXY2DEV/markview.nvim" },
 })
 
 require("mason").setup()
@@ -32,6 +33,7 @@ require("nvim-treesitter").install({ "lua", "bash", "zsh", "java", "xml", "json"
 require("nvim-treesitter").setup()
 require("nvim-ts-autotag").setup()
 require("snacks").setup()
+require("markview").setup()
 
 -- default language formatters
 require("conform").setup({
