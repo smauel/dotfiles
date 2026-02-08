@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
--- Key mappings
 vim.g.mapleader = "," -- Set leader key
 vim.g.maplocalleader = "," -- Set local leader key
 
@@ -22,25 +21,19 @@ vim.pack.add({
 require("mason").setup()
 require("mason-lspconfig").setup({ ensure_installed = { "lua_ls", "jdtls" } })
 require("gitsigns").setup()
-require("mini.pairs").setup()
+require("mini.basics").setup()
 require("mini.completion").setup()
 require("mini.icons").setup()
 require("mini.keymap").setup()
-require("mini.surround").setup()
-require("mini.basics").setup()
+require("mini.pairs").setup()
 require("mini.statusline").setup()
+require("mini.surround").setup()
 require("nvim-treesitter").install({ "lua", "bash", "zsh", "java", "xml", "json", "yaml" })
 require("nvim-treesitter").setup()
 require("nvim-ts-autotag").setup()
-require("snacks").setup({
-  explorer = {},
-  picker = {
-    hidden = true,
-    sources = {
-      explorer = {},
-    },
-  },
-})
+require("snacks").setup()
+
+-- default language formatters
 require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
@@ -49,6 +42,7 @@ require("conform").setup({
   },
 })
 
+-- completion keymaps
 local map_multistep = require("mini.keymap").map_multistep
 map_multistep("i", "<Tab>", { "pmenu_next" })
 map_multistep("i", "<S-Tab>", { "pmenu_prev" })
