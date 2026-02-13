@@ -36,7 +36,7 @@ alias ll='ls -la'
 alias rm='rm -i'
 alias v='nvim'
 alias vim='nvim'
-alias vv='nvim $(fzf)'
+alias vv='nvim $(fd --type f | fzf)'
 
 alias gs='git status'
 alias gd='git diff'

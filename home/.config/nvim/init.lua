@@ -17,6 +17,11 @@ vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.nvim" },
   { src = "https://github.com/mcauley-penney/techbase.nvim" },
   { src = "https://github.com/OXY2DEV/markview.nvim" },
+  { src = "https://codeberg.org/mfussenegger/nvim-jdtls.git" },
+  { src = "https://github.com/nvim-neotest/neotest" },
+  { src = "https://github.com/nvim-neotest/nvim-nio" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/rcasia/neotest-java" },
 })
 
 require("mason").setup()
@@ -34,6 +39,42 @@ require("nvim-treesitter").setup()
 require("nvim-ts-autotag").setup()
 require("snacks").setup()
 require("markview").setup()
+require("neotest").setup({
+  adapters = {
+    require("neotest-java"),
+  },
+})
+
+-- Workspace path - one per project
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+local workspace_dir = vim.fn.expand("$HOME/.local/share/nvim/jdtls-workspace/") .. project_name
+local jdtls_path = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/jdtls")
+local lombok_path = vim.fn.expand("$HOME/.local/share/nvim/mason/share/jdtls/lombok.jar")
+
+vim.lsp.config("jdtls", {
+  cmd = {
+    "java",
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=ALL",
+    "-Xmx1g",
+    "--add-modules=ALL-SYSTEM",
+    "--add-opens",
+    "java.base/java.util=ALL-UNNAMED",
+    "--add-opens",
+    "java.base/java.lang=ALL-UNNAMED",
+    -- Add Lombok as a javaagent
+    "-javaagent:" .. lombok_path,
+    "-jar",
+    vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+    "-configuration",
+    jdtls_path .. "/config_linux",
+    "-data",
+    workspace_dir,
+  },
+})
 
 -- default language formatters
 require("conform").setup({
@@ -187,11 +228,23 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 vim.keymap.set("n", "<leader>rl", ":so $MYVIMRC<CR>", { desc = "Reload config" })
 
+-- NeoTest
+vim.keymap.set("n", "<leader>tt", function()
+  require("neotest").run.run()
+end, { desc = "Run Test Method" })
+
+vim.keymap.set("n", "<leader>tT", function()
+  require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Run Test Class" })
+
+vim.keymap.set("n", "<leader>ts", function()
+  require("neotest").summary.toggle()
+end, { desc = "Run Test Class" })
+
 -- ============================================================================
 -- AUTOCMDS
 -- ============================================================================
 
--- Basic autocommands
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 -- Highlight yanked text
@@ -251,6 +304,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)
     require("conform").format({ bufnr = args.buf })
   end,
+})
+
+-- turn completion off in snacks picker
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
+  pattern = "snacks_picker_input",
+  desc = "Disable mini.completion for snacks picker",
+  command = "lua vim.b.minicompletion_disable=true",
 })
 
 -- ============================================================================
