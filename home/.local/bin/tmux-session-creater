@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fd --base-directory ~/git --max-depth 1 --absolute-path | sed 's|/$||' | fzf --delimiter / --with-nth -1 --reverse)
+  selected=$(fd --base-directory ~/src --max-depth 1 --absolute-path | sed 's|/$||' | fzf --delimiter / --with-nth -1 --reverse)
 fi
 
 if [[ -z $selected ]]; then
