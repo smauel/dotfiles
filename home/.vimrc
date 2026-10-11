@@ -6,6 +6,7 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
@@ -21,6 +22,7 @@ colorscheme retrobox
 set autoindent
 set background=dark
 set backspace=eol,start,indent
+set clipboard=unnamedplus
 set encoding=utf8
 set expandtab
 set foldcolumn=1

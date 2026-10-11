@@ -11,6 +11,7 @@ alias x='exit'
 alias cc='clear'
 alias gs='git status'
 alias gd='git diff'
+alias gds='git diff --staged'
 alias gap='git add -p'
 alias ll='ls -la'
 
