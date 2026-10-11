@@ -1,0 +1,53 @@
+[user]
+	email = samuelmorrison87@gmail.com
+	name = Sam Morrison
+
+[alias]
+	# short aliases
+	st = status
+	co = checkout
+	br = branch
+	df = diff
+	lg = log -p
+    me = config user.name
+
+	undo = reset HEAD
+	undo-commit = reset --soft HEAD^
+
+	# interactive rebase
+	ir = !sh -c 'git rebase -i origin/${1-master}' -
+
+	# update current branch
+	update = !sh -c 'git fetch origin && git rebase -p origin/${1-master}' -
+
+	# all commits today for only me
+	today = !git all --since='12am' --committer=\"`git me`\"
+
+	# today's commits without formatting or paging
+	today-text = !git --no-pager today --no-color
+
+	# files different from master on current branch
+	fdm = !git diff origin/master... --name-status
+
+	# `git nuke my-old-branch`
+	# (Checks out master and does a non-forced delete on the branch entered)
+	nuke = !git co master && sh -c 'git br -d $1' -
+
+	# give a count of dirty files
+	dirty = !git status --porcelain -uno | wc -l
+
+[color]
+	ui = auto
+
+[core]
+	autocrlf = input
+	ignorecase = false
+	whitespace = cr-at-eol
+	editor = vim
+	pager = less -x4
+
+[push]
+	default = upstream
+
+[help]
+	autocorrect = 1

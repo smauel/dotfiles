@@ -1,10 +1,18 @@
 call plug#begin()
 	Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-    Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-sensible'
     Plug '/usr/bin/fzf' 
+    Plug 'Raimondi/delimitMate'
+    Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 let mapleader=','
@@ -46,8 +54,6 @@ set wildignore+=*/.git/*
 set wildmenu
 set wrap
 
-set statusline=%{HasPaste()}\ %f%m%r%h\ %{FugitiveStatusline()}
-
 syntax enable
 
 " enable filetype plugins
@@ -83,6 +89,9 @@ map <leader>r :Rg!<cr>
 map <leader>/ :nohlsearch<cr>
 map <leader>gb :Git blame<cr>
 map <leader>gd :Git diff<cr>
+map <leader>gh :GBrowse<cr>
+map <leader>gn <Plug>(GitGutterNextHunk)
+map <leader>gp <Plug>(GitGutterPrevHunk)
 
 " move a line of text with alt-jk
 nmap <M-j> mz:m+<cr>`z
@@ -97,4 +106,7 @@ function! HasPaste()
     endif
     return ''
 endfunction
+
+" let g:github_enterprise_urls = ['https://example.com']
+let NERDTreeShowHidden=1
 
