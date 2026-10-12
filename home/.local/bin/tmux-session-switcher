@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Path to search
+GIT_DIR="$HOME/git"
+
+# Ensure tmux is installed
+if ! command -v tmux &> /dev/null; then
+    echo "Error: tmux is not installed."
+    exit 1
+fi
+
+# Find git repositories inside ~/git
+# If 'fd' is available, use it (it's faster); otherwise fall back to 'find'
+if command -v fd &> /dev/null; then
+    selected=$(fd --hidden --max-depth 3 --type d '^\.git$' "$GIT_DIR" --exec dirname {} | fzf)
+else
+    selected=$(find "$GIT_DIR" -maxdepth 3 -name ".git" -type d 2>/dev/null | xargs -I {} dirname {} | fzf)
+fi
+
+# Exit if no selection was made
+if [[ -z "$selected" ]]; then
+    exit 0
+fi
+
+# Extract session name (folder name) and replace dots with underscores for tmux compatibility
+selected_name=$(basename "$selected" | tr . _)
+
+# Check if tmux is already running
+tmux_running=$(pgrep tmux)
+
+# If not inside tmux and tmux isn't running, start a new session
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
+    tmux new-session -s "$selected_name" -c "$selected"
+    exit 0
+fi
+
+# Create session if it doesn't already exist
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+# Attach or switch depending on whether inside tmux
+if [[ -z "$TMUX" ]]; then
+    tmux attach-session -t "$selected_name"
+else
+    tmux switch-client -t "$selected_name"
+fi
