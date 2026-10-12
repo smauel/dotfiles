@@ -70,10 +70,11 @@ au FocusGained,BufEnter * silent! checktime
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " sudo save
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+command! WW execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 " fatfinger bindings
 cmap qw wq
+cmap W w
 cmap Wq wq
 cmap WQ wq
 cmap wQ wq
@@ -89,6 +90,7 @@ map <leader>l :NERDTreeToggle<cr>
 map <leader>p :FZF!<cr>
 map <leader>r :Rg!<cr>
 map <leader>/ :nohlsearch<cr>
+map <leader>bd :bd<cr>
 map <leader>gb :Git blame<cr>
 map <leader>gd :Git diff<cr>
 map <leader>gh :GBrowse<cr>
