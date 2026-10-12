@@ -7,6 +7,7 @@ call plug#begin()
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'rhysd/vim-clang-format'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
@@ -87,7 +88,7 @@ map <C-l> <C-W>l
 
 map <leader>P :setlocal paste!<cr>
 map <leader>l :NERDTreeToggle<cr>
-map <leader>p :FZF!<cr>
+map <leader>p :GFiles!<cr>
 map <leader>r :Rg!<cr>
 map <leader>/ :nohlsearch<cr>
 map <leader>bd :bd<cr>
@@ -114,3 +115,5 @@ endfunction
 " let g:github_enterprise_urls = ['https://example.com']
 let NERDTreeShowHidden=1
 
+" format on save
+let g:clang_format#auto_format=1
