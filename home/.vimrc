@@ -73,12 +73,12 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " sudo save
 command! WW execute 'w !sudo tee % > /dev/null' <bar> edit!
 
-" fatfinger bindings
-cmap qw wq
-cmap W w
-cmap Wq wq
-cmap WQ wq
-cmap wQ wq
+" fatfinger bindings: only expand when the whole : command is the typo
+cnoreabbrev <expr> W  getcmdtype() == ':' && getcmdline() ==# 'W'  ? 'w'  : 'W'
+cnoreabbrev <expr> Wq getcmdtype() == ':' && getcmdline() ==# 'Wq' ? 'wq' : 'Wq'
+cnoreabbrev <expr> WQ getcmdtype() == ':' && getcmdline() ==# 'WQ' ? 'wq' : 'WQ'
+cnoreabbrev <expr> wQ getcmdtype() == ':' && getcmdline() ==# 'wQ' ? 'wq' : 'wQ'
+cnoreabbrev <expr> qw getcmdtype() == ':' && getcmdline() ==# 'qw' ? 'wq' : 'qw'
 
 " movement
 nnoremap <C-j> <C-W>j
