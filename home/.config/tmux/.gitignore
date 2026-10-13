@@ -1,0 +1,4 @@
+# ~/.config/tmux is symlinked here by stow, so ignore anything plugins write.
+*
+!.gitignore
+!tmux.conf

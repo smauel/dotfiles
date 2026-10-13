@@ -1,0 +1,4 @@
+# ~/.local/bin is symlinked here by stow, so ignore anything other tools install.
+*
+!.gitignore
+!tmux-session-switcher

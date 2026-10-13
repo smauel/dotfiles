@@ -18,7 +18,10 @@
 	ir = !sh -c 'git rebase -i origin/${1-master}' -
 
 	# update current branch
-	update = !sh -c 'git fetch origin && git rebase -p origin/${1-master}' -
+	update = !sh -c 'git fetch origin && git rebase --rebase-merges origin/${1-master}' -
+
+	# one-line log across all branches
+	all = log --all --oneline --decorate
 
 	# all commits today for only me
 	today = !git all --since='12am' --committer=\"`git me`\"
