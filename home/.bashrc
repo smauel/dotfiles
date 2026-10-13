@@ -14,5 +14,7 @@ alias gd='git diff'
 alias gds='git diff --staged'
 alias gap='git add -p'
 alias ll='ls -la'
+alias ..='cd ..'
+alias ...='cd ../..'
 
 PS1='[\u@\h \W]\$ '
