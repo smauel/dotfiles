@@ -81,28 +81,28 @@ cmap WQ wq
 cmap wQ wq
 
 " movement
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
-map <leader>P :setlocal paste!<cr>
-map <leader>l :NERDTreeToggle<cr>
-map <leader>p :GFiles!<cr>
-map <leader>r :Rg!<cr>
-map <leader>/ :nohlsearch<cr>
-map <leader>bd :bd<cr>
-map <leader>gb :Git blame<cr>
-map <leader>gd :Git diff<cr>
-map <leader>gh :GBrowse<cr>
-map <leader>gn <Plug>(GitGutterNextHunk)
-map <leader>gp <Plug>(GitGutterPrevHunk)
+nnoremap <leader>P :setlocal paste!<cr>
+nnoremap <leader>l :NERDTreeToggle<cr>
+nnoremap <leader>p :GFiles!<cr>
+nnoremap <leader>r :Rg!<cr>
+nnoremap <leader>/ :nohlsearch<cr>
+nnoremap <leader>bd :bd<cr>
+nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gh :GBrowse<cr>
+nmap <leader>gn <Plug>(GitGutterNextHunk)
+nmap <leader>gp <Plug>(GitGutterPrevHunk)
 
 " move a line of text with alt-jk
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nnoremap <M-j> mz:m+<cr>`z
+nnoremap <M-k> mz:m-2<cr>`z
+vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " is paste mode enabled
 function! HasPaste()
