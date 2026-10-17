@@ -21,4 +21,8 @@ alias ...='cd ../..'
 
 source "${HOME}/.local/bin/taskr_completion"
 
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--preview-window hidden'
+export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+
 PS1='[\u@\h \W]\$ '
