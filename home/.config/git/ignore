@@ -1,0 +1,7 @@
+.vim/
+.claude/worktrees/
+.idea/
+.project
+.classpath
+.factorypath
+.settings/

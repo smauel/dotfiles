@@ -1,0 +1,44 @@
+# taskr default config (ADR 0009). The lowest config layer; `taskr init` copies it to .taskr/config.yaml, with
+# the views and reports commented out.
+
+# Where task files live, relative to the store root.
+tasksDir: tasks
+
+# How wide tables are fitted to on a terminal when COLUMNS isn't set; 80 if no config layer sets it (ADR 0047).
+# A personal setting: set it in your global config, since a project config would impose it on everyone.
+# width: 120
+
+# Statuses in order. Every status belongs to a status category: todo, active or closed.
+# Commands pick the first status in a category: `new`/`reopen` -> todo, `start` -> active, `close` -> closed.
+statuses:
+  - { name: todo,        category: todo }
+  - { name: in-progress, category: active }
+  - { name: on-hold,     category: active }
+  - { name: done,        category: closed }
+  - { name: cancelled,   category: closed }
+
+# Custom properties every task has, in the order they are written (ADR 0010). Each has a type
+# (string, enum, list, date, int or bool), allowed values for an enum (in order, lowest first),
+# an optional default value, and `required: true` if it can never be empty.
+# Without a default value, an optional property starts empty: `tags: []`, `due:`.
+properties:
+  priority: { type: enum, values: [low, medium, high, critical], default: medium }
+  tags:     { type: list, default: [] }
+  due:      { type: date }
+
+# Views: named layouts for `ls`, `search` and `report` (ADR 0047). `--view <name>` picks one; `default` is used otherwise.
+# `columns` are properties, or id, title, status, created, updated, blocked-by, category, blocked, ready and blocks
+# (the open tasks it blocks); `sort` is optional, sort keys as for --sort, a leading - sorting descending, and
+# without one the oldest task comes first. A higher config layer's view replaces a lower one of the same name, and
+# `remove: true` deletes it (not `default`). `taskr init` writes them commented out, so they don't hide the views
+# of your global config.
+# views:
+#   default: { columns: [id, title, status, priority, blocked, created], sort: [-priority, -blocks, created] }
+
+# Reports: saved searches, run with `taskr report <name> [query…]` (ADR 0047); `taskr report` lists them. Each has a
+# `query` (as for ls), and optionally a `view` (default `default`), a `sort` (else the view's) and `all: true` to
+# include closed tasks. Merged across config layers as views are; `taskr init` writes them commented out, so they
+# don't hide the reports of your global config.
+# reports:
+#   ready:   { query: 'is:ready' }
+#   blocked: { query: 'is:blocked' }
