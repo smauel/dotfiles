@@ -28,6 +28,7 @@ call plug#begin()
   Plug 'cohama/lexima.vim'       " auto-close pairs, <CR> expansion
   Plug 'christoomey/vim-tmux-navigator'  " C-hjkl across vim splits and tmux panes
   Plug 'catppuccin/vim', { 'as': 'catppuccin' }  " colorscheme
+  Plug 'JalaiAmitahl/maven-compiler.vim'
 call plug#end()
 
 " ── UI ─────────────────────────────────────────────────────
@@ -303,6 +304,11 @@ nnoremap <leader>gl :Git log --oneline<CR>
 
 " ── Keymaps: undo tree ─────────────────────────────────────
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" ── Keymaps: maven ─────────────────────────────────────────────────────
+autocmd Filetype java compiler mvn
+autocmd Filetype pom compiler mvn
+autocmd Filetype java no <F2> :make clean package<CR>
 
 " ── LSP ────────────────────────────────────────────────────
 " Install servers separately: jdtls (AUR), yaml-language-server, bash-language-server
