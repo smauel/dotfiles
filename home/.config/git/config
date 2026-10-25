@@ -1,0 +1,58 @@
+[user]
+	email = samuelmorrison87@gmail.com
+	name = Sam Morrison
+
+[alias]
+    me = config user.name
+
+    # one line log
+    lg = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    a = add
+    ap = add -p
+    cm = commit --verbose
+    cam = commit --amend --verbose
+
+	df = diff
+	dfs = diff --staged
+
+	st = status -s
+	co = checkout
+    cob = checkout -b
+
+    # list branches sorted by date
+    br = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+    aliases = "!git config -l | grep alias | cut -c 7-"
+
+    # undo
+	unstage = reset HEAD --
+	uncommit = reset --soft HEAD^
+    discard = reset HEAD --hard
+
+	# update current branch
+	update = !sh -c 'git fetch origin && git rebase --rebase-merges origin/${1-master}' -
+
+[color]
+	ui = auto
+
+[core]
+	autocrlf = input
+	ignorecase = false
+	whitespace = cr-at-eol
+	editor = vim
+	pager = less -x4
+	excludesFile = ~/.config/git/ignore
+
+[push]
+	default = upstream
+
+[help]
+	autocorrect = 1
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
