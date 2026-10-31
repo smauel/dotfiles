@@ -88,10 +88,26 @@ rainbow() {
 prompt-set-theme() {
     local theme=${1:-0}
     local j=0
+
+    # di=directory, ln=symlink, ex=executable
+    local ls_di=""
+    local ls_ln=""
+    local ls_ex=""
+
     for ((i = theme; i <= 255; i += 30)); do
         PROMPT_COLORS[j]=$'\e[38;5;'${i}m
+
+        # set ls colors to match prompt theme
+        case $j in
+            0) ls_di="di=38;5;${i}" ;;
+            1) ls_ln="ln=38;5;${i}" ;;
+            2) ls_ex="ex=38;5;${i}" ;;
+        esac
+
         ((j++))
     done
+
+    export LS_COLORS="${ls_di}:${ls_ln}:${ls_ex}:"
 }
 
 prompt-init() {
@@ -148,6 +164,6 @@ PROMPT_COMMAND=prompt-update
 PROMPT_DIRTRIM=2
 
 prompt-init
-prompt-set-theme 24
+prompt-set-theme 29
 
 source "$HOME/.bash_completion"
