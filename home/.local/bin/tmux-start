@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Define session name and target directory
+SESSION_NAME="git"
+TARGET_DIR="$HOME/git"
+
+# Check if the tmux session already exists
+tmux has-session -t "$SESSION_NAME" 2>/dev/null
+
+if [ $? -ne 0 ]; then
+    # Create a new detached session with the specified name and starting directory
+    tmux new-session -d -s "$SESSION_NAME" -c "$TARGET_DIR"
+fi
+
+# Attach to the session (works whether it was just created or already existed)
+# If already inside a tmux session, switch client instead of nesting
+if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$SESSION_NAME"
+else
+    tmux attach-session -t "$SESSION_NAME"
+fi
